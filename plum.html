@@ -15,8 +15,18 @@
 
 <style>
 
-html, body { background:#fff; height:100%; margin:0; padding:0; width:100%; }
-body, input, select { font:400 12px/1.5em Helvetica, Arial, sans-serif; }
+html, body { 
+	background:#fff; 
+	height:100%; 
+	margin:0; 
+	padding:0; 
+	width:100%;
+}
+
+body, input, select { 
+	font:400 12px/1.5em Helvetica, Arial, sans-serif; 
+}
+
 h1, h2 { margin:20px 0; }
 h1:first-child { margin-top:0; }
 h1 { font-size:2em; font-weight:700; letter-spacing:-1px; line-height:1em; }
@@ -27,8 +37,10 @@ ol, ul { padding-left:1.5em; }
 hr { border:0; border-top:1px solid #ccc; margin:20px 0; }
 a, #header span { color:#982056; font-weight:700; }
 a:hover { color:#000; text-decoration:none; }
-pre { background:#f0f0f0; font:1.1em 'Anonymous Pro', monospace; padding:10px; }
+
+/*pre { background:#f0f0f0; font:1.1em 'Anonymous Pro', monospace; padding:10px; }*/
 .note { color:#777; }
+
 #page { min-height:100%; }
 #header { background:#661443; height:2em; padding:30px; }
 #header h1 { color:#fff; float:left; }
@@ -41,6 +53,7 @@ pre { background:#f0f0f0; font:1.1em 'Anonymous Pro', monospace; padding:10px; }
 	text-decoration:none;
 }
 #header a:hover { color:#cc2b73; }
+
 #footer {
 	border-top:1px solid #ccc;
 	clear:both;
@@ -48,9 +61,11 @@ pre { background:#f0f0f0; font:1.1em 'Anonymous Pro', monospace; padding:10px; }
 	font-size:11px;
 	margin:auto;
 	padding:20px 0;
-	width:960px;
+	width:90%; /*960px;*/ 
 }
-#main { margin:20px auto; width:960px; }
+
+#main { margin:20px auto; width:90%; /*960px;*/ }
+
 #main:after, #products > ul:after {
 	clear:both;
 	content:'';
@@ -60,14 +75,39 @@ pre { background:#f0f0f0; font:1.1em 'Anonymous Pro', monospace; padding:10px; }
 	visibility:hidden;
 	width:100%;
 }
-#details { float:right; width:400px; }
-#products { float:left; height:100px; position:relative; width:515px; }
+
+
+#products { 
+	float:left; 
+	height:100px; 
+	width: 80%;
+	position:relative; 
+	/*width:515px; */
+}
+
 #products > ul { list-style:none; padding:0; }
-#products > ul > li { float:left; margin:5px 0 0 5px; }
+#products > ul > li { 
+	/*float:left; */
+	margin:5px 0 0 5px; 
+}
 #products > ul > li:first-child { margin-left:0; }
-#products img { background:#f0f0f0; display:block; height:180px; width:125px; }
+
+#products img { 
+	background:#f0f0f0;
+	display:block;
+	height:0px;
+	width:0px; 
+}
 #products p { padding:0 5px; }
-#products .price, #products .purchase { float:right; }
+#products .price, 
+#products .purchase { float:right; }
+
+#details { 
+	float:right;
+	/*width:400px;*/
+}
+
+/*
 #products li.details { width:510px; }
 #products li.details img { float:left; height:365px; width:255px; }
 #products li.details div { float:right; width:240px; }
@@ -75,22 +115,55 @@ pre { background:#f0f0f0; font:1.1em 'Anonymous Pro', monospace; padding:10px; }
 #products li.details .price { font-size:1.2em; margin-top:-2.2em; }
 #products li.details label { display:block; float:left; width:50px; }
 #products li.details select { margin:0 0 5px; width:190px; }
-#cart ul { list-style:none; margin:0 0 20px; padding:0; width:100%; }
-#cart ul li { background:#f0f0f0; height:20px; margin:1px 0 0; padding:10px; }
+*/
+
+#cart ul { 
+	list-style:none;
+	margin:0 0 20px;
+	padding:0;
+	width:100%;
+}
+#cart ul li { 
+	background:#f0f0f0; 
+	height:20px; 
+	margin:1px 0 0; 
+	padding:10px; 
+}
 #cart ul li:first-child { margin:0; }
 #cart ul li > * { display:block; float:left; }
 #cart ul li span { text-align:right; width:65px; }
 #cart ul li span:first-child { text-align:left; width:100px; }
-#cart ul li > div { border:1px solid #f0f0f0; width:145px; }
+#cart ul li > div { 
+border:1px solid #f0f0f0;
+/*width:145px;*/ 
+}
 #cart ul li select { width:70px; }
 #cart ul li input { margin:0 5px 0 0; width:50px; }
 #cart ul li a { float:right; }
-#totals { background:#f0f0f0; float:right; padding:10px; width:250px; }
-#totals input { float:right; margin:0 0 5px; }
-#totals select { width:100%; }
-#totals p label, #totals span { display:block; float:left; width:120px; }
+
+#totals { 
+	background:#f0f0f0;
+	/*float:right;*/
+	padding:10px;
+	width:250px;
+}
+#totals input { 
+	float:right;
+	margin:0 0 5px; 
+}
+/*#totals select { width:100%; }*/
+#totals p label, 
+#totals span { 
+	display:block; 
+	float:left;
+	width:120px;
+}
 #totals span { text-align:right; }
-#checkout { clear:right; float:right; margin:20px 0 0; }
+#checkout { 
+	clear:right; 
+	float:right; 
+	margin:20px 0 0; 
+}
 
 </style>
 
@@ -100,6 +173,28 @@ pre { background:#f0f0f0; font:1.1em 'Anonymous Pro', monospace; padding:10px; }
 <div id="page">
 	
 	<div id="main">
+
+		<div id="totals">
+				
+				<p>
+					<!--<label>Total items</label>
+					<span class="cart-quantity">0</span>
+					<br>
+					<label>Subtotal</label>
+					<span class="cart-subtotal">$0.00</span>
+					<br>-->
+					<label>Total</label> <span class="cart-total">$111.24</span>
+				</p>
+			</div>
+
+
+			<div id="cart">
+				<ul>
+				</ul>
+			</div>
+
+			<a class="empty" href="http://demo.plumjs.com/shop/index.html#">Remove all items</a>
+
 		
 		<div id="products">
 
@@ -137,7 +232,7 @@ pre { background:#f0f0f0; font:1.1em 'Anonymous Pro', monospace; padding:10px; }
 
 			<ul>
 				<li class="product" id="tank">
-					<img src="./img/tank.png" alt="">
+					<!--img src="./img/tank.png" alt=""-->
 					<p>
 						<span class="title">Tank</span>
 						<span class="price">$13.00</span><br>
@@ -145,7 +240,7 @@ pre { background:#f0f0f0; font:1.1em 'Anonymous Pro', monospace; padding:10px; }
 					</p>
 				</li>
 				<li class="product" id="long-sleeve">
-					<img src="./img/long-sleeve.png" alt="">
+					<!--img src="./img/long-sleeve.png" alt=""-->
 					<p>
 						<span class="title">Long Sleeve</span>
 						<span class="price">$19.00</span><br>
@@ -153,7 +248,7 @@ pre { background:#f0f0f0; font:1.1em 'Anonymous Pro', monospace; padding:10px; }
 					</p>
 				</li>
 				<li class="product" id="pants">
-					<img src="./img/pants.png" alt="">
+					<!--img src="./img/pants.png" alt=""-->
 					<p>
 						<span class="title">Pants</span>
 						<span class="price">$22.00</span><br>
@@ -161,22 +256,25 @@ pre { background:#f0f0f0; font:1.1em 'Anonymous Pro', monospace; padding:10px; }
 					</p>
 				</li>
 				<li class="product" id="skirt">
-					<img src="./img/skirt.png" alt="">
+					<!--img src="./img/skirt.png" alt="">
 					<p>
 						<span class="title">Skirt</span>
 						<span class="price">$15.00</span><br>
 						<input class="purchase" type="button" value="Add to cart">
+						<input class="purchase" type="button" value="+">
 					</p>
 				</li>
 			</ul>
 			<hr>
 			<ul>
-				<li class="product details" id="shoe">
-					<img src="./img/shoe.png" alt="">
-					<div>
-						<h3 class="title">Shoe</h3>
+				<li class="product" id="shoe"> <!-- details -->
+					<!--img src="./img/shoe.png" alt="">
+					<!--div-->
+					<p>
+						<!-- h3 class="title">Shoe</h3> -->
+						<span class="title">Shoe</span>
 						<span class="price">$42.00</span>
-						<p class="description">
+						<!--p class="description">
 							The shoe's description. It's not very informative,
 							but it sure is a description.
 						</p>
@@ -195,12 +293,14 @@ pre { background:#f0f0f0; font:1.1em 'Anonymous Pro', monospace; padding:10px; }
 							<option value="magenta">Magenta</option>
 							<option value="yellow">Yellow</option>
 							<option value="black">Black</option>
-						</select>-->
-						<p><input class="purchase" type="button" value="Add to cart"></p>
-					</div>
+						</select>--
+						<p-->
+						<input class="purchase" type="button" value="Add to cart">
+					</p>
+					<!--</div>-->
 				</li>
 			</ul>
-			
+			<!--
 			<a class="empty" href="http://demo.plumjs.com/shop/index.html#">Empty cart</a>
 
 			<div id="cart">
@@ -223,9 +323,9 @@ pre { background:#f0f0f0; font:1.1em 'Anonymous Pro', monospace; padding:10px; }
 					<label>Tax</label> <span class="cart-tax">$8.24</span>
 					<br>
 					<label>Discount</label> <span class="cart-discount">-$0.00</span><br>
-					<label>Total</label> <span class="cart-total">$111.24</span>-->
+					<label>Total</label> <span class="cart-total">$111.24</span>--
 				</p>
-			</div>
+			</div>-->
 
 			
 			
