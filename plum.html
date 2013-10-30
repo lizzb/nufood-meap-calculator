@@ -71,6 +71,7 @@ a:hover { color:#000; text-decoration:none; }
 }
 #header a:hover { color:#cc2b73; }
 
+/*
 #footer {
 	border-top:1px solid #ccc;
 	clear:both;
@@ -78,8 +79,8 @@ a:hover { color:#000; text-decoration:none; }
 	font-size:11px;
 	margin:auto;
 	/*padding:20px 0; */
-	/*width:90%; 960px;*/ 
-}
+	/*width:90%; 960px;*
+}*/
 
 #main { /*margin:20px auto; width:90%;*/ /*960px;*/ }
 
@@ -145,26 +146,26 @@ a:hover { color:#000; text-decoration:none; }
 }
 #cart ul li { 
 	background:#f0f0f0; 
-	height:20px; 
+	height:30px; 
 	margin:1px 0 0; 
 	padding:10px; 
 }
 #cart ul li:first-child { margin:0; }
 #cart ul li > * { display:block; float:left; }
-#cart ul li span { text-align:right; width:65px; }
+#cart ul li span { /*text-align:right; width:65px;*/ }
 #cart ul li span:first-child { text-align:left; width:100px; }
 #cart ul li > div { 
 border:1px solid #f0f0f0;
 /*width:145px;*/ 
 }
 #cart ul li select { width:70px; }
-#cart ul li input { margin:0 5px 0 0; width:50px; }
+#cart ul li input { margin:0 5px 0 0; width:40px; } /* 50 */
 #cart ul li a { float:right; }
 
 #totals { 
 	background:#f0f0f0;
 	/*float:right;*/
-	padding:10px;
+	/*padding:10px;*/
 	/*width:250px;*/
 }
 #totals input { 
@@ -183,10 +184,23 @@ border:1px solid #f0f0f0;
 #checkout { 
 	clear:right; 
 	float:right; 
-	margin:20px 0 0; 
+	/*margin:20px 0 0; */
 }
 
 
+
+
+
+</style>
+
+    <!-- Bootstrap core CSS -->
+    <link href="css/bootstrap.css" rel="stylesheet">
+
+    <!-- Custom styles for this template
+    <link href="starter-template.css" rel="stylesheet">  -->
+
+
+<style>
 
 body {
   padding-top: 50px;
@@ -198,13 +212,12 @@ body {
 
 .empty {float: right;margin-bottom: 15px; display: block;}
 
+.item {width:100%; text-align:left;}
+.item-name {float: left; text-align:left;}
+.item-price {float: right;}
+.container {padding: 5px; margin: auto;}
 </style>
 
-    <!-- Bootstrap core CSS -->
-    <link href="css/bootstrap.css" rel="stylesheet">
-
-    <!-- Custom styles for this template
-    <link href="starter-template.css" rel="stylesheet">  -->
 
 
     <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
@@ -252,7 +265,7 @@ body {
       </div>
   -->
 
-    </div><!-- /.container -->
+    
 
 
 
@@ -271,14 +284,14 @@ body {
 					<label>Subtotal</label>
 					<span class="cart-subtotal">$0.00</span>
 					<br>-->
-					<label>Total</label> <span class="cart-total">$111.24</span>
+					<label>Total</label> <span class="cart-total">$0.00</span>
 				</p>
 			</div>
 
 
 			<div id="cart">
-				<ul>
-				</ul>
+				<!--<ul>
+				</ul>-->
 			</div>
 
 			
@@ -287,20 +300,26 @@ body {
 <hr>
 		
 		<div id="products">
-			
 
+			<!-- type="button"  <input onclick="addToCart(parseFloat(this.valueAsNumber));" value=".17"-->
+			<!--button class="purchase btn btn-info item">
+				<span class="title item-name">Lean Cuisine</span>
+				<span class="price item-price">4.88</span>
+			</button-->
+
+			<!--</button>-->
 
 			
 
 
 			<ul>
-				<li class="product" id="tank">
+				<li class="product purchase btn btn-info item" id="1"> <!-- tank -->
 					<!--img src="./img/tank.png" alt=""-->
-					<p>
+					<!--p-->
 						<span class="title">Tank</span>
 						<span class="price">$13.00</span>
-						<input class="purchase" type="button" value=" + ">
-					</p>
+						<!--input class="purchase" type="button" value="+"-->
+					<!--/p-->
 				</li>
 				<li class="product" id="long-sleeve">
 					<!--img src="./img/long-sleeve.png" alt=""-->
@@ -382,14 +401,15 @@ body {
 
 		<!--</div>
 	</div>-->
+
+
 	
 </div>
 
-<script src="./js/jquery.js"></script>
-<!--script src="./js/jquery.plum.js"></script-->
-<script src="./js/plum.shop.js"></script>
-<!--script src="./js/example-plum-shop-configuration.js"></script-->
+</div><!-- /.container -->
 
+<script src="./js/jquery.js"></script>
+<script src="./js/plum.shop.js"></script>
 
 
 

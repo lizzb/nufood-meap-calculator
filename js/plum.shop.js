@@ -77,8 +77,8 @@ var plum = plum || {};
 		cart: {
 			items: [],
 			timeout: null,
-			shippingMethod: null,
-			discountCode: null,
+			//shippingMethod: null,
+			//discountCode: null,
 			country: null,
 			region: null,
 			each: function (callback) {
@@ -96,17 +96,17 @@ var plum = plum || {};
 		carts: { },
 		// A cached property to check if the shipping menu already has an item
 		// in it.
-		shippingMenuPopulated: false,
+		//shippingMenuPopulated: false,
 		// The cart's discount amount.
-		discount: 0,
+		//discount: 0,
 		// The cart's shipping cost.
-		shipping: 0,
+		//shipping: 0,
 		// The cart's subtotal amount.
 		subtotal: 0,
 		// The cart's total quantity.
 		quantity: 0,
 		// The cart's tax amount.
-		tax: 0,
+		//tax: 0,
 		// The cart's total cost.
 		total: 0,
 		// Default option list.
@@ -114,19 +114,19 @@ var plum = plum || {};
 			// The list of class or data-attribute listeners for HTML elements.
 			classes: {
 				// The HTML tag that contains the cart's discount amount.
-				cartdiscount: 'cart-discount',
+				//cartdiscount: 'cart-discount',
 				// HTML tag for the cart's total number of items.
 				cartquantity: 'cart-quantity',
 				// The cart's shipping cost.
-				cartshipping: 'cart-shipping',
+				//cartshipping: 'cart-shipping',
 				// The cart's subtotal.
 				cartsubtotal: 'cart-subtotal',
 				// The cart's calculate tax amount.
-				carttax: 'cart-tax',
+				//carttax: 'cart-tax',
 				// The cart's total.
 				carttotal: 'cart-total',
 				// The field where a customer can type in a discount code.
-				discount: 'discount',
+				//discount: 'discount',
 				// The button that triggers emptying the shopping cart.
 				empty: 'empty',
 				// The class name or data attribute to store a product's ID/SKU.
@@ -144,12 +144,12 @@ var plum = plum || {};
 				// Class or data attribute for a product's quantity.
 				quantity: 'quantity',
 				// A property to determine if tax should be applied to the item.
-				taxable: 'taxable',
+				//taxable: 'taxable',
 				// Class name or data attribute for a product's title.
 				title: 'title',
 				// Class name to identify the cart's drop-down menu of shipping
 				// options.
-				shipping: 'shipping',
+				//shipping: 'shipping',
 				// Class or data attribute to list a product's in stock amount.
 				// The value of this field can trigger the itemSoldOut calback
 				// method.
@@ -170,13 +170,13 @@ var plum = plum || {};
 			// will discount 10% of the subtotal when entering "10PERCENT" into
 			// a text field marked with a "discount" class, or $10 when entering
 			// "10DOLLARS".
-			discountCodes: false,
+			//discountCodes: false,
 			// If this is set to a URL on your server, any discount code that is
 			// entered into a "discount" text field will be sent to this URL
 			// with a post request so you can determine if an amount should be
 			// discounted. The response from your server should be a JSON string
 			// with a "discount" index containing the amount to be discounted.
-			discountURL: '',
+			//discountURL: '',
 			// Set this to true to use plum.Shop's experimental geolocation,
 			// which utilizes services of geoplugin.com, a third-party provider.
 			geolocation: false,
@@ -202,14 +202,14 @@ var plum = plum || {};
 			// payment gateways.
 			sandbox: false,
 			// The product property to be used when calculating "range" shipping
-			shippingProperty: null,
+			//shippingProperty: null,
 			// Can be a single amount or a list of shipping options and their
 			// amounts. For example, you can offer various shipping carriers:
 			// { 'USPS': 0.1, 'UPS': 0.15, 'FedEx': 0.17 }
-			shippingRate: 0,
+			//shippingRate: 0,
 			// Set this to 'fixed', 'flat', 'range', or 'variable' to set the
 			// shipping method.
-			shippingType: 'variable',
+			//shippingType: 'variable',
 			// This is a list of callback functions that are applied to each
 			// matched shortcode in the item's cart HTML. A shortcode is a
 			// string wrapped in curly brackets. For example, {title} will
@@ -256,13 +256,13 @@ var plum = plum || {};
 			// Triggers before the cart's HTML has started building.
 			buildCartBefore: function () { },
 			// Triggers when the cart's discount is being calculated.
-			calcDiscount: function () { },
+			//calcDiscount: function () { },
 			// Triggers when the shipping amount is being calculated.
-			calcShipping: function () { },
+			//calcShipping: function () { },
 			// Triggers when the subtotal is being calculated.
 			calcSubtotal: function () { },
 			// Triggers when tax is being calculated.
-			calcTax: function () { },
+			//calcTax: function () { },
 			// Triggers when the total amount is being calculated.
 			calcTotal: function () { },
 			// Triggers after the shopping cart has been emptied.
@@ -278,7 +278,7 @@ var plum = plum || {};
 			// Triggers before an item is removed.
 			removeItemBefore: function () { },
 			// Triggers when a customer changes to a different shipping option.
-			shippingChanged: function () { },
+			//shippingChanged: function () { },
 			// Triggers after an existing item is modified.
 			updateItemAfter: function () { },
 			// Triggers before an existing item is modified.
@@ -311,7 +311,7 @@ var plum = plum || {};
 				// Get the shopping cart.
 				o.properties = $.merge([ c.id, c.limit, c.price, c.quantity, c.stock, c.title ], o.properties);
 				// Check if the shipping menu is already populated.
-				this.shippingMenuPopulated = !!$('select.' + c.shipping).children().length;
+				//this.shippingMenuPopulated = !!$('select.' + c.shipping).children().length;
 				this.saveCart(true);
 				if (this.cart.timeout === null) {
 					this.cart.timeout = this.timeout(true);
@@ -320,13 +320,13 @@ var plum = plum || {};
 				/*if (o.geolocation) {
 					this.geolocation();
 				}*/
-				$('input.' + c.discount).val(this.cart.discountCode);
+				//$('input.' + c.discount).val(this.cart.discountCode);
 				// Listen for specific events on marked HTML elements.
 				d.bind('plum', 'build', $.proxy(this.listen, this));
 				d.delegate('.' + c.purchase, 'click', 'purchase', $.proxy(this.listen, this));
 				d.delegate('.' + c.empty, 'click', 'empty', $.proxy(this.listen, this));
-				d.delegate(':radio.' + c.shipping + ',select.' + c.shipping, 'change', 'shipping', $.proxy(this.listen, this));
-				d.delegate('input.' + c.discount, 'change', 'discount', $.proxy(this.listen, this));
+				//d.delegate(':radio.' + c.shipping + ',select.' + c.shipping, 'change', 'shipping', $.proxy(this.listen, this));
+				//d.delegate('input.' + c.discount, 'change', 'discount', $.proxy(this.listen, this));
 				// Listen for checkout events.
 				for (i in this.checkout) {
 					if (this.checkout.hasOwnProperty(i)) {
@@ -399,7 +399,7 @@ var plum = plum || {};
 						: product[value];
 					html = html.replace(new RegExp(prop, 'g'), value === undefined ? '' : value);
 				});
-				html = $('<li data-id="' + product[c.id] + '">' + html + '</li>');
+				html = $('<li class="cart-item" data-id="' + product[c.id] + '">' + html + '</li>');
 				$(':input', html).each(function () {
 					var elem = $(this), prop = this.className, property;
 					// We need to ensure that all input fields in the cart item
@@ -757,7 +757,7 @@ var plum = plum || {};
 		 */
 		calcTotal: function () {
 			var o = this.options, total = 0, callback;
-			total = this.subtotal + this.shipping - this.discount + (o.taxIncluded ? 0 : this.tax);
+			total = this.subtotal; // + this.shipping - this.discount + (o.taxIncluded ? 0 : this.tax);
 			callback = o.calcTotal.call(this, total);
 			total = callback === undefined ? total : callback;
 			return total < 0 ? 0 : total;
@@ -800,8 +800,8 @@ var plum = plum || {};
 			if (force) {
 				this.cart.items = [];
 				this.cart.timeout = this.timeout(true);
-				this.cart.discountCode = null;
-				this.cart.shippingMethod = null;
+				//this.cart.discountCode = null;
+				//this.cart.shippingMethod = null;
 				this[o.geolocation ? 'geolocation' : 'saveCart'](o.geolocation);
 				$.each(this.carts, function (cart) { $(cart).empty(); });
 			} else if (this.cart.items && this.cart.items.length && o.emptyCartBefore.call(this) !== false) {
@@ -1132,10 +1132,10 @@ var plum = plum || {};
 				// Update the item
 				this.insertItem(product);
 				break;
-			case 'discount':
+			/*case 'discount':
 				target.blur();
 				this.saveCart(target);
-				break;
+				break;*/
 			case 'empty':
 				this.emptyCart();
 				break;
@@ -1191,6 +1191,7 @@ var plum = plum || {};
 						}
 					});
 				});
+
 				// A stock-keeping unit can be generated based on chosen
 				// options for the product. Options used are those based on
 				// designated select menus, radio buttons and checkboxes.
@@ -1200,6 +1201,7 @@ var plum = plum || {};
 						: product[c.id] ? product[c.id] + ':' + SKU
 							: SKU;
 				}
+
 				// Convert the product's price to a float number. This
 				// removes any invalid characters, like "$" or ",".
 				if (product[c.price]) {
@@ -1224,14 +1226,14 @@ var plum = plum || {};
 					this.insertItem(product);
 				}
 				break;
-			case 'shipping':
+			/*case 'shipping':
 				this.cart.shippingMethod = target.value;
 				this.shipping = $(target).is('select')
 					? $('option[value="' + target.value + '"]', target).data('rate')
 					: $(target).data('rate');
 				o.shippingChanged.call(this);
 				this.saveCart();
-				break;
+				break;*/
 			}
 		},
 
@@ -1402,8 +1404,8 @@ var plum = plum || {};
 					country: null,
 					region: null,
 					timeout: this.timeout(true),
-					discountCode: null,
-					shippingMethod: null
+					//discountCode: null,
+					//shippingMethod: null
 				};
 			$.each(cart, function (key, value) { self.cart[key] = value; });
 			this.cart.items = cart.items || [];
@@ -1774,7 +1776,7 @@ var plum = plum || {};
  */
 $('#cart').plum('shop', {
 	cartitem: '<span>{title}</span> '
-		+ '<div class="options">'
+		/*+ '<div class="options">'
 			+ '<select class="color">'
 				+ '<option value="cyan">Cyan</option>'
 				+ '<option value="magenta">Magenta</option>'
@@ -1787,24 +1789,27 @@ $('#cart').plum('shop', {
 				+ '<option value="8">8</option>'
 				+ '<option value="9">9</option>'
 			+ '</select>'
-		+ '</div>'
-		+ '<input class="quantity" value="{quantity}">'
-		+ '<span>{pricesingle}</span> '
-		+ '<span>{pricetotal}</span> '
-		+ '<a class="remove" href="#">Remove</a>',
+		+ '</div>'*/
+		//+ '<input class="purchase" type="button" value="+">'
+		+ '<input type="number" class="quantity" value="{quantity}">' //type="number"
+		+ ' x '
+		+ '<span class="pricesingle">{pricesingle}</span> '
+		+ ' = '
+		+ '<span class="pricetotal">{pricetotal}</span> '
+		+ '<a class="remove" href="#"> Clear </a>', //Remove X
 	properties: [ 'description', 'thumb', 'color', 'size' ],
 	currencyFormat: '$00,000,000.00', // £
 	currencyCode: 'USD',
 	generateSKU: true,
 	//geolocation: true,
 	//taxRate: { 'US': [ 0.08 ] },
-	discountCodes: { '10PERCENT': '10%', '10DOLLARS': 10 },
+	//discountCodes: { '10PERCENT': '10%', '10DOLLARS': 10 },
 	sandbox: true,
-	shippingRate: {
+	/*shippingRate: {
 		'USPS': 0.10,
 		'UPS Ground': 0.15,
 		'FedEx Express': 0.18
-	},
+	},*/
 	storage: 'session',
 	storageURL: 'shopping-cart.php',
 	//paypaluser: 'hello',
