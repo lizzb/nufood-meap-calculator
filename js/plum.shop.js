@@ -115,18 +115,27 @@ var plum = plum || {};
 			classes: {
 				// The HTML tag that contains the cart's discount amount.
 				//cartdiscount: 'cart-discount',
-				// HTML tag for the cart's total number of items.
-				cartquantity: 'cart-quantity',
 				// The cart's shipping cost.
 				//cartshipping: 'cart-shipping',
-				// The cart's subtotal.
-				cartsubtotal: 'cart-subtotal',
 				// The cart's calculate tax amount.
 				//carttax: 'cart-tax',
-				// The cart's total.
-				carttotal: 'cart-total',
 				// The field where a customer can type in a discount code.
 				//discount: 'discount',
+				// A property to determine if tax should be applied to the item.
+				//taxable: 'taxable',
+				// Class name to identify the cart's drop-down menu of shipping
+				// options.
+				//shipping: 'shipping',
+
+				// HTML tag for the cart's total number of items.
+				cartquantity: 'cart-quantity',
+				
+				// The cart's subtotal.
+				cartsubtotal: 'cart-subtotal',
+				
+				// The cart's total.
+				carttotal: 'cart-total',
+				
 				// The button that triggers emptying the shopping cart.
 				empty: 'empty',
 				// The class name or data attribute to store a product's ID/SKU.
@@ -143,13 +152,10 @@ var plum = plum || {};
 				purchase: 'purchase',
 				// Class or data attribute for a product's quantity.
 				quantity: 'quantity',
-				// A property to determine if tax should be applied to the item.
-				//taxable: 'taxable',
+				
 				// Class name or data attribute for a product's title.
 				title: 'title',
-				// Class name to identify the cart's drop-down menu of shipping
-				// options.
-				//shipping: 'shipping',
+				
 				// Class or data attribute to list a product's in stock amount.
 				// The value of this field can trigger the itemSoldOut calback
 				// method.
@@ -165,18 +171,6 @@ var plum = plum || {};
 			// The currency code used when checking out with a third-party
 			// payment gateway, like PayPal.
 			currencyCode: 'USD',
-			// This can be a list of discount codes and the value which is
-			// discounted. For example, { '10PERCENT': '10%', '10DOLLARS': 10 }
-			// will discount 10% of the subtotal when entering "10PERCENT" into
-			// a text field marked with a "discount" class, or $10 when entering
-			// "10DOLLARS".
-			//discountCodes: false,
-			// If this is set to a URL on your server, any discount code that is
-			// entered into a "discount" text field will be sent to this URL
-			// with a post request so you can determine if an amount should be
-			// discounted. The response from your server should be a JSON string
-			// with a "discount" index containing the amount to be discounted.
-			//discountURL: '',
 			// Set this to true to use plum.Shop's experimental geolocation,
 			// which utilizes services of geoplugin.com, a third-party provider.
 			geolocation: false,
@@ -201,15 +195,7 @@ var plum = plum || {};
 			// Setting this to true will enable sandbox mode at the third-party
 			// payment gateways.
 			sandbox: false,
-			// The product property to be used when calculating "range" shipping
-			//shippingProperty: null,
-			// Can be a single amount or a list of shipping options and their
-			// amounts. For example, you can offer various shipping carriers:
-			// { 'USPS': 0.1, 'UPS': 0.15, 'FedEx': 0.17 }
-			//shippingRate: 0,
-			// Set this to 'fixed', 'flat', 'range', or 'variable' to set the
-			// shipping method.
-			//shippingType: 'variable',
+			
 			// This is a list of callback functions that are applied to each
 			// matched shortcode in the item's cart HTML. A shortcode is a
 			// string wrapped in curly brackets. For example, {title} will
@@ -234,17 +220,7 @@ var plum = plum || {};
 			// When using server-side storage, this is the URL where Plum sends
 			// GET and POST requests.
 			storageURL: '',
-			// If set to true, calculated tax amounts are subtracted from the
-			// subtotal to display the total amount of tax on each item.
-			//taxIncluded: false,
-			// A single VAT or sales tax rate, multiple tax rates, or a list of
-			// localities and their tax rates. Examples:
-			// 0.07
-			// [ 0.035, 0.04, 0.02 ]
-			// { 'US:NY': [ 0.0375, 0.04 ], 'FR': 0.23 }
-			//taxRate: 0,
-			// Setting this option to true will also calculate tax on shipping.
-			//taxShipping: false,
+			
 			// The number of seconds until the shopping cart contents expire.
 			timeout: 86400,
 			// Triggers after a new item has been added to the cart.
@@ -255,14 +231,10 @@ var plum = plum || {};
 			buildCartAfter: function () { },
 			// Triggers before the cart's HTML has started building.
 			buildCartBefore: function () { },
-			// Triggers when the cart's discount is being calculated.
-			//calcDiscount: function () { },
-			// Triggers when the shipping amount is being calculated.
-			//calcShipping: function () { },
+			
 			// Triggers when the subtotal is being calculated.
 			calcSubtotal: function () { },
-			// Triggers when tax is being calculated.
-			//calcTax: function () { },
+			
 			// Triggers when the total amount is being calculated.
 			calcTotal: function () { },
 			// Triggers after the shopping cart has been emptied.
@@ -283,6 +255,56 @@ var plum = plum || {};
 			updateItemAfter: function () { },
 			// Triggers before an existing item is modified.
 			updateItemBefore: function () { }
+
+
+			// This can be a list of discount codes and the value which is
+			// discounted. For example, { '10PERCENT': '10%', '10DOLLARS': 10 }
+			// will discount 10% of the subtotal when entering "10PERCENT" into
+			// a text field marked with a "discount" class, or $10 when entering
+			// "10DOLLARS".
+			//discountCodes: false,
+			// If this is set to a URL on your server, any discount code that is
+			// entered into a "discount" text field will be sent to this URL
+			// with a post request so you can determine if an amount should be
+			// discounted. The response from your server should be a JSON string
+			// with a "discount" index containing the amount to be discounted.
+			//discountURL: '',
+
+			// If set to true, calculated tax amounts are subtracted from the
+			// subtotal to display the total amount of tax on each item.
+			//taxIncluded: false,
+			// A single VAT or sales tax rate, multiple tax rates, or a list of
+			// localities and their tax rates. Examples:
+			// 0.07
+			// [ 0.035, 0.04, 0.02 ]
+			// { 'US:NY': [ 0.0375, 0.04 ], 'FR': 0.23 }
+			//taxRate: 0,
+			// Setting this option to true will also calculate tax on shipping.
+			//taxShipping: false,
+
+			// The product property to be used when calculating "range" shipping
+			//shippingProperty: null,
+			// Can be a single amount or a list of shipping options and their
+			// amounts. For example, you can offer various shipping carriers:
+			// { 'USPS': 0.1, 'UPS': 0.15, 'FedEx': 0.17 }
+			//shippingRate: 0,
+			// Set this to 'fixed', 'flat', 'range', or 'variable' to set the
+			// shipping method.
+			//shippingType: 'variable',
+
+
+			// Triggers when the cart's discount is being calculated.
+			//calcDiscount: function () { },
+			// Triggers when the shipping amount is being calculated.
+			//calcShipping: function () { },
+			// Triggers when tax is being calculated.
+			//calcTax: function () { },
+
+
+
+
+
+
 		},
 
 		/**
@@ -426,240 +448,9 @@ var plum = plum || {};
 			return html;
 		},
 
-		/**
-		 * Calculate the discount.
-		 *
-		 * This will first check to see if a list of discount codes exist and
-		 * the entered discount code is a part of that list. If not, Plum will
-		 * send some data to the location defined in the "discountURL" option.
-		 * That data will include the raw numbers for quantity, subtotal, tax,
-		 * and shipping. It will also include the shopping cart items, and the
-		 * discount code that was entered. The value that is returned from the
-		 * server as a JSON string will be used as the discount amount. For
-		 * example, returning '{"discount":10}' will take $10 off the subtotal.
-		 *
-		 * @since   2.0
-		 * @return  number  Returns the discount amount
-		 
-		calcDiscount: function (target) {
-			var o = this.options,
-				self = this,
-				discount,
-				callback,
-				data;
-			if (!target) {
-				target = $('.' + o.classes.discount);
-				target = target.length ? target[0] : {};
-			}
-			// If the "discountCodes" option is set, the discount code searched
-			// for in the object. If one is found, a number is calculated based
-			// on the found value. If the value is a number, it is used as the
-			// discount amount. If the value is a number followed by a % sign,
-			// the discount is that percentage of the subtotal.
-			if (target.value && typeof o.discountCodes === 'object') {
-				if (o.discountCodes[target.value] !== undefined) {
-					discount = o.discountCodes[target.value];
-					discount = this.calcDiscountAmount(discount);
-				}
-			// A synchronous GET request is sent to the file located at the
-			// "discountURL" option containing "plum_shop", the cart's quantity,
-			// subtotal, tax, shipping and discount code.
-			} else if (target.value && o.discountURL) {
-				data = {
-					quantity: this.quantity,
-					subtotal: this.subtotal,
-					tax: this.tax,
-					shipping: this.shipping,
-					discount: target.value
-				};
-				data[o.storageName] = true;
-				$.ajax({
-					url: o.discountURL,
-					async: false,
-					type: 'GET',
-					data: data,
-					dataType: 'json',
-					// Expected response: JSON string with a "discount" index
-					// containing a number value. If any fail, the discount
-					// remains at 0.
-					success: function (response) {
-						if (response.discount !== undefined) {
-							discount = self.calcDiscountAmount(response.discount);
-						}
-					}
-				});
-			}
-			// If a discount code was successfully found, set the cart's
-			// discount code to the typed value and discount amount to value
-			// returned by the server.
-			if (discount !== undefined) {
-				this.discount = discount;
-				this.cart.discountCode = target.value;
-				$('.' + o.classes.discount).val(target.value);
-			} else {
-				discount = 0;
-				this.discount = 0;
-				this.cart.discountCode = null;
-				target.value = '';
-			}
-			callback = o.calcDiscount.call(this, discount, target.value);
-			return callback === undefined ? discount : callback;
-		},
-		*/
 
-		/**
-		 * Calculates a discount amount based on a given variable.
-		 *
-		 * This function will determine if a fixed value needs to be discounted,
-		 * or if a percentage value will be applied.
-		 *
-		 * @since   2.0
-		 * @param   mixed   discount  A callback function to calculate the
-		 *                            discount, a string with '%' appended to
-		 *                            it, or a fixed discount
-		 * @return  number  Returns the discount amount
-		 
-		calcDiscountAmount: function (discount) {
-			discount = typeof discount === 'function'
-				? discount.call(this)
-				: (
-					/^\d+%$/.test(discount)
-					? this.subtotal * parseFloat(discount) / 100
-					: discount
-				);
-			if (!isNaN(discount)) {
-				return discount;
-			}
-		},
-		*/
 
-		/**
-		 * Calculate the shipping.
-		 *
-		 * This loops through each option in the shippingRate list and applies
-		 * each rate through the this.calcShippingRate method. If given a list,
-		 * each shipping rate is compiled into a list of options and inserted
-		 * into the designated drop-down menu that contains shipping rates.
-		 *
-		 * @since   2.0
-		 * @return  number  Returns the shipping amount
-		 
-		calcShipping: function () {
-			var self = this,
-				o = self.options,
-				c = o.classes,
-				select,
-				options = $(),
-				shipping = 0,
-				callback;
-			if (typeof o.shippingRate === 'object') {
-				select = $('select.' + c.shipping);
-				if (select.length) {
-					$.each(o.shippingRate, function (name, rate) {
-						var selected = '';
-						rate = self.calcShippingRate(rate);
-						if (self.cart.shippingMethod === name) {
-							selected = ' selected';
-							shipping = rate;
-						}
-						options = options.add('<option value="' + name + '" data-rate="'
-							+ rate + '"'
-							+ selected + '>' + name
-							+ ' (' + self.formatPrice(rate) + ')</option>'
-						);
-					});
-					if (this.shippingMenuPopulated) {
-						options = select.children().eq(0).clone().attr('disabled', true).add(options);
-					}
-					select.html(options).children().each(function () {
-						if (this.selected) {
-							shipping = parseFloat($(this).data('rate'));
-							select.val(this.value);
-							self.cart.shippingMethod = this.value;
-							return false;
-						}
-					});
-				} else {
-					shipping = $(':radio.' + o.shipping + ':checked').data('rate');
-				}
-				shipping = isNaN(shipping) ? 0 : shipping;
-			} else {
-				shipping = this.calcShippingRate(o.shippingRate);
-			}
-			callback = o.calcShipping.call(this, shipping);
-			return callback === undefined ? shipping : callback;
-		},
-		*/
 
-		/**
-		 * Calculate the shipping amount for a single shipping option.
-		 *
-		 * @since   2.0
-		 * @param   number  rate  The rate of the current option
-		 * @return  number  Returns the shipping amount
-		 
-		calcShippingRate: function (rate) {
-			var quantity = this.quantity,
-				subtotal = this.subtotal,
-				o = this.options,
-				c = o.classes,
-				shipping = 0,
-				baseRange = 0,
-				property,
-				type = o.shippingType.split(',');
-			switch (type[0]) {
-			case 'fixed':
-				// Shipping is based on the quantity of each item.
-				shipping = quantity * rate;
-				break;
-			case 'flat':
-				// Shipping is the same regardless of cart contents.
-				shipping = rate;
-				break;
-			case 'range':
-				// Shipping changes based on an amount of cart contents.
-				property = o.shippingProperty ? o.shippingProperty : c.price;
-				type = type[1] || 'flat';
-				this.cart.each(function () {
-					// If the shipping property is "quantity", only the
-					// range is added to the base shipping cost. If it's
-					// anything else, the range is multiplied by the
-					// quantity.
-					var range = parseFloat(this[property]);
-					baseRange += property === c.quantity ? range
-						: (isNaN(range) ? 0 : range) * this[c.quantity];
-				});
-				if (typeof rate === 'object' && rate !== null) {
-					$.each(rate, function (range, rate) {
-						range = parseFloat(range);
-						range = isNaN(range) ? 0 : range;
-						if (baseRange >= range) {
-							switch (type) {
-							case 'fixed':
-								// Shipping is applied to each item.
-								shipping += quantity * rate;
-								break;
-							case 'flat':
-								// Shipping is the same.
-								shipping = rate;
-								break;
-							default:
-								// Variable rate based on the cart subtotal.
-								shipping = subtotal * rate;
-								break;
-							}
-						}
-					});
-				}
-				break;
-			default:
-				// Variable rate based on the cart subtotal.
-				shipping = subtotal * rate;
-				break;
-			}
-			return shipping;
-		},
-		*/
 
 		/**
 		 * Calculate the subtotal and tally the quantity.
@@ -678,76 +469,7 @@ var plum = plum || {};
 			return callback === undefined ? subtotal : callback;
 		},
 
-		/**
-		 * Calculate the tax.
-		 *
-		 * If the "taxIncluded" option is false, this will calculate tax as an
-		 * incremented value of the subtotal. If the option is true, it will
-		 * calculate how much tax was included in each item.
-		 *
-		 * @since   2.0
-		 * @return  number  Returns the tax amount
-		 
-		calcTax: function () {
-			var self = this,
-				callback,
-				o = self.options,
-				c = o.classes,
-				rates = [ ],
-				tax = 0,
-				taxable = o.taxShipping ? this.shipping : 0
-				taxRate = [ ];
-			this.cart.each(function () {
-				taxable += this[c.taxable] ? this[c.price] * this[c.quantity] : 0;
-			});
-			if (typeof o.taxRate === 'object') {
-				// If no regions are set, the tax rate is a global rate added to
-				// all localities.
-				if (o.taxRate instanceof Array) {
-					$.each(o.taxRate, function (i, rate) {
-						rates.push(self.calcTaxAmount(taxable, rate));
-					});
-					taxRate = o.taxRate;
-				// Otherwise, rates can be set in "COUNTRY:REGION" format. For
-				// example, {'US:NY': [ 0.04, 0.0375 ]} will apply a 7.75% tax
-				// tax to all customers in New York, United States.
-				} else {
-					$.each(o.taxRate, function (loc, rate) {
-						loc = loc.split(':');
-						if (self.cart.country === loc[0]) {
-							if (!loc[1] || (self.cart.region === loc[1])) {
-								$.each(rate, function (i, rate) {
-									rates.push(self.calcTaxAmount(taxable, rate));
-								});
-								taxRate = rate;
-							}
-						}
-					});
-				}
-			}
-			$.each(rates, function (i, rate) { tax += rate; });
-			tax = parseFloat(tax.toFixed(2), rates);
-			// Optional calcTax function can further refine the tax rate.
-			callback = o.calcTax.call(this, tax, taxRate);
-			return callback === undefined ? tax : callback;
-		},
-		*/
 
-		/**
-		 * Calculates the amount of tax to be added, or the amount of tax that
-		 * was included.
-		 *
-		 * @since   2.0
-		 * @param   number  taxable  The total price
-		 * @param   number  rate     The tax rate
-		 * @return  number  Returns the tax amount
-		 
-		calcTaxAmount: function (taxable, rate) {
-			return this.options.taxIncluded
-				? taxable - taxable / ((rate + 1) * 100) * 100
-				: taxable * rate;
-		},
-		*/
 
 		/**
 		 * Calculate the total.
@@ -767,7 +489,7 @@ var plum = plum || {};
 		 * Runs a checkout method to process a transaction.
 		 *
 		 * @since  1.0
-		 */
+		 *
 		checkout: function (event, vars) {
 			if (typeof event === 'string') {
 				var fields = [];
@@ -786,7 +508,7 @@ var plum = plum || {};
 					this.checkout[event.data].call(this);
 				}
 			}
-		},
+		},*/
 
 		/**
 		 * Empties the shopping cart.
@@ -983,9 +705,11 @@ var plum = plum || {};
 			}
 			// Determine if the product is taxable or not.
 			product[c.taxable] = product[c.taxable] === 'false' ? false : true;
+			
 			// Check if the item already exists in the cart.
 			i = this.itemExists(product);
 			soldOut = product[c.stock];
+			
 			// If it does not already exist, run the addItemBefore callback
 			// function. If the function does not return false, push the item to
 			// the cart, run the addItemAfter callback and save the cart.
@@ -998,6 +722,7 @@ var plum = plum || {};
 					this.saveCart();
 					o.addItemAfter.call(this, product);
 				}
+
 			// If the item exists and the updated quantity is 0, run the
 			// removeItemBefore and removeItemAfter callback functions.
 			} else if (product[c.quantity] + this.cart.items[i][c.quantity] < 1) {
@@ -1007,6 +732,7 @@ var plum = plum || {};
 					this.saveCart();
 					o.removeItemAfter.call(this, product);
 				}
+
 			// For items that exist and the quantity is being changed to a
 			// value other than 0, the updateItemBefore and updateItemAfter
 			// callback functions are run.
@@ -1085,6 +811,7 @@ var plum = plum || {};
 					});
 				});
 				break;
+
 			case 'cart-options':
 				target = $(target);
 				value = target[0].value;
@@ -1097,6 +824,7 @@ var plum = plum || {};
 						property = prop;
 					}
 				});
+
 				// If the property is a quantity, the product's quantity
 				// should be subtracted from the value to change the amount.
 				if (property === c.quantity) {
@@ -1136,9 +864,11 @@ var plum = plum || {};
 				target.blur();
 				this.saveCart(target);
 				break;*/
+
 			case 'empty':
 				this.emptyCart();
 				break;
+
 			case 'purchase':
 				container = $(target).closest('.' + c.product)[0];
 				SKU = this.options.generateSKU ? [] : false;
@@ -1226,6 +956,19 @@ var plum = plum || {};
 					this.insertItem(product);
 				}
 				break;
+
+
+			case 'remove-one':
+				id = $(target).closest('li[data-id]').data('id');
+				i = this.itemExists(id);
+				if (i !== false) {
+					//product[c.id] = id;
+					product[c.quantity] -= 1; //-this.cart.items[i][c.quantity];
+					this.insertItem(product); //update the item
+				}
+				break;
+
+
 			/*case 'shipping':
 				this.cart.shippingMethod = target.value;
 				this.shipping = $(target).is('select')
@@ -1463,6 +1206,329 @@ var plum = plum || {};
 		}
 
 	};
+/** -------------------------------------------------------
+
+TAX
+
+-------------------------------------------------------- **/
+
+		/**
+		 * Calculate the tax.
+		 *
+		 * If the "taxIncluded" option is false, this will calculate tax as an
+		 * incremented value of the subtotal. If the option is true, it will
+		 * calculate how much tax was included in each item.
+		 *
+		 * @since   2.0
+		 * @return  number  Returns the tax amount
+		 
+		calcTax: function () {
+			var self = this,
+				callback,
+				o = self.options,
+				c = o.classes,
+				rates = [ ],
+				tax = 0,
+				taxable = o.taxShipping ? this.shipping : 0
+				taxRate = [ ];
+			this.cart.each(function () {
+				taxable += this[c.taxable] ? this[c.price] * this[c.quantity] : 0;
+			});
+			if (typeof o.taxRate === 'object') {
+				// If no regions are set, the tax rate is a global rate added to
+				// all localities.
+				if (o.taxRate instanceof Array) {
+					$.each(o.taxRate, function (i, rate) {
+						rates.push(self.calcTaxAmount(taxable, rate));
+					});
+					taxRate = o.taxRate;
+				// Otherwise, rates can be set in "COUNTRY:REGION" format. For
+				// example, {'US:NY': [ 0.04, 0.0375 ]} will apply a 7.75% tax
+				// tax to all customers in New York, United States.
+				} else {
+					$.each(o.taxRate, function (loc, rate) {
+						loc = loc.split(':');
+						if (self.cart.country === loc[0]) {
+							if (!loc[1] || (self.cart.region === loc[1])) {
+								$.each(rate, function (i, rate) {
+									rates.push(self.calcTaxAmount(taxable, rate));
+								});
+								taxRate = rate;
+							}
+						}
+					});
+				}
+			}
+			$.each(rates, function (i, rate) { tax += rate; });
+			tax = parseFloat(tax.toFixed(2), rates);
+			// Optional calcTax function can further refine the tax rate.
+			callback = o.calcTax.call(this, tax, taxRate);
+			return callback === undefined ? tax : callback;
+		},
+		*/
+
+		/**
+		 * Calculates the amount of tax to be added, or the amount of tax that
+		 * was included.
+		 *
+		 * @since   2.0
+		 * @param   number  taxable  The total price
+		 * @param   number  rate     The tax rate
+		 * @return  number  Returns the tax amount
+		 
+		calcTaxAmount: function (taxable, rate) {
+			return this.options.taxIncluded
+				? taxable - taxable / ((rate + 1) * 100) * 100
+				: taxable * rate;
+		},
+		*/
+
+/** -------------------------------------------------------
+
+DISCOUNT
+
+-------------------------------------------------------- **/
+
+				/**
+		 * Calculate the discount.
+		 *
+		 * This will first check to see if a list of discount codes exist and
+		 * the entered discount code is a part of that list. If not, Plum will
+		 * send some data to the location defined in the "discountURL" option.
+		 * That data will include the raw numbers for quantity, subtotal, tax,
+		 * and shipping. It will also include the shopping cart items, and the
+		 * discount code that was entered. The value that is returned from the
+		 * server as a JSON string will be used as the discount amount. For
+		 * example, returning '{"discount":10}' will take $10 off the subtotal.
+		 *
+		 * @since   2.0
+		 * @return  number  Returns the discount amount
+		 
+		calcDiscount: function (target) {
+			var o = this.options,
+				self = this,
+				discount,
+				callback,
+				data;
+			if (!target) {
+				target = $('.' + o.classes.discount);
+				target = target.length ? target[0] : {};
+			}
+			// If the "discountCodes" option is set, the discount code searched
+			// for in the object. If one is found, a number is calculated based
+			// on the found value. If the value is a number, it is used as the
+			// discount amount. If the value is a number followed by a % sign,
+			// the discount is that percentage of the subtotal.
+			if (target.value && typeof o.discountCodes === 'object') {
+				if (o.discountCodes[target.value] !== undefined) {
+					discount = o.discountCodes[target.value];
+					discount = this.calcDiscountAmount(discount);
+				}
+			// A synchronous GET request is sent to the file located at the
+			// "discountURL" option containing "plum_shop", the cart's quantity,
+			// subtotal, tax, shipping and discount code.
+			} else if (target.value && o.discountURL) {
+				data = {
+					quantity: this.quantity,
+					subtotal: this.subtotal,
+					tax: this.tax,
+					shipping: this.shipping,
+					discount: target.value
+				};
+				data[o.storageName] = true;
+				$.ajax({
+					url: o.discountURL,
+					async: false,
+					type: 'GET',
+					data: data,
+					dataType: 'json',
+					// Expected response: JSON string with a "discount" index
+					// containing a number value. If any fail, the discount
+					// remains at 0.
+					success: function (response) {
+						if (response.discount !== undefined) {
+							discount = self.calcDiscountAmount(response.discount);
+						}
+					}
+				});
+			}
+			// If a discount code was successfully found, set the cart's
+			// discount code to the typed value and discount amount to value
+			// returned by the server.
+			if (discount !== undefined) {
+				this.discount = discount;
+				this.cart.discountCode = target.value;
+				$('.' + o.classes.discount).val(target.value);
+			} else {
+				discount = 0;
+				this.discount = 0;
+				this.cart.discountCode = null;
+				target.value = '';
+			}
+			callback = o.calcDiscount.call(this, discount, target.value);
+			return callback === undefined ? discount : callback;
+		},
+		*/
+
+		/**
+		 * Calculates a discount amount based on a given variable.
+		 *
+		 * This function will determine if a fixed value needs to be discounted,
+		 * or if a percentage value will be applied.
+		 *
+		 * @since   2.0
+		 * @param   mixed   discount  A callback function to calculate the
+		 *                            discount, a string with '%' appended to
+		 *                            it, or a fixed discount
+		 * @return  number  Returns the discount amount
+		 
+		calcDiscountAmount: function (discount) {
+			discount = typeof discount === 'function'
+				? discount.call(this)
+				: (
+					/^\d+%$/.test(discount)
+					? this.subtotal * parseFloat(discount) / 100
+					: discount
+				);
+			if (!isNaN(discount)) {
+				return discount;
+			}
+		},
+		*/
+
+
+/** -------------------------------------------------------
+
+SHIPPING
+
+-------------------------------------------------------- **/
+		/**
+		 * Calculate the shipping.
+		 *
+		 * This loops through each option in the shippingRate list and applies
+		 * each rate through the this.calcShippingRate method. If given a list,
+		 * each shipping rate is compiled into a list of options and inserted
+		 * into the designated drop-down menu that contains shipping rates.
+		 *
+		 * @since   2.0
+		 * @return  number  Returns the shipping amount
+		 
+		calcShipping: function () {
+			var self = this,
+				o = self.options,
+				c = o.classes,
+				select,
+				options = $(),
+				shipping = 0,
+				callback;
+			if (typeof o.shippingRate === 'object') {
+				select = $('select.' + c.shipping);
+				if (select.length) {
+					$.each(o.shippingRate, function (name, rate) {
+						var selected = '';
+						rate = self.calcShippingRate(rate);
+						if (self.cart.shippingMethod === name) {
+							selected = ' selected';
+							shipping = rate;
+						}
+						options = options.add('<option value="' + name + '" data-rate="'
+							+ rate + '"'
+							+ selected + '>' + name
+							+ ' (' + self.formatPrice(rate) + ')</option>'
+						);
+					});
+					if (this.shippingMenuPopulated) {
+						options = select.children().eq(0).clone().attr('disabled', true).add(options);
+					}
+					select.html(options).children().each(function () {
+						if (this.selected) {
+							shipping = parseFloat($(this).data('rate'));
+							select.val(this.value);
+							self.cart.shippingMethod = this.value;
+							return false;
+						}
+					});
+				} else {
+					shipping = $(':radio.' + o.shipping + ':checked').data('rate');
+				}
+				shipping = isNaN(shipping) ? 0 : shipping;
+			} else {
+				shipping = this.calcShippingRate(o.shippingRate);
+			}
+			callback = o.calcShipping.call(this, shipping);
+			return callback === undefined ? shipping : callback;
+		},
+		*/
+
+		/**
+		 * Calculate the shipping amount for a single shipping option.
+		 *
+		 * @since   2.0
+		 * @param   number  rate  The rate of the current option
+		 * @return  number  Returns the shipping amount
+		 
+		calcShippingRate: function (rate) {
+			var quantity = this.quantity,
+				subtotal = this.subtotal,
+				o = this.options,
+				c = o.classes,
+				shipping = 0,
+				baseRange = 0,
+				property,
+				type = o.shippingType.split(',');
+			switch (type[0]) {
+			case 'fixed':
+				// Shipping is based on the quantity of each item.
+				shipping = quantity * rate;
+				break;
+			case 'flat':
+				// Shipping is the same regardless of cart contents.
+				shipping = rate;
+				break;
+			case 'range':
+				// Shipping changes based on an amount of cart contents.
+				property = o.shippingProperty ? o.shippingProperty : c.price;
+				type = type[1] || 'flat';
+				this.cart.each(function () {
+					// If the shipping property is "quantity", only the
+					// range is added to the base shipping cost. If it's
+					// anything else, the range is multiplied by the
+					// quantity.
+					var range = parseFloat(this[property]);
+					baseRange += property === c.quantity ? range
+						: (isNaN(range) ? 0 : range) * this[c.quantity];
+				});
+				if (typeof rate === 'object' && rate !== null) {
+					$.each(rate, function (range, rate) {
+						range = parseFloat(range);
+						range = isNaN(range) ? 0 : range;
+						if (baseRange >= range) {
+							switch (type) {
+							case 'fixed':
+								// Shipping is applied to each item.
+								shipping += quantity * rate;
+								break;
+							case 'flat':
+								// Shipping is the same.
+								shipping = rate;
+								break;
+							default:
+								// Variable rate based on the cart subtotal.
+								shipping = subtotal * rate;
+								break;
+							}
+						}
+					});
+				}
+				break;
+			default:
+				// Variable rate based on the cart subtotal.
+				shipping = subtotal * rate;
+				break;
+			}
+			return shipping;
+		},
+		*/
 
 	/**
 	 * The custom checkout method.
@@ -1791,12 +1857,14 @@ $('#cart').plum('shop', {
 			+ '</select>'
 		+ '</div>'*/
 		//+ '<input class="purchase" type="button" value="+">'
-		+ '<input type="number" class="quantity" value="{quantity}">' //type="number"
-		+ ' x '
+		//+ '<input type="number" class="quantity" value="{quantity}">' //type="number"
 		+ '<span class="pricesingle">{pricesingle}</span> '
-		+ ' = '
+		//+ ' x '
+		+ 'x <input type="number" class="quantity" value="{quantity}"> = ' //type="number"
+		//+ '<span class="pricesingle">{pricesingle}</span> '
+		//+ ' = '
 		+ '<span class="pricetotal">{pricetotal}</span> '
-		+ '<a class="remove" href="#"> Clear </a>', //Remove X
+		+ '<input class="remove-one" type="button" value=" - ">"', //<a class="remove-one" href="#"> Clear </a>', //Remove X
 	properties: [ 'description', 'thumb', 'color', 'size' ],
 	currencyFormat: '$00,000,000.00', // £
 	currencyCode: 'USD',
@@ -1830,8 +1898,9 @@ $('#cart').plum('shop', {
 	},
 	emptyCartBefore: function () {
 		return confirm(
-			'This message is controlled by a callback function.\n\n'
-			+ 'Are you sure you want to empty your cart?'
+			//'This message is controlled by a callback function.\n\n'
+			//+ 
+			'Are you sure you want to empty your cart?'
 		);
 	}
 });
