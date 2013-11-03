@@ -5,17 +5,16 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="">
     <meta name="author" content="">
-    <link rel="shortcut icon" href="../../assets/ico/favicon.png">
+    <!--link rel="shortcut icon" href="../../assets/ico/favicon.png"-->
 
     <title>nuFood - Meal Equivalency & Points Calculator</title>
 
-	<!--<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+	<!--
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+	<title>plum.shop, the JavaScript shopping cart</title>
+	-->
+	<!-- saved from url=(0038)http://demo.plumjs.com/shop/index.html -->
 
-<title>plum.shop, the JavaScript shopping cart</title>
-
-<meta charset="utf-8"> -->
-<!-- saved from url=(0038)http://demo.plumjs.com/shop/index.html -->
-<!--link rel="stylesheet" href="http://demo.plumjs.com/shop/style.css"-->
 <script>
 
 var items = {
@@ -373,6 +372,19 @@ body {
 
 </div><!-- /.container -->
 
+ 
+-              <script type="text/javascript">
+-            var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
+-            document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));
+-          </script>
+-          <script type="text/javascript">
+-            try {
+-              var pageTracker = _gat._getTracker("UA-45359239-1");
+-            pageTracker._trackPageview();
+-            } catch(err) {}
+-          </script>
+
+
 <script src="./js/jquery.js"></script>
 <script src="./js/plum.shop.js"></script>
 
@@ -393,23 +405,19 @@ $.each( items, function( item, price ) {
   i++;
 });
 
-//productlisthtml += "</ul>";
 
 document.getElementById("products").innerHTML = "<ul>" + productlisthtml + "</ul>";
-/*$("products")
 
+/*$("products")
 $( "p" ).click(function() {
   var htmlString = $( this ).html();
   $( this ).text( htmlString );
 });*/
 }
-
 </script>
 
 
 <script>
-
-
 /**
  * Example plum.Shop configuration
  */
