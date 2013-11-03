@@ -74,6 +74,7 @@ var items = {
 	
 };
 
+
 </script>
 
 <style>
@@ -448,6 +449,10 @@ fieldset[disabled] .btn-info.active {
 			<br>
 			<hr>
 
+			<button onclick="sortAZ()">Sort A-Z</button>
+			<button onclick="sortByPrice()">Sort By Price</button>
+
+
 			<!-- This is filled with html generated from an array -->
 
 			<div id="products">
@@ -499,6 +504,79 @@ function makeProductList() {
 
 	document.getElementById("products").innerHTML = "<ul>" + productlisthtml + "</ul>";
 }
+
+function sortAZ() {
+	var productList = $('#products ul');
+	var listItems = productList.children('li').get();
+	listItems.sort(function(a, b) {
+		var compA = $(a).text().toUpperCase();
+		var compB = $(b).text().toUpperCase();
+   return (compA < compB) ? -1 : (compA > compB) ? 1 : 0;
+})
+$.each(listItems, function(idx, itm) { productList.append(itm); });
+
+}
+
+function sortByPrice() {
+
+  var myYears = ['Freshman', 'Sophomore', 'Junior', 'Senior'];
+  var myList = $('#products ul');
+  var listItems = myList.children('li').get();
+  listItems.sort(function(a,b){
+    var compA = $(a).find('.price').text();
+    var compB = $(b).find('.price').text();
+    return (compA < compB) ? -1 : (compA > compB) ? 1 : 0;
+  });
+  $(myList).append(listItems);
+}
+/*
+var arr = [];
+
+for (var key in items) {
+    if (items.hasOwnProperty(key)) {
+        arr.push(items[key]);
+    }
+}
+
+alert(arr.sort());
+*/
+/*
+	// sort on key values
+function keysrt(key,desc) {
+  return function(a,b){
+   return desc ? ~~(a[key] < b[key]) : ~~(a[key] > b[key]);
+  }
+}
+	items.sort(function (item, price){
+
+
+	})
+
+	var productList = $('#products ul');
+	var listItems = productList.children('li').get();
+	listItems.sort(function(a, b) {
+		var compA = $(a).text().toUpperCase();
+		var compB = $(b).text().toUpperCase();
+   return (compA < compB) ? -1 : (compA > compB) ? 1 : 0;
+})
+$.each(listItems, function(idx, itm) { productList.append(itm); });
+*/
+
+//}
+
+
+/*
+function sortByYear(){
+  var myYears = ['Freshman', 'Sophomore', 'Junior', 'Senior'];
+  var myList = $('#foo ul');
+  var listItems = myList.children('li').get();
+  listItems.sort(function(a,b){
+    var compA = $.inArray($(a).find('.year').text(), myYears);
+    var compB = $.inArray($(b).find('.year').text(), myYears);
+    return (compA < compB) ? -1 : (compA > compB) ? 1 : 0;
+  });
+  $(myList).append(listItems);
+}*/
 </script>
 
 
