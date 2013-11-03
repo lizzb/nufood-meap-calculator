@@ -18,6 +18,10 @@
 <!--link rel="stylesheet" href="http://demo.plumjs.com/shop/style.css"-->
 <script>
 
+var items = {
+  "Candy Bar": "1.19",
+  "Lean Cuisine": "4.99"
+};
 
 </script>
 
@@ -382,11 +386,6 @@ function makeProductList() {
 
 var productlisthtml = "";
 var i = 0;
-
-var items = {
-  "Candy Bar": "1.19",
-  "Lean Cuisine": "4.99"
-};
 
 $.each( items, function( item, price ) {
   
