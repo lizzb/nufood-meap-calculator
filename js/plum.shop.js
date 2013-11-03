@@ -79,8 +79,8 @@ var plum = plum || {};
 			timeout: null,
 			//shippingMethod: null,
 			//discountCode: null,
-			country: null,
-			region: null,
+			//country: null,
+			//region: null,
 			each: function (callback) {
 				var result, i, length = this.items.length;
 				for (i = 0; i < length; i++) {
@@ -343,6 +343,9 @@ var plum = plum || {};
 		 * @param  object  options  Configuration options
 		 */
 		init: function (options) {
+			makeProductList();
+
+			
 			var self = this, o = this.options, c = o.classes, d = $(document), i;
 			// Set up the cart configuration.
 			$.extend(true, o, options);

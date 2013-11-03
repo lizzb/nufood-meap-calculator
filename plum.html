@@ -308,6 +308,9 @@ body {
 			<a class="empty" href="http://demo.plumjs.com/shop/index.html#">Clear all items</a>
 <br>
 <hr>
+
+
+
 		
 		<div id="products">
 
@@ -372,6 +375,42 @@ body {
 <script src="./js/jquery.js"></script>
 <script src="./js/plum.shop.js"></script>
 
+
+<script>
+function makeProductList() {
+
+
+var productlisthtml = "";
+var i = 0;
+
+var items = {
+  "Candy Bar": "1.19",
+  "Lean Cuisine": "4.99"
+};
+
+$.each( items, function( item, price ) {
+  
+  	productlisthtml +=
+  	"<li class='product purchase btn btn-info item' id='"+i+"'>" +
+  	"<span class='title'>" + item + "</span>" +
+  	"<span class='price'> $" + price + "</span> </li>";
+  i++;
+});
+
+//productlisthtml += "</ul>";
+
+document.getElementById("products").innerHTML = "<ul>" + productlisthtml + "</ul>";
+/*$("products")
+
+$( "p" ).click(function() {
+  var htmlString = $( this ).html();
+  $( this ).text( htmlString );
+});*/
+}
+
+</script>
+
+
 <script>
 
 
@@ -404,9 +443,9 @@ $('#cart').plum('shop', {
 		+ '<span class="pricesingle">{pricesingle} &nbsp;x&nbsp; </span>'
 		//+ '<span class="pricesingle">{pricesingle}</span> '
 
-				+ '<input type="number" class="quantity" value="{quantity}">'
+		+ '<input type="number" class="quantity" value="{quantity}">'
 
-		+ '<span class="pricetotal"> = {pricetotal}</span> '
+		+ '<span class="pricetotal"> {pricetotal} </span> '
 		//+ '<span class="pricetotal"> = {pricetotal}</span> '
 
 		// + '<a class="remove-one" type="button" value=" - "> minus </a>'
@@ -438,7 +477,7 @@ $('#cart').plum('shop', {
     <!-- Bootstrap core JavaScript
     ================================================== -->
     <!-- Placed at the end of the document so the pages load faster -->
-    <script src="../../assets/js/jquery.js"></script>
-    <script src="../../dist/js/bootstrap.min.js"></script>
+    <script src="./js/jquery.js"></script>
+    <script src="./js/bootstrap.min.js"></script>
   </body>
 </html>
