@@ -213,8 +213,8 @@ a:hover { color:#000; text-decoration:none; }
 }
 */
 #totals span { text-align:right; }
-.total-field {display: inline-block; width: 120px; /*float: left; margin-right: 10px;*/ }
-
+.total-field {display: inline-block; /*width: 30%;*/ padding: 0px 7px; /*width: 100px;*/ /*float: left; margin-right: 10px;*/ }
+.subtotal {text-align: left;}
 
 </style>
 
@@ -245,6 +245,108 @@ body {
 .container {padding: 5px; margin: auto;}
 .pricetotal {float: right;}
 .pricesingle {float: left;}
+
+/*
+.navbar-inverse {background-color: #563d7c;
+border-color: #463265;}
+
+.navbar-nav > li > a {
+color: #cdbfe3;
+}*/
+
+.btn {
+  display: inline-block;
+  padding: 6px 12px;
+  margin-bottom: 0;
+  font-size: 14px;
+  font-weight: normal;
+  line-height: 1.428571429;
+  /*text-align: center;*/
+  white-space: nowrap;
+  vertical-align: middle;
+  cursor: pointer;
+  border: 1px solid transparent;
+  border-radius: 4px;
+  -webkit-user-select: none;
+     -moz-user-select: none;
+      -ms-user-select: none;
+       -o-user-select: none;
+          user-select: none;
+}
+
+
+.btn:focus {
+  outline: thin dotted #333;
+  outline: 5px auto -webkit-focus-ring-color;
+  outline-offset: -2px;
+}
+
+.btn:hover,
+.btn:focus {
+  color: #333333;
+  text-decoration: none;
+}
+
+.btn:active,
+.btn.active {
+  background-image: none;
+  outline: 0;
+  -webkit-box-shadow: inset 0 3px 5px rgba(0, 0, 0, 0.125);
+          box-shadow: inset 0 3px 5px rgba(0, 0, 0, 0.125);
+}
+
+.btn.disabled,
+.btn[disabled],
+fieldset[disabled] .btn {
+  pointer-events: none;
+  cursor: not-allowed;
+  opacity: 0.65;
+  filter: alpha(opacity=65);
+  -webkit-box-shadow: none;
+          box-shadow: none;
+}
+
+.btn-info {
+  color: #ffffff;
+  background-color: #5bc0de;
+  border-color: #46b8da;
+}
+
+
+.btn-info:hover,
+.btn-info:focus,
+.btn-info:active,
+.btn-info.active,
+.open .dropdown-toggle.btn-info {
+  color: #ffffff;
+  background-color: #39b3d7;
+  border-color: #269abc;
+}
+
+.btn-info:active,
+.btn-info.active,
+.open .dropdown-toggle.btn-info {
+  background-image: none;
+}
+
+.btn-info.disabled,
+.btn-info[disabled],
+fieldset[disabled] .btn-info,
+.btn-info.disabled:hover,
+.btn-info[disabled]:hover,
+fieldset[disabled] .btn-info:hover,
+.btn-info.disabled:focus,
+.btn-info[disabled]:focus,
+fieldset[disabled] .btn-info:focus,
+.btn-info.disabled:active,
+.btn-info[disabled]:active,
+fieldset[disabled] .btn-info:active,
+.btn-info.disabled.active,
+.btn-info[disabled].active,
+fieldset[disabled] .btn-info.active {
+  background-color: #5bc0de;
+  border-color: #46b8da;
+}
 </style>
 
 
@@ -299,7 +401,7 @@ body {
       <div class="starter-template">
         <h1>meap</h1>
         <p class="lead">Meal Equivalency and Points Calculator</p>Calculate how many many items you can buy from Lisa's Cafe to perfectly use up meal equivalencies. <br>
-      
+      <br>
 
 
 	<div id="totals">
@@ -312,6 +414,7 @@ body {
 			<div class="total-field">
 			<label> Subtotal: </label> <span class="cart-subtotal">$0.00</span>
 			</div>
+			Points Til next Meal EQ:
 			<br>-->
 			
 			<div class="total-field">
@@ -325,28 +428,29 @@ body {
 			
 
 			<div class="total-field">
-			<label> Points Til next Meal EQ: </label> <span class="meal-remaining">0</span>
+			<label> Points Under: </label> <span class="meal-remaining">0</span>
 			</div>
 
-			<div class="total-field">
+			<div class="total-field subtotal">
 			<label> Total: </label> <span class="cart-total">$0.00</span>
 			</div>
 		</div>
 			<br><br>
 
+
+
 			<!-- This is filled with a ul by the functions -->
-			<div id="cart">
-			</div>
 
-			
+			<div id="cart"> </div>
+
 			<a class="empty" href="http://demo.plumjs.com/shop/index.html#">Clear all items</a>
-<br>
-<hr>
 
+			<br>
+			<hr>
 
+			<!-- This is filled with html generated from an array -->
 
-		
-		<div id="products">
+			<div id="products">
 
 			<!-- 
 			<li class="product purchase btn btn-info item" id="1">
@@ -355,25 +459,24 @@ body {
 						<span class="badge pull-right"> + </span>
 						<input class="purchase" type="button" value=" + ">
 						<input class="remove-one" type="button" value=" - ">
-			</li>
-			-->
-		</div>
+			</li> -->
+
+			</div>
 	
 		</div>
 
 </div><!-- /.container -->
 
- 
--              <script type="text/javascript">
--            var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
--            document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));
--          </script>
--          <script type="text/javascript">
--            try {
--              var pageTracker = _gat._getTracker("UA-45359239-1");
--            pageTracker._trackPageview();
--            } catch(err) {}
--          </script>
+<script type="text/javascript">
+var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
+document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));
+</script>
+<script type="text/javascript">
+try {
+	var pageTracker = _gat._getTracker("UA-45359239-1");
+	pageTracker._trackPageview();
+	} catch(err) {}
+</script>
 
 
 <script src="./js/jquery.js"></script>
@@ -383,27 +486,18 @@ body {
 <script>
 function makeProductList() {
 
+	var productlisthtml = "";
+	var i = 0;
 
-var productlisthtml = "";
-var i = 0;
+	$.each( items, function( item, price ) {
+	  	productlisthtml +=
+	  	"<li class='product purchase btn btn-info item' id='"+i+"'>" +
+	  	"<span class='title'>" + item + "</span>" +
+	  	"<span class='price'> $" + price + "</span> </li>";
+	  i++;
+	});
 
-$.each( items, function( item, price ) {
-  
-  	productlisthtml +=
-  	"<li class='product purchase btn btn-info item' id='"+i+"'>" +
-  	"<span class='title'>" + item + "</span>" +
-  	"<span class='price'> $" + price + "</span> </li>";
-  i++;
-});
-
-
-document.getElementById("products").innerHTML = "<ul>" + productlisthtml + "</ul>";
-
-/*$("products")
-$( "p" ).click(function() {
-  var htmlString = $( this ).html();
-  $( this ).text( htmlString );
-});*/
+	document.getElementById("products").innerHTML = "<ul>" + productlisthtml + "</ul>";
 }
 </script>
 
@@ -416,16 +510,17 @@ $('#cart').plum('shop', {
 
 	cartitem: '<span>{title}</span> '
 
-		//+ '<input class="purchase" type="button" value="+">'
+		// why wont this add...
+		// + '<input class="purchase" type="button" value="+">'
 
 
 		+ '<span class="pricesingle">{pricesingle} &nbsp;x&nbsp; </span>'
-		//+ '<span class="pricesingle">{pricesingle}</span> '
+		//{pricesingle}</span> '
 
 		+ '<input type="number" class="quantity" value="{quantity}">'
 
 		+ '<span class="pricetotal"> {pricetotal} </span> '
-		//+ '<span class="pricetotal"> = {pricetotal}</span> '
+		//= {pricetotal}
 
 		// + '<a class="remove-one" type="button" value=" - "> minus </a>'
 		//+ '<input class="remove-one" type="button" value=" -- ">'
