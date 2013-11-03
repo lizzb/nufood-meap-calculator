@@ -7,7 +7,7 @@
     <meta name="author" content="">
     <link rel="shortcut icon" href="../../assets/ico/favicon.png">
 
-    <title>Starter Template for Bootstrap</title>
+    <title>nuFood - Meal Equivalency & Points Calculator</title>
 
 	<!--<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 
@@ -19,8 +19,60 @@
 <script>
 
 var items = {
-  "Candy Bar": "1.19",
-  "Lean Cuisine": "4.99"
+	"Soup of the day": "0.00",
+
+	"Chicken Caesar Salad": "5.59",
+	"Tomato + Mozzerella Baguette": "4.99",
+
+	"Celery + Carrots (Crudites)": "2.69",
+	"Edamame": "2.95",
+
+	"Sushi - Veggie": "0.00",
+	"Sushi - Shrimp": "0.00",
+	"Sushi - California w/ Masago": "0.00",
+	"Sushi - California": "0.00",
+	
+	"Nerd Rope": "1.19",
+	"Odwalla Juice Smoothie": "3.49",
+	"Sweettart Gummies": "2.75",
+
+	"Tostido's Lime Tortilla Chips": "4.29",
+	"Spicy Cheeto Fries": "1.49",
+
+	"Lean Cuisine": "4.99",
+	"Amy's Pesto Tortellini Bowl": "5.49",
+	"Taipei Stir Fry Chinese Takeout Boxes": "4.99",
+	"Bagel Bites Mini Pizzas": "0.00",
+	"Naanwich": "0.00",
+
+	"Simply Asia Soup/Noodles": "4.99",
+
+	"Cup O Ramen": "0.00",
+	"Top Ramen Package": "0.49",
+
+	"PB&J on Wheat": "2.99",
+	"Brownie": "1.99",
+	"Danish": "2.25",
+	"Cookie": "1.75",
+	"Machine Coffee Drink 16 oz": "3.00",
+
+	"Dorito's": "0.00",
+	"Soda - 12 pack cans": "0.00",
+	"Soda - Individual bottle": "0.00",
+	
+	"Chocolate Candy Bar": "0.00",
+	"Clif Bar": "0.00",
+	
+	"Candy Bar": "1.19",
+	"M&Ms": "1.19",
+	"Laffy Taffy": "0.25",
+	"Mini Reese's Cups": "0.25",
+	"Gum": "0.00",
+	
+	"Wheat Thins": "0.00",
+	"Box of cereal": "0.00",
+	"Mini bowl of cereal": "0.00",
+	
 };
 
 </script>
@@ -58,10 +110,7 @@ a, #header span {
 }
 a:hover { color:#000; text-decoration:none; }
 
-/*pre { background:#f0f0f0; font:1.1em 'Anonymous Pro', monospace; padding:10px; }
-.note { color:#777; }
 
-#page { min-height:100%; }*/
 #header { background:#661443; height:2em; /*padding:30px;*/ }
 #header h1 { color:#fff; float:left; }
 
@@ -88,7 +137,8 @@ a:hover { color:#000; text-decoration:none; }
 
 #main { /*margin:20px auto; width:90%;*/ /*960px;*/ }
 
-#main:after, #products > ul:after {
+#main:after, 
+#products > ul:after {
 	clear:both;
 	content:'';
 	display:block;
@@ -100,14 +150,7 @@ a:hover { color:#000; text-decoration:none; }
 
 
 #products { 
-	/*float:left; */
 	height:100px; 
-
-	/*width: 100%;
-	margin: auto;*/
-	
-	/*position:relative; */
-	/*width:515px; */
 }
 
 #products > ul { list-style:none; padding:0; }
@@ -123,24 +166,15 @@ a:hover { color:#000; text-decoration:none; }
 	height:0px;
 	width:0px; 
 }
+
 #products p { padding:0 5px; }
 #products .price, 
-#products .purchase { float:right; padding-left: 20px; }
-
-#details { 
-	float:right;
-	/*width:400px;*/
-}
+#products .purchase { float:right; /*padding-left: 20px;*/ }
 
 /*
-#products li.details { width:510px; }
-#products li.details img { float:left; height:365px; width:255px; }
-#products li.details div { float:right; width:240px; }
-#products li.details p { padding:0; }
-#products li.details .price { font-size:1.2em; margin-top:-2.2em; }
-#products li.details label { display:block; float:left; width:50px; }
-#products li.details select { margin:0 0 5px; width:190px; }
-*/
+#details { 
+	float:right;
+}*/
 
 #cart ul { 
 	list-style:none;
@@ -148,47 +182,40 @@ a:hover { color:#000; text-decoration:none; }
 	padding:0;
 	width:100%;
 }
+
 #cart ul li { 
 	background:#f0f0f0; 
-	height:30px; 
+	height:45px;
 	margin:1px 0 0; 
 	padding:10px; 
 }
 #cart ul li:first-child { margin:0; }
 #cart ul li > * { display:block; float:left; }
-#cart ul li span { /*text-align:right; width:65px;*/ }
-#cart ul li span:first-child { text-align:left; width:100px; }
-#cart ul li > div { 
-border:1px solid #f0f0f0;
-/*width:145px;*/ 
-}
-#cart ul li select { width:70px; }
+#cart ul li span { /*text-align:right; width:65px;*/ padding-left: 4px;}
+#cart ul li span:first-child { text-align:left; width:200px; padding: 0px; }
+#cart ul li > div { border:1px solid #f0f0f0; }
+
+/*#cart ul li select { width:70px; }*/
 #cart ul li input { margin:0px; padding: 0px; width:30px; } /* margin:0 5px 0 0;  50 */
 #cart ul li a { float:right; }
 
-#totals { 
-	background:#f0f0f0;
-	/*float:right;*/
-	/*padding:10px;*/
-	/*width:250px;*/
-}
+#totals { background:#f0f0f0; }
+
 #totals input { 
 	float:right;
 	margin:0 0 5px; 
 }
-/*#totals select { width:100%; }*/
+
 #totals p label, 
 #totals span { 
 	display:block; 
 	float:left;
-	/*width:120px;*/
 }
 #totals span { text-align:right; }
 
 #checkout { 
 	clear:right; 
 	float:right; 
-	/*margin:20px 0 0; */
 }
 
 
@@ -218,8 +245,9 @@ body {
 .empty {float: right;margin-bottom: 15px; display: block;}
 
 .item {width:100%; text-align:left;}
-.item-name {float: left; text-align:left;}
+.item-name {float: left; text-align:left; width: 100px;}
 .item-price {float: right;}
+
 .container {padding: 5px; margin: auto;}
 .pricetotal {float: right;}
 .pricesingle {float: left;}
@@ -294,11 +322,11 @@ body {
 			<br>-->
 
 			<label> Total: </label> <span class="cart-total"> $0.00 </span>
-			<br>
+			<br><br>
 			<label> Meals: </label> <span class="equivalency-meals">0</span>
-			<br>
+			<br><br>
 			<label> Points Over: </label> <span class="meal-remainder">0</span>
-			<br>
+			<br><br>
 			<label> Points Til next Meal EQ: </label> <span class="meal-remaining">0</span>
 		</p>
 		</div>
@@ -340,39 +368,8 @@ body {
 			</li>
 			-->
 
-			
-			<ul>
-				<li class="product purchase btn btn-info item" id="1">
-						<span class="title">Tank</span>
-						<span class="price">$13.00</span>
-				</li>
-
-				<li class="product purchase btn btn-info item" id="long-sleeve">
-						<span class="title">Long Sleeve</span>
-						<span class="price">$19.00</span>
-
-				</li>
-
-				<li class="product purchase btn btn-info item" id="pants">
-						<span class="title">Pants</span>
-						<span class="price">$22.00</span>
-
-				</li>
-
-				<li class="product purchase btn btn-info item" id="skirt">
-						<span class="title">Skirt</span>
-						<span class="price">$15.00</span>
-				</li>
-
-				<li class="product purchase btn btn-info item" id="shoe">
-						<span class="title">Shoe</span>
-						<span class="price">$42.00</span>
-				</li>
-			</ul>
-
-
 	
-</div>
+		</div>
 
 </div><!-- /.container -->
 
