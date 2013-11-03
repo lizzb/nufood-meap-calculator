@@ -94,6 +94,7 @@ var plum = plum || {};
 		// The list of shopping cart selectors and the HTML that will be used to
 		// build each item.
 		carts: { },
+
 		// A cached property to check if the shipping menu already has an item
 		// in it.
 		//shippingMenuPopulated: false,
@@ -101,14 +102,16 @@ var plum = plum || {};
 		//discount: 0,
 		// The cart's shipping cost.
 		//shipping: 0,
+		// The cart's tax amount.
+		//tax: 0,
+
 		// The cart's subtotal amount.
 		subtotal: 0,
 		// The cart's total quantity.
 		quantity: 0,
-		// The cart's tax amount.
-		//tax: 0,
 		// The cart's total cost.
 		total: 0,
+
 		// Default option list.
 		options: {
 			// The list of class or data-attribute listeners for HTML elements.
@@ -135,6 +138,18 @@ var plum = plum || {};
 				
 				// The cart's total.
 				carttotal: 'cart-total',
+
+
+				// The cart's .....
+				cartmeals: 'equivalency-meals',
+
+				// The cart's .....
+				//cartremainder: 'amountOverMealEQ', //'meal-remainder',
+				amountOverMealEQ: 'meal-remainder',
+				amountUnderMealEQ: 'meal-remaining',
+				//amountOverMealEQ
+	//
+
 				
 				// The button that triggers emptying the shopping cart.
 				empty: 'empty',
@@ -194,7 +209,7 @@ var plum = plum || {};
 			properties: [ ],
 			// Setting this to true will enable sandbox mode at the third-party
 			// payment gateways.
-			sandbox: false,
+			//sandbox: false,
 			
 			// This is a list of callback functions that are applied to each
 			// matched shortcode in the item's cart HTML. A shortcode is a
@@ -227,6 +242,7 @@ var plum = plum || {};
 			addItemAfter: function () { },
 			// Triggers before a new item has been added.
 			addItemBefore: function () { },
+
 			// Triggers after the cart's HTML display has finished building.
 			buildCartAfter: function () { },
 			// Triggers before the cart's HTML has started building.
@@ -237,26 +253,29 @@ var plum = plum || {};
 			
 			// Triggers when the total amount is being calculated.
 			calcTotal: function () { },
+
 			// Triggers after the shopping cart has been emptied.
 			emptyCartAfter: function () { },
 			// Triggers before the cart is emptied.
 			emptyCartBefore: function () { },
+
 			// Triggers when the quantity of an item reaches the "stock" limit.
 			itemSoldOut: function () { },
 			// Triggers when the cart has loaded after the page initially loads.
 			ready: function () { },
+
 			// Triggers after a single item is removed from the cart.
 			removeItemAfter: function () { },
 			// Triggers before an item is removed.
 			removeItemBefore: function () { },
-			// Triggers when a customer changes to a different shipping option.
-			//shippingChanged: function () { },
+			
 			// Triggers after an existing item is modified.
 			updateItemAfter: function () { },
 			// Triggers before an existing item is modified.
 			updateItemBefore: function () { }
 
-
+			// Triggers when a customer changes to a different shipping option.
+			//shippingChanged: function () { },s
 			// This can be a list of discount codes and the value which is
 			// discounted. For example, { '10PERCENT': '10%', '10DOLLARS': 10 }
 			// will discount 10% of the subtotal when entering "10PERCENT" into
@@ -350,11 +369,11 @@ var plum = plum || {};
 				//d.delegate(':radio.' + c.shipping + ',select.' + c.shipping, 'change', 'shipping', $.proxy(this.listen, this));
 				//d.delegate('input.' + c.discount, 'change', 'discount', $.proxy(this.listen, this));
 				// Listen for checkout events.
-				for (i in this.checkout) {
+				/*for (i in this.checkout) {
 					if (this.checkout.hasOwnProperty(i)) {
 						d.delegate('.' + (this.options.classes[i] || i), 'click', i, $.proxy(this.checkout, this));
 					}
-				}
+				}*/
 				// Build the shopping cart.
 				$.each(this.carts, function (cart) {
 					d.delegate(cart + ' .' + c.remove, 'click', 'remove', $.proxy(self.listen, self));
@@ -424,6 +443,7 @@ var plum = plum || {};
 				html = $('<li class="cart-item" data-id="' + product[c.id] + '">' + html + '</li>');
 				$(':input', html).each(function () {
 					var elem = $(this), prop = this.className, property;
+					
 					// We need to ensure that all input fields in the cart item
 					// have properties applicable to those fields. If not, the
 					// field can be removed from the item to prevent unavailable
@@ -437,10 +457,12 @@ var plum = plum || {};
 						});
 						if (property === undefined) {
 							elem.remove();
-						} else {
+						} 
+						else {
 							elem.val(property);
 						}
-					} else {
+					} 
+					else {
 						elem.remove();
 					}
 				});
@@ -449,7 +471,7 @@ var plum = plum || {};
 		},
 
 
-
+/* ----------------------------------------------------*/
 
 
 		/**
@@ -485,30 +507,7 @@ var plum = plum || {};
 			return total < 0 ? 0 : total;
 		},
 
-		/**
-		 * Runs a checkout method to process a transaction.
-		 *
-		 * @since  1.0
-		 *
-		checkout: function (event, vars) {
-			if (typeof event === 'string') {
-				var fields = [];
-				$.each(vars, function (i, field) {
-					fields.push('<input type="hidden" name="' + field[0] + '" value="' + field[1].toString() + '">');
-				});
-				$('<form>', {
-					action: event,
-					method: 'post',
-					css: { display: 'none' },
-					html: fields.join('')
-				}).appendTo('body').trigger('submit');
-			} else {
-				event.preventDefault();
-				if (this.quantity) {
-					this.checkout[event.data].call(this);
-				}
-			}
-		},*/
+/* ----------------------------------------------------*/
 
 		/**
 		 * Empties the shopping cart.
@@ -524,7 +523,7 @@ var plum = plum || {};
 				this.cart.timeout = this.timeout(true);
 				//this.cart.discountCode = null;
 				//this.cart.shippingMethod = null;
-				this[o.geolocation ? 'geolocation' : 'saveCart'](o.geolocation);
+				//this[o.geolocation ? 'geolocation' : 'saveCart'](o.geolocation);
 				$.each(this.carts, function (cart) { $(cart).empty(); });
 			} else if (this.cart.items && this.cart.items.length && o.emptyCartBefore.call(this) !== false) {
 				this.emptyCart(true);
@@ -645,20 +644,24 @@ var plum = plum || {};
 			decimal = decimal === number ? '' : decimal;
 			number = decimal ? number.substring(0, number.lastIndexOf(decimal)) : number;
 			number = number.split('').reverse();
+			
 			// Split the price to whole & fraction amounts.
 			price = parseFloat(price || 0).toFixed(2).toString().match(/^(.+?)(?:[^\d](\d\d))?$/);
 			price[1] = price[1].replace(/[^\d]/g, '');
 			price[2] = price[2] || 0;
+			
 			// Reformat the price array to contain only whole & fraction
 			// numbers, and reverse the format.
 			price = parseFloat(price[1] + '.' + price[2]).toFixed(2).split('.');
 			price[0] = price[0].split('').reverse();
+			
 			// Build the currency string.
 			currency = [];
 			$.each(number, function (i, number) {
 				currency.push(/^\d+$/.test(number) ? price[0].shift() : number);
 			});
 			currency = currency.reverse().join('').replace(/^(?:[^\d]+)?(.+)(?:[^\d]+)?$/, '$1');
+			
 			// Add formatting.
 			price = before + currency + (decimal ? decimal + price[1] : '') + after;
 			return price;
@@ -747,7 +750,8 @@ var plum = plum || {};
 				} else if (o.updateItemBefore.call(this, product) !== false) {
 					if (o.overrideProperties) {
 						$.extend(this.cart.items[i], product);
-					} else {
+					} 
+					else {
 						this.cart.items[i][c.quantity] = product[c.quantity];
 					}
 					this.saveCart();
@@ -872,15 +876,14 @@ var plum = plum || {};
 			case 'purchase':
 				container = $(target).closest('.' + c.product)[0];
 				SKU = this.options.generateSKU ? [] : false;
+
 				// Make sure a product container exists.
-				if (!container) {
-					return false;
-				}
+				if (!container) { return false; }
+
 				// If the product container has an ID, that is used as the
 				// ID for the item in the shopping cart.
-				if (container.id) {
-					product[c.id] = container.id;
-				}
+				if (container.id) { product[c.id] = container.id; }
+
 				// Get properties from the container's data attributes.
 				$.each(container.attributes, function (prop, elem) {
 					prop = elem.nodeName;
@@ -944,9 +947,11 @@ var plum = plum || {};
 				product[c.quantity] = this.forceInt(product[c.quantity], 1);
 				product[c.limit] = this.forceInt(product[c.limit], 0);
 				product[c.stock] = this.forceInt(product[c.stock], 0);
+
 				// Update or add a new item to the cart.
 				this.insertItem(product);
 				break;
+
 			case 'remove':
 				id = $(target).closest('li[data-id]').data('id');
 				i = this.itemExists(id);
@@ -976,7 +981,8 @@ var plum = plum || {};
 					: $(target).data('rate');
 				o.shippingChanged.call(this);
 				this.saveCart();
-				break;*/
+				break;
+				*/
 			}
 		},
 
@@ -1190,19 +1196,43 @@ var plum = plum || {};
 		 */
 		updateTotals: function (discountTarget) {
 			var shop = this, c = shop.options.classes;
+			
 			// Calculate the cart amounts.
 			shop.subtotal = parseFloat(shop.calcSubtotal().toFixed(2));
-			//shop.shipping = parseFloat(shop.calcShipping().toFixed(2));
-			//shop.tax = parseFloat(shop.calcTax().toFixed(2));
-			//shop.discount = parseFloat(shop.calcDiscount(discountTarget).toFixed(2));
 			shop.total = parseFloat(shop.calcTotal().toFixed(2));
+
 			// Update the text amounts for each cart total-related field.
 			$('.' + c.cartquantity).each(function () { this.innerHTML = shop.quantity.toString(); });
 			$('.' + c.cartsubtotal).each(function () { this.innerHTML = shop.formatPrice(shop.subtotal); });
+			$('.' + c.carttotal).each(function () { this.innerHTML = shop.formatPrice(shop.total) });
+
+			var mealCount = this.forceInt(shop.subtotal / 9, 0); 
+			var overflow = (shop.subtotal % 9);
+			var pointsTilNextMeal = 0;
+			if (overflow != 0) pointsTilNextMeal = 9 - overflow;
+			//var amountUnderMealEQ
+
+			// trial
+			$('.' + c.cartmeals).each(function () { this.innerHTML = mealCount; });
+			$('.' + c.amountOverMealEQ).each(function () { this.innerHTML = shop.formatPrice(overflow); }); //amountTilFullMealEQ); });
+			$('.' + c.amountUnderMealEQ).each(function () { this.innerHTML = shop.formatPrice(pointsTilNextMeal); }); //amountTilFullMealEQ); });
+
+	//amountOverMealEQ
+	//amountUnderMealEQ
+
+				//cartmeals: 'equivalency-meals',
+				//cartremainder: 'meal-remainder',
+
+
+
+			//shop.shipping = parseFloat(shop.calcShipping().toFixed(2));
+			//shop.tax = parseFloat(shop.calcTax().toFixed(2));
+			//shop.discount = parseFloat(shop.calcDiscount(discountTarget).toFixed(2));
+			
 			//$('.' + c.cartshipping).each(function () { this.innerHTML = shop.formatPrice(shop.shipping); });
 			//$('.' + c.carttax).each(function () { this.innerHTML = shop.formatPrice(shop.tax); });
 			//$('.' + c.cartdiscount).each(function () { this.innerHTML = '-' + shop.formatPrice(shop.discount); });
-			$('.' + c.carttotal).each(function () { this.innerHTML = shop.formatPrice(shop.total) });
+			
 		}
 
 	};
@@ -1530,6 +1560,38 @@ SHIPPING
 		},
 		*/
 
+/** -------------------------------------------------------
+
+CHECKOUT
+
+-------------------------------------------------------- **/
+
+		/**
+		 * Runs a checkout method to process a transaction.
+		 *
+		 * @since  1.0
+		 *
+		checkout: function (event, vars) {
+			if (typeof event === 'string') {
+				var fields = [];
+				$.each(vars, function (i, field) {
+					fields.push('<input type="hidden" name="' + field[0] + '" value="' + field[1].toString() + '">');
+				});
+				$('<form>', {
+					action: event,
+					method: 'post',
+					css: { display: 'none' },
+					html: fields.join('')
+				}).appendTo('body').trigger('submit');
+			} else {
+				event.preventDefault();
+				if (this.quantity) {
+					this.checkout[event.data].call(this);
+				}
+			}
+		},*/
+
+
 	/**
 	 * The custom checkout method.
 	 *
@@ -1837,9 +1899,14 @@ SHIPPING
 }(jQuery));
 
 
+
+
+
+
+
 /**
  * Example plum.Shop configuration
- */
+ *
 $('#cart').plum('shop', {
 	cartitem: '<span>{title}</span> '
 		/*+ '<div class="options">'
@@ -1855,7 +1922,7 @@ $('#cart').plum('shop', {
 				+ '<option value="8">8</option>'
 				+ '<option value="9">9</option>'
 			+ '</select>'
-		+ '</div>'*/
+		+ '</div>'*
 		//+ '<input class="purchase" type="button" value="+">'
 		//+ '<input type="number" class="quantity" value="{quantity}">' //type="number"
 		+ '<span class="pricesingle">{pricesingle}</span> '
@@ -1872,12 +1939,12 @@ $('#cart').plum('shop', {
 	//geolocation: true,
 	//taxRate: { 'US': [ 0.08 ] },
 	//discountCodes: { '10PERCENT': '10%', '10DOLLARS': 10 },
-	sandbox: true,
+	//sandbox: true,
 	/*shippingRate: {
 		'USPS': 0.10,
 		'UPS Ground': 0.15,
 		'FedEx Express': 0.18
-	},*/
+	},*
 	storage: 'session',
 	storageURL: 'shopping-cart.php',
 	//paypaluser: 'hello',
@@ -1886,7 +1953,7 @@ $('#cart').plum('shop', {
 	//amazonmerchant: 'A18WCVD7H429AV',
 	//skrilluser: 'hello',
 	//skrilldomain: 'robocreatif.com',
-	checkout: function () {
+	/*checkout: function () {
 		console.dir(this.cart);
 		return false;
 		alert(
@@ -1895,7 +1962,7 @@ $('#cart').plum('shop', {
 			+ 'total of ' + this.formatPrice(this.total)
 		);
 		return true;
-	},
+	},*
 	emptyCartBefore: function () {
 		return confirm(
 			//'This message is controlled by a callback function.\n\n'
@@ -1903,4 +1970,4 @@ $('#cart').plum('shop', {
 			'Are you sure you want to empty your cart?'
 		);
 	}
-});
+});*/
