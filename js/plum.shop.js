@@ -532,6 +532,7 @@ var plum = plum || {};
 				this.emptyCart(true);
 				o.emptyCartAfter(true);
 			}
+			this.updateTotals();
 		},
 
 		/**
@@ -1217,8 +1218,10 @@ var plum = plum || {};
 
 			// trial
 			$('.' + c.cartmeals).each(function () { this.innerHTML = mealCount; });
-			$('.' + c.amountOverMealEQ).each(function () { this.innerHTML = shop.formatPrice(overflow); }); //amountTilFullMealEQ); });
-			$('.' + c.amountUnderMealEQ).each(function () { this.innerHTML = shop.formatPrice(pointsTilNextMeal); }); //amountTilFullMealEQ); });
+			$('.' + c.amountOverMealEQ).each(function () 
+				{ this.innerHTML = shop.formatPrice(overflow); }); //amountTilFullMealEQ); });
+			$('.' + c.amountUnderMealEQ).each(function () 
+				{ this.innerHTML = shop.formatPrice(pointsTilNextMeal); }); //amountTilFullMealEQ); });
 
 	//amountOverMealEQ
 	//amountUnderMealEQ

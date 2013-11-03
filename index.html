@@ -15,67 +15,7 @@
 	-->
 	<!-- saved from url=(0038)http://demo.plumjs.com/shop/index.html -->
 
-<script>
-
-var items = {
-	"Soup of the day": "0.00",
-
-	"Chicken Caesar Salad": "5.59",
-	"Tomato + Mozzerella Baguette": "4.99",
-
-	"Celery + Carrots (Crudites)": "2.69",
-	"Edamame": "2.95",
-
-	"Sushi - Veggie": "0.00",
-	"Sushi - Shrimp": "0.00",
-	"Sushi - California w/ Masago": "0.00",
-	"Sushi - California": "0.00",
-	
-	"Nerd Rope": "1.19",
-	"Odwalla Juice Smoothie": "3.49",
-	"Sweettart Gummies": "2.75",
-
-	"Tostido's Lime Tortilla Chips": "4.29",
-	"Spicy Cheeto Fries": "1.49",
-
-	"Lean Cuisine": "4.99",
-	"Amy's Pesto Tortellini Bowl": "5.49",
-	"Taipei Stir Fry Chinese Takeout Boxes": "4.99",
-	"Bagel Bites Mini Pizzas": "0.00",
-	"Naanwich": "0.00",
-
-	"Simply Asia Soup/Noodles": "4.99",
-
-	"Cup O Ramen": "0.00",
-	"Top Ramen Package": "0.49",
-
-	"PB&J on Wheat": "2.99",
-	"Brownie": "1.99",
-	"Danish": "2.25",
-	"Cookie": "1.75",
-	"Machine Coffee Drink 16 oz": "3.00",
-
-	"Dorito's": "0.00",
-	"Soda - 12 pack cans": "0.00",
-	"Soda - Individual bottle": "0.00",
-	
-	"Chocolate Candy Bar": "0.00",
-	"Clif Bar": "0.00",
-	
-	"Candy Bar": "1.19",
-	"M&Ms": "1.19",
-	"Laffy Taffy": "0.25",
-	"Mini Reese's Cups": "0.25",
-	"Gum": "0.00",
-	
-	"Wheat Thins": "0.00",
-	"Box of cereal": "0.00",
-	"Mini bowl of cereal": "0.00",
-	
-};
-
-
-</script>
+<script src="./js/itemPriceList.js"></script>
 
 <style>
 
@@ -221,9 +161,6 @@ a:hover { color:#000; text-decoration:none; }
 
     <!-- Bootstrap core CSS -->
     <link href="css/bootstrap.css" rel="stylesheet">
-
-    <!-- Custom styles for this template
-    <link href="starter-template.css" rel="stylesheet">  -->
 
 
 <style>
@@ -390,7 +327,7 @@ fieldset[disabled] .btn-info.active {
             <li><a href="#about">About</a></li>
             <li>
             	<a class="empty" href="http://demo.plumjs.com/shop/index.html#">Clear all items</a>
-            	<a href="#contact">Contact</a></li>
+            	
           </ul>
         </div><!--/.nav-collapse -->
       </div>
@@ -407,16 +344,12 @@ fieldset[disabled] .btn-info.active {
 
 	<div id="totals">
 			
-			<!--<label>Total items</label>
-			<span class="cart-quantity">0</span>
-			<br>
+			<!--
+			<label>Total items</label><span class="cart-quantity">0</span>
 			<label> Total: </label> <span class="cart-total"> $0.00 </span>
-
-			<div class="total-field">
 			<label> Subtotal: </label> <span class="cart-subtotal">$0.00</span>
-			</div>
 			Points Til next Meal EQ:
-			<br>-->
+			-->
 			
 			<div class="total-field">
 			<label> Meals: </label> <span class="equivalency-meals">0</span>
@@ -425,7 +358,6 @@ fieldset[disabled] .btn-info.active {
 			<div class="total-field">
 			<label> Points Over: </label> <span class="meal-remainder">0</span>
 			</div>
-
 			
 
 			<div class="total-field">
@@ -436,6 +368,7 @@ fieldset[disabled] .btn-info.active {
 			<label> Total: </label> <span class="cart-total">$0.00</span>
 			</div>
 		</div>
+
 			<br><br>
 
 
@@ -444,7 +377,7 @@ fieldset[disabled] .btn-info.active {
 
 			<div id="cart"> </div>
 
-			<a class="empty" href="http://demo.plumjs.com/shop/index.html#">Clear all items</a>
+			<a class="empty" href="#">Clear all items</a>
 
 			<br>
 			<hr>
@@ -489,98 +422,13 @@ try {
 
 
 <script>
-function makeProductList() {
-
-	var productlisthtml = "";
-	var i = 0;
-
-	$.each( items, function( item, price ) {
-	  	productlisthtml +=
-	  	"<li class='product purchase btn btn-info item' id='"+i+"'>" +
-	  	"<span class='title'>" + item + "</span>" +
-	  	"<span class='price'> $" + price + "</span> </li>";
-	  i++;
-	});
-
-	document.getElementById("products").innerHTML = "<ul>" + productlisthtml + "</ul>";
-}
-
-function sortAZ() {
-	var productList = $('#products ul');
-	var listItems = productList.children('li').get();
-	listItems.sort(function(a, b) {
-		var compA = $(a).text().toUpperCase();
-		var compB = $(b).text().toUpperCase();
-   return (compA < compB) ? -1 : (compA > compB) ? 1 : 0;
-})
-$.each(listItems, function(idx, itm) { productList.append(itm); });
-
-}
-
-function sortByPrice() {
-
-  var myYears = ['Freshman', 'Sophomore', 'Junior', 'Senior'];
-  var myList = $('#products ul');
-  var listItems = myList.children('li').get();
-  listItems.sort(function(a,b){
-    var compA = $(a).find('.price').text();
-    var compB = $(b).find('.price').text();
-    return (compA < compB) ? -1 : (compA > compB) ? 1 : 0;
-  });
-  $(myList).append(listItems);
-}
-/*
-var arr = [];
-
-for (var key in items) {
-    if (items.hasOwnProperty(key)) {
-        arr.push(items[key]);
-    }
-}
-
-alert(arr.sort());
-*/
-/*
-	// sort on key values
-function keysrt(key,desc) {
-  return function(a,b){
-   return desc ? ~~(a[key] < b[key]) : ~~(a[key] > b[key]);
-  }
-}
-	items.sort(function (item, price){
-
-
-	})
-
-	var productList = $('#products ul');
-	var listItems = productList.children('li').get();
-	listItems.sort(function(a, b) {
-		var compA = $(a).text().toUpperCase();
-		var compB = $(b).text().toUpperCase();
-   return (compA < compB) ? -1 : (compA > compB) ? 1 : 0;
-})
-$.each(listItems, function(idx, itm) { productList.append(itm); });
-*/
-
-//}
-
-
-/*
-function sortByYear(){
-  var myYears = ['Freshman', 'Sophomore', 'Junior', 'Senior'];
-  var myList = $('#foo ul');
-  var listItems = myList.children('li').get();
-  listItems.sort(function(a,b){
-    var compA = $.inArray($(a).find('.year').text(), myYears);
-    var compB = $.inArray($(b).find('.year').text(), myYears);
-    return (compA < compB) ? -1 : (compA > compB) ? 1 : 0;
-  });
-  $(myList).append(listItems);
-}*/
+// this used to contain the sorting and making of list
 </script>
 
 
 <script>
+
+// this used to have the cart config
 /**
  * Example plum.Shop configuration
  */
