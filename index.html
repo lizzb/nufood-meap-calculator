@@ -98,6 +98,7 @@ a:hover { color:#000; text-decoration:none; }
 #products > ul > li { 
 	/*float:left; */
 	/*margin:5px 0 0 5px; */
+	padding-bottom: 5px;
 }
 #products > ul > li:first-child { margin-left:0; }
 
@@ -118,6 +119,7 @@ a:hover { color:#000; text-decoration:none; }
 	margin:0 0 20px;
 	padding:0;
 	width:100%;
+	/*font-size: 9pt;*/
 }
 
 #cart ul li { 
@@ -128,24 +130,45 @@ a:hover { color:#000; text-decoration:none; }
 }
 #cart ul li:first-child { margin:0; }
 #cart ul li > * { display:block; float:left; }
-#cart ul li span { /*text-align:right; width:65px;*/ padding-left: 4px;}
-#cart ul li span:first-child { text-align:left; width:200px; padding: 0px; }
+#cart ul li span { 
+	/*text-align:right;
+	width:65px;*/
+	padding-left: 4px;
+}
+#cart ul li span:first-child { 
+	text-align:left;
+	width:200px;
+	padding: 0px;
+}
+
+.quantity {}
+
+.cart-item {display: block;}
+
+.carttitle {}
+.pricesingle {float: left; font-size: 8pt;}
+.pricetotal {float: right; font-size: 8pt;}
+.cart-prices {float: right; font-size: 9pt; padding-right: 2px;}
+/*
 #cart ul li > div { border:1px solid #f0f0f0; }
 
-/*#cart ul li select { width:70px; }*/
+#cart ul li select { width:70px; }*/
+
 #cart ul li input { 
 	margin:0px;
 	padding: 0px;
 	width:30px; 
+	height: 25px;
+	text-align: center;
 } /* margin:0 5px 0 0;  50 */
 
 #cart ul li a { float:right; }
 
-#totals { background:#f0f0f0; }
+#totals { background:#f0f0f0; font-size: 12pt; }
 
 #totals input { 
 	float:right;
-	margin:0 0 5px; 
+	/*margin:0 0 5px; */
 }
 /*
 #checkout { 
@@ -154,7 +177,13 @@ a:hover { color:#000; text-decoration:none; }
 }
 */
 #totals span { text-align:right; }
-.total-field {display: inline-block; /*width: 30%;*/ padding: 0px 7px; /*width: 100px;*/ /*float: left; margin-right: 10px;*/ }
+.total-field {
+display: inline-block; 
+/*width: 30%;*/ padding: 0px 7px; 
+/*width: 100px;*/ 
+/*float: left; 
+margin-right: 10px;*/ 
+}
 .subtotal {text-align: left;}
 
 </style>
@@ -173,16 +202,32 @@ body {
   text-align: center;
 } 
 
-.cart-item{display: block;}
-.empty {float: right;margin-bottom: 15px; display: block;}
 
-.item {width:100%; text-align:left;}
-.item-name {float: left; text-align:left; width: 100px;}
-.item-price {float: right;}
+
+.empty {
+	float: right;
+	margin-bottom: 15px;
+	display: block;
+}
+
+.item {
+	width:100%;
+	text-align:left;
+}
+.item-name {
+	float: left;
+	text-align:left;
+	width: 100px;
+}
+.item-price {
+	float: right;
+
+}
+
+
 
 .container {padding: 5px; margin: auto;}
-.pricetotal {float: right;}
-.pricesingle {float: left;}
+
 
 /*
 .navbar-inverse {background-color: #563d7c;
@@ -192,19 +237,26 @@ border-color: #463265;}
 color: #cdbfe3;
 }*/
 
+.navbar-inverse {height: 40px;}
+
 .btn {
   display: inline-block;
   padding: 6px 12px;
   margin-bottom: 0;
+
   font-size: 14px;
   font-weight: normal;
   line-height: 1.428571429;
+
   /*text-align: center;*/
   white-space: nowrap;
   vertical-align: middle;
+
   cursor: pointer;
   border: 1px solid transparent;
-  border-radius: 4px;
+  border-radius: 0px; /*4px;*/
+
+
   -webkit-user-select: none;
      -moz-user-select: none;
       -ms-user-select: none;
@@ -233,8 +285,7 @@ color: #cdbfe3;
           box-shadow: inset 0 3px 5px rgba(0, 0, 0, 0.125);
 }
 
-.btn.disabled,
-.btn[disabled],
+.btn.disabled, .btn[disabled],
 fieldset[disabled] .btn {
   pointer-events: none;
   cursor: not-allowed;
@@ -251,10 +302,8 @@ fieldset[disabled] .btn {
 }
 
 
-.btn-info:hover,
-.btn-info:focus,
-.btn-info:active,
-.btn-info.active,
+.btn-info:hover, .btn-info:focus,
+.btn-info:active, .btn-info.active,
 .open .dropdown-toggle.btn-info {
   color: #ffffff;
   background-color: #39b3d7;
@@ -267,24 +316,12 @@ fieldset[disabled] .btn {
   background-image: none;
 }
 
-.btn-info.disabled,
-.btn-info[disabled],
-fieldset[disabled] .btn-info,
-.btn-info.disabled:hover,
-.btn-info[disabled]:hover,
-fieldset[disabled] .btn-info:hover,
-.btn-info.disabled:focus,
-.btn-info[disabled]:focus,
-fieldset[disabled] .btn-info:focus,
-.btn-info.disabled:active,
-.btn-info[disabled]:active,
-fieldset[disabled] .btn-info:active,
-.btn-info.disabled.active,
-.btn-info[disabled].active,
-fieldset[disabled] .btn-info.active {
+ 
+ /* disabled info colors 
   background-color: #5bc0de;
   border-color: #46b8da;
-}
+  */
+
 </style>
 
 
@@ -303,15 +340,18 @@ fieldset[disabled] .btn-info.active {
     <div class="navbar navbar-inverse navbar-fixed-top">
       <div class="container">
         <div class="navbar-header">
-          <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+          <!--button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
-          </button>
+          </button-->
 
           <a class="navbar-brand" href="#">
-				<!--label>Subtotal:  Total</label <label> Total: </label> -->
-				<!--span class="cart-total">$0.00</span-->
+				<!--
+				<label>Subtotal:  Total</label>
+				<label> Total: </label> 
+				<span class="cart-total">$0.00</span>
+				-->
 				<span class="equivalency-meals">0</span> <label> Meals </label>  + 
 				<span class="meal-remainder">0</span> <label> Points </label> 
 				
@@ -333,12 +373,13 @@ fieldset[disabled] .btn-info.active {
       </div>
     </div>
 
-    <div class="container">
+    
 
     	
       <div class="starter-template">
         <h1>meap</h1>
-        <p class="lead">Meal Equivalency and Points Calculator</p>Calculate how many many items you can buy from Lisa's Cafe to perfectly use up meal equivalencies. <br>
+        <p class="lead">Meal Equivalency and Points Calculator</p>
+        Calculate how many items to buy from Lisa's Cafe to perfectly use up meal equivalencies. <br>
       <br>
 
 
@@ -350,26 +391,35 @@ fieldset[disabled] .btn-info.active {
 			<label> Subtotal: </label> <span class="cart-subtotal">$0.00</span>
 			Points Til next Meal EQ:
 			-->
-			
+			<!--
 			<div class="total-field">
-			<label> Meals: </label> <span class="equivalency-meals">0</span>
+			<label> Meals: </label> <span id="numMeals" class="equivalency-meals">0</span>
 			</div>
 
 			<div class="total-field">
 			<label> Points Over: </label> <span class="meal-remainder">0</span>
 			</div>
 			
-
 			<div class="total-field">
 			<label> Points Under: </label> <span class="meal-remaining">0</span>
 			</div>
+			-->
+			<div class="total-field">
+			<span class="meal-remainder">0</span> points <strong>over</strong> <span class="equivalency-meals">0</span> meals
+			</div>
 
+			<div class="total-field">
+			<span class="meal-remaining">0</span> <!--points <strong>over</strong>
+			points under </label> <span class="equivalency-meals++">0</span>-->
+			</div>
+
+			
+	</div>
+
+			<br>
 			<div class="total-field subtotal">
 			<label> Total: </label> <span class="cart-total">$0.00</span>
 			</div>
-		</div>
-
-			<br><br>
 
 
 
@@ -385,6 +435,7 @@ fieldset[disabled] .btn-info.active {
 			<button onclick="sortAZ()">Sort A-Z</button>
 			<button onclick="sortByPrice()">Sort By Price</button>
 
+<!--div class="container"-->
 
 			<!-- This is filled with html generated from an array -->
 
@@ -434,18 +485,29 @@ try {
  */
 $('#cart').plum('shop', {
 
-	cartitem: '<span>{title}</span> '
+	cartitem: '<span class="carttitle">{title}</span> '
 
 		// why wont this add...
 		// + '<input class="purchase" type="button" value="+">'
 
 
-		+ '<span class="pricesingle">{pricesingle} &nbsp;x&nbsp; </span>'
+		// + '<span class="pricesingle">{pricesingle} x '
+		+ '<span class="cart-prices">{pricesingle} x '
+		+ '<input type="number" pattern="[0-9]*" class="quantity" value="{quantity}">'
+		+ '</span>'
+		//+ '<span class="pricesingle">{pricesingle} &nbsp;x&nbsp; </span>'
+
 		//{pricesingle}</span> '
+		//+ '<input type="number" pattern="[0-9]*" class="quantity" value="{quantity}">'
+		//+ '<input type="number" class="quantity" value="{quantity}">'
+		//+ '<input type="tel" class="quantity" value="{quantity}">'
+		// attempted hack for easier number access on mobile devices
+		/*+ '<input type="button" value="-" class="qtyminus" field="quantity" />'
+    	+ '<input type="text" name="quantity" value="{quantity}" class="qty" />'
+    	+ '<input type="button" value="+" class="qtyplus" field="quantity" />'
+		*/
 
-		+ '<input type="number" class="quantity" value="{quantity}">'
-
-		+ '<span class="pricetotal"> {pricetotal} </span> '
+		//+ '<span class="pricetotal"> {pricetotal} </span> '
 		//= {pricetotal}
 
 		// + '<a class="remove-one" type="button" value=" - "> minus </a>'

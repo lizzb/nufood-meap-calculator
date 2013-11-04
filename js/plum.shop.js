@@ -1210,6 +1210,8 @@ var plum = plum || {};
 			$('.' + c.cartsubtotal).each(function () { this.innerHTML = shop.formatPrice(shop.subtotal); });
 			$('.' + c.carttotal).each(function () { this.innerHTML = shop.formatPrice(shop.total) });
 
+			// janky ass code ahead!
+
 			var mealCount = this.forceInt(shop.subtotal / 9, 0); 
 			var overflow = (shop.subtotal % 9);
 			var pointsTilNextMeal = 0;
@@ -1218,11 +1220,20 @@ var plum = plum || {};
 
 			// trial
 			$('.' + c.cartmeals).each(function () { this.innerHTML = mealCount; });
+			
 			$('.' + c.amountOverMealEQ).each(function () 
-				{ this.innerHTML = shop.formatPrice(overflow); }); //amountTilFullMealEQ); });
+				{ this.innerHTML = shop.formatPrice(overflow) });
+				//+ " over " + mealCount + " meals.";  //amountTilFullMealEQ); });
+			
+			if (overflow == 0) pointsTilNextMeal = 9;
 			$('.' + c.amountUnderMealEQ).each(function () 
-				{ this.innerHTML = shop.formatPrice(pointsTilNextMeal); }); //amountTilFullMealEQ); });
+				{ this.innerHTML = shop.formatPrice(pointsTilNextMeal)
+					+ "<strong> under </strong>" + (mealCount + 1) + " meals."; }); 
 
+
+					//amountTilFullMealEQ); });
+
+			//equivalency-meals++
 	//amountOverMealEQ
 	//amountUnderMealEQ
 
