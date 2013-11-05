@@ -78,8 +78,6 @@ var plum = plum || {};
 			items: [],
 			timeout: null,
 
-			//country: null,
-			//region: null,
 			each: function (callback) {
 				var result, i, length = this.items.length;
 				for (i = 0; i < length; i++) {
@@ -98,25 +96,21 @@ var plum = plum || {};
 		// in it.
 		//shippingMenuPopulated: false,
 
+
 		// The cart's subtotal amount.
 		subtotal: 0,
 		// The cart's total quantity.
 		quantity: 0,
-
 		// The cart's total cost.
 		total: 0,
+
 		// Default option list.
 		options: {
 			// The list of class or data-attribute listeners for HTML elements.
 			classes: {
-
 				// The HTML tag that contains the cart's discount amount.
 				//cartdiscount: 'cart-discount',
-				// The field where a customer can type in a discount code.
-				//discount: 'discount',
-				// Class name to identify the cart's drop-down menu of shipping
-				// options.
-				//shipping: 'shipping',
+
 
 				// HTML tag for the cart's total number of items.
 				cartquantity: 'cart-quantity',
@@ -126,6 +120,18 @@ var plum = plum || {};
 				
 				// The cart's total.
 				carttotal: 'cart-total',
+
+
+				// The cart's .....
+				cartmeals: 'equivalency-meals',
+
+				// The cart's .....
+				//cartremainder: 'amountOverMealEQ', //'meal-remainder',
+				amountOverMealEQ: 'meal-remainder',
+				amountUnderMealEQ: 'meal-remaining',
+				//amountOverMealEQ
+	//
+
 				
 				// The button that triggers emptying the shopping cart.
 				empty: 'empty',
@@ -150,7 +156,7 @@ var plum = plum || {};
 				// Class or data attribute to list a product's in stock amount.
 				// The value of this field can trigger the itemSoldOut calback
 				// method.
-				stock: 'stock',
+				//stock: 'stock',
 				// The class name inside a single list item in the cart that
 				// refers to the button that will remove the item.
 				remove: 'remove'
@@ -164,8 +170,7 @@ var plum = plum || {};
 			currencyCode: 'USD',
 			// Set this to true to use plum.Shop's experimental geolocation,
 			// which utilizes services of geoplugin.com, a third-party provider.
-			//geolocation: false,
-			
+			geolocation: false,
 			// If set to true, Plum will generate an ID for products based on
 			// the options that are chosen.
 			generateSKU: false,
@@ -175,7 +180,6 @@ var plum = plum || {};
 			// An ISO-2 code used to determine the language available on the
 			// payment gateway's checkout page.
 			language: 'EN',
-
 			// When updating an item that has different properties than is
 			// already saved in the cart, setting this option to true will force
 			// any new properties to override existing properties.
@@ -185,6 +189,7 @@ var plum = plum || {};
 			// also look for a data-title attribute, or an element that has a
 			// "title" class.
 			properties: [ ],
+
 			
 			// This is a list of callback functions that are applied to each
 			// matched shortcode in the item's cart HTML. A shortcode is a
@@ -213,45 +218,48 @@ var plum = plum || {};
 			
 			// The number of seconds until the shopping cart contents expire.
 			timeout: 86400,
-
 			// Triggers after a new item has been added to the cart.
 			addItemAfter: function () { },
 			// Triggers before a new item has been added.
 			addItemBefore: function () { },
 
-			// Triggers after a single item is removed from the cart.
-			removeItemAfter: function () { },
-			// Triggers before an item is removed.
-			removeItemBefore: function () { },
-
-			// Triggers after an existing item is modified.
-			updateItemAfter: function () { },
-			// Triggers before an existing item is modified.
-			updateItemBefore: function () { }
-
-
 			// Triggers after the cart's HTML display has finished building.
 			buildCartAfter: function () { },
 			// Triggers before the cart's HTML has started building.
 			buildCartBefore: function () { },
-
-			// Triggers after the shopping cart has been emptied.
-			emptyCartAfter: function () { },
-			// Triggers before the cart is emptied.
-			emptyCartBefore: function () { },
 			
-
 			// Triggers when the subtotal is being calculated.
 			calcSubtotal: function () { },
 			
 			// Triggers when the total amount is being calculated.
 			calcTotal: function () { },
 
-			// Triggers when the quantity of an item reaches the "stock" limit.
-			itemSoldOut: function () { },
+			// Triggers after the shopping cart has been emptied.
+			emptyCartAfter: function () { },
+			// Triggers before the cart is emptied.
+			emptyCartBefore: function () { },
 
+			// Triggers when the quantity of an item reaches the "stock" limit.
+			//itemSoldOut: function () { },
 			// Triggers when the cart has loaded after the page initially loads.
 			ready: function () { },
+
+			// Triggers after a single item is removed from the cart.
+			removeItemAfter: function () { },
+			// Triggers before an item is removed.
+			removeItemBefore: function () { },
+			
+			// Triggers after an existing item is modified.
+			updateItemAfter: function () { },
+			// Triggers before an existing item is modified.
+			updateItemBefore: function () { }
+
+
+
+
+
+
+
 
 		},
 
@@ -272,27 +280,31 @@ var plum = plum || {};
 		 * @param  object  options  Configuration options
 		 */
 		init: function (options) {
+			makeProductList();
+
+			
 			var self = this, o = this.options, c = o.classes, d = $(document), i;
 			// Set up the cart configuration.
 			$.extend(true, o, options);
 			// Set up the storage method.
 			this.saveCart = this.setStorageMethod(o.storage);
 			if (this.saveCart) {
+
 				// Get the shopping cart.
-				o.properties = $.merge([ c.id, c.limit, c.price, c.quantity, c.stock, c.title ], o.properties);
-				// Check if the shipping menu is already populated.
-				//this.shippingMenuPopulated = !!$('select.' + c.shipping).children().length;
+				//o.properties = $.merge([ c.id, c.limit, c.price, c.quantity, c.stock, c.title ], o.properties);
+				o.properties = $.merge([ c.id, c.limit, c.price, c.quantity, c.title ], o.properties);
+
+
 				this.saveCart(true);
 				if (this.cart.timeout === null) {
 					this.cart.timeout = this.timeout(true);
 				}
-
-				//$('input.' + c.discount).val(this.cart.discountCode);
+				
 				// Listen for specific events on marked HTML elements.
 				d.bind('plum', 'build', $.proxy(this.listen, this));
 				d.delegate('.' + c.purchase, 'click', 'purchase', $.proxy(this.listen, this));
 				d.delegate('.' + c.empty, 'click', 'empty', $.proxy(this.listen, this));
-
+				
 				// Build the shopping cart.
 				$.each(this.carts, function (cart) {
 					d.delegate(cart + ' .' + c.remove, 'click', 'remove', $.proxy(self.listen, self));
@@ -359,11 +371,10 @@ var plum = plum || {};
 						: product[value];
 					html = html.replace(new RegExp(prop, 'g'), value === undefined ? '' : value);
 				});
-
 				html = $('<li class="cart-item" data-id="' + product[c.id] + '">' + html + '</li>');
-				
 				$(':input', html).each(function () {
 					var elem = $(this), prop = this.className, property;
+					
 					// We need to ensure that all input fields in the cart item
 					// have properties applicable to those fields. If not, the
 					// field can be removed from the item to prevent unavailable
@@ -375,17 +386,23 @@ var plum = plum || {};
 								return false;
 							}
 						});
-						if (property === undefined) { elem.remove(); }
-						else { elem.val(property); }
+						if (property === undefined) {
+							elem.remove();
+						} 
+						else {
+							elem.val(property);
+						}
+					} 
+					else {
+						elem.remove();
 					}
-					else { elem.remove(); }
 				});
 			}
 			return html;
 		},
 
 
-
+/* ----------------------------------------------------*/
 
 
 		/**
@@ -421,7 +438,7 @@ var plum = plum || {};
 			return total < 0 ? 0 : total;
 		},
 
-
+/* ----------------------------------------------------*/
 
 		/**
 		 * Empties the shopping cart.
@@ -437,11 +454,11 @@ var plum = plum || {};
 				this.cart.timeout = this.timeout(true);
 				
 				$.each(this.carts, function (cart) { $(cart).empty(); });
-			}
-			else if (this.cart.items && this.cart.items.length && o.emptyCartBefore.call(this) !== false) {
+			} else if (this.cart.items && this.cart.items.length && o.emptyCartBefore.call(this) !== false) {
 				this.emptyCart(true);
 				o.emptyCartAfter(true);
 			}
+			this.updateTotals();
 		},
 
 		/**
@@ -557,25 +574,28 @@ var plum = plum || {};
 			decimal = decimal === number ? '' : decimal;
 			number = decimal ? number.substring(0, number.lastIndexOf(decimal)) : number;
 			number = number.split('').reverse();
+			
 			// Split the price to whole & fraction amounts.
 			price = parseFloat(price || 0).toFixed(2).toString().match(/^(.+?)(?:[^\d](\d\d))?$/);
 			price[1] = price[1].replace(/[^\d]/g, '');
 			price[2] = price[2] || 0;
+			
 			// Reformat the price array to contain only whole & fraction
 			// numbers, and reverse the format.
 			price = parseFloat(price[1] + '.' + price[2]).toFixed(2).split('.');
 			price[0] = price[0].split('').reverse();
+			
 			// Build the currency string.
 			currency = [];
 			$.each(number, function (i, number) {
 				currency.push(/^\d+$/.test(number) ? price[0].shift() : number);
 			});
 			currency = currency.reverse().join('').replace(/^(?:[^\d]+)?(.+)(?:[^\d]+)?$/, '$1');
+			
 			// Add formatting.
 			price = before + currency + (decimal ? decimal + price[1] : '') + after;
 			return price;
 		},
-
 
 
 		/**
@@ -590,25 +610,28 @@ var plum = plum || {};
 				c = o.classes,
 				i,
 				soldOut;
-			// The product MUST have an ID attached to it.
-			if (!product[c.id]) {  return false;  }
 
+			// The product MUST have an ID attached to it.
+			if (!product[c.id]) {
+				return false;
+			}
 			// Determine if the product is taxable or not.
-			//product[c.taxable] = product[c.taxable] === 'false' ? false : true;
+			product[c.taxable] = product[c.taxable] === 'false' ? false : true;
 			
 			// Check if the item already exists in the cart.
 			i = this.itemExists(product);
-			soldOut = product[c.stock];
+			//soldOut = product[c.stock];
 			
 			// If it does not already exist, run the addItemBefore callback
 			// function. If the function does not return false, push the item to
 			// the cart, run the addItemAfter callback and save the cart.
 			if (i === false) {
-				soldOut = soldOut && product[c.quantity] > soldOut;
+				//soldOut = soldOut && product[c.quantity] > soldOut;
+				//if (soldOut) {
+				//	o.itemSoldOut.call(this, product);
+				//} else if (o.addItemBefore.call(this, product) !== false) {
+				if (o.addItemBefore.call(this, product) !== false) {
 
-				if (soldOut) {  o.itemSoldOut.call(this, product);  }
-
-				else if (o.addItemBefore.call(this, product) !== false) {
 					this.cart.items.push(product);
 					this.saveCart();
 					o.addItemAfter.call(this, product);
@@ -636,10 +659,12 @@ var plum = plum || {};
 				if (soldOut) {
 					o.itemSoldOut.call(this, product);
 				} else if (o.updateItemBefore.call(this, product) !== false) {
-
-					if (o.overrideProperties) { $.extend(this.cart.items[i], product); } 
-					else { this.cart.items[i][c.quantity] = product[c.quantity]; }
-
+					if (o.overrideProperties) {
+						$.extend(this.cart.items[i], product);
+					} 
+					else {
+						this.cart.items[i][c.quantity] = product[c.quantity];
+					}
 					this.saveCart();
 					o.updateItemAfter.call(this, product);
 				}
@@ -750,7 +775,7 @@ var plum = plum || {};
 				// Update the item
 				this.insertItem(product);
 				break;
-
+			
 			case 'empty':
 				this.emptyCart();
 				break;
@@ -760,11 +785,11 @@ var plum = plum || {};
 				SKU = this.options.generateSKU ? [] : false;
 
 				// Make sure a product container exists.
-				if (!container) {  return false;  }
+				if (!container) { return false; }
 
 				// If the product container has an ID, that is used as the
 				// ID for the item in the shopping cart.
-				if (container.id) {  product[c.id] = container.id;  }
+				if (container.id) { product[c.id] = container.id; }
 
 				// Get properties from the container's data attributes.
 				$.each(container.attributes, function (prop, elem) {
@@ -776,7 +801,6 @@ var plum = plum || {};
 						}
 					}
 				});
-
 				// Get properties from the container's child elements that
 				// have relevant class names. An <img> tag uses the source,
 				// any form element (e.g., <input>) uses the value, and all
@@ -829,7 +853,7 @@ var plum = plum || {};
 				// integers.
 				product[c.quantity] = this.forceInt(product[c.quantity], 1);
 				product[c.limit] = this.forceInt(product[c.limit], 0);
-				product[c.stock] = this.forceInt(product[c.stock], 0);
+				//product[c.stock] = this.forceInt(product[c.stock], 0);
 
 				// Update or add a new item to the cart.
 				this.insertItem(product);
@@ -874,7 +898,9 @@ var plum = plum || {};
 				switch (type) {
 				case 'cookie':
 					// Test for cookies.
-					if (!method && navigator.cookieEnabled) {method = 'storageCookie';}
+					if (!method && navigator.cookieEnabled) {
+						method = 'storageCookie';
+					}
 					break;
 				case 'local':
 					// Test for localStorage.
@@ -892,11 +918,15 @@ var plum = plum || {};
 					break;
 				case 'session':
 					// Test for server-side session storage.
-					if (!method && storageURL) { method = 'storageSession'; }
+					if (!method && storageURL) {
+						method = 'storageSession';
+					}
 					break;
 				}
 			});
-			if (method && typeof this[method] === 'function') { return this[method]; }
+			if (method && typeof this[method] === 'function') {
+				return this[method];
+			}
 		},
 
 		/**
@@ -1018,18 +1048,18 @@ var plum = plum || {};
 				: /^\{".+\}$/.test(cart) ? $.parseJSON(cart)
 				: {
 					items: [],
-					//country: null,
-					//region: null,
+					country: null,
+					region: null,
 					timeout: this.timeout(true),
-
 				};
+
 			$.each(cart, function (key, value) { self.cart[key] = value; });
 			this.cart.items = cart.items || [];
 			this.cart.timeout = parseInt(cart.timeout, 10);
 			this.cart.each(function () {
 				this.price = Number(this.price);
 				this.quantity = Number(this.quantity);
-				this.stock = Number(this.stock);
+				//this.stock = Number(this.stock);
 			});
 			this.timeout();
 		},
@@ -1063,81 +1093,63 @@ var plum = plum || {};
 		 */
 		updateTotals: function (discountTarget) {
 			var shop = this, c = shop.options.classes;
-
+			
 			// Calculate the cart amounts.
 			shop.subtotal = parseFloat(shop.calcSubtotal().toFixed(2));
-			
 			shop.total = parseFloat(shop.calcTotal().toFixed(2));
 
 			// Update the text amounts for each cart total-related field.
 			$('.' + c.cartquantity).each(function () { this.innerHTML = shop.quantity.toString(); });
 			$('.' + c.cartsubtotal).each(function () { this.innerHTML = shop.formatPrice(shop.subtotal); });
 			$('.' + c.carttotal).each(function () { this.innerHTML = shop.formatPrice(shop.total) });
-		}
 
-	};
+			// janky ass code ahead!
 
-/** -------------------------------------------------------
+			var mealCount = this.forceInt(shop.subtotal / 9, 0); 
+			var overflow = (shop.subtotal % 9);
+			var pointsTilNextMeal = 0;
+			if (overflow != 0) pointsTilNextMeal = 9 - overflow;
+			//var amountUnderMealEQ
 
-TAX
-DISCOUNT
-SHIPPING
-GEOLOCATION
-CHECKOUT
+			// trial
+			$('.' + c.cartmeals).each(function () { this.innerHTML = mealCount; });
+			
+			$('.' + c.amountOverMealEQ).each(function () 
+				{ this.innerHTML = shop.formatPrice(overflow) });
+				//+ " over " + mealCount + " meals.";  //amountTilFullMealEQ); });
+			
+			if (overflow == 0) pointsTilNextMeal = 9;
+			$('.' + c.amountUnderMealEQ).each(function () 
+				{ this.innerHTML = shop.formatPrice(pointsTilNextMeal)
+					+ "<strong> under </strong>" + (mealCount + 1) + " meals."; }); 
 
-//shop.shipping = parseFloat(shop.calcShipping().toFixed(2));
+
+					//amountTilFullMealEQ); });
+
+			//equivalency-meals++
+	//amountOverMealEQ
+	//amountUnderMealEQ
+
+				//cartmeals: 'equivalency-meals',
+				//cartremainder: 'meal-remainder',
+
+
+
+			//shop.shipping = parseFloat(shop.calcShipping().toFixed(2));
 			//shop.tax = parseFloat(shop.calcTax().toFixed(2));
 			//shop.discount = parseFloat(shop.calcDiscount(discountTarget).toFixed(2));
-//$('.' + c.cartshipping).each(function () { this.innerHTML = shop.formatPrice(shop.shipping); });
+			
+			//$('.' + c.cartshipping).each(function () { this.innerHTML = shop.formatPrice(shop.shipping); });
 			//$('.' + c.carttax).each(function () { this.innerHTML = shop.formatPrice(shop.tax); });
 			//$('.' + c.cartdiscount).each(function () { this.innerHTML = '-' + shop.formatPrice(shop.discount); });
 			
--------------------------------------------------------- **/
+		}
+
+	};
 
 }(jQuery));
 
 
 
-/**
- * Example plum.Shop configuration
- */
-$('#cart').plum('shop', {
-	cartitem: '<span>{title}</span> '
-		/*+ '<div class="options">'
-			+ '<select class="color">'
-				+ '<option value="cyan">Cyan</option>'
-				+ '<option value="magenta">Magenta</option>'
-				+ '<option value="yellow">Yellow</option>'
-				+ '<option value="black">Black</option>'
-			+ '</select> '
-			+ '<select class="size">'
-				+ '<option value="6">6</option>'
-				+ '<option value="7">7</option>'
-				+ '<option value="8">8</option>'
-				+ '<option value="9">9</option>'
-			+ '</select>'
-		+ '</div>'*/
-		//+ '<input class="purchase" type="button" value="+">'
-		//+ '<input type="number" class="quantity" value="{quantity}">' //type="number"
-		+ '<span class="pricesingle">{pricesingle}</span> '
-		//+ ' x '
-		+ 'x <input type="number" class="quantity" value="{quantity}"> = ' //type="number"
-		//+ '<span class="pricesingle">{pricesingle}</span> '
-		//+ ' = '
-		+ '<span class="pricetotal">{pricetotal}</span> '
-		+ '<input class="remove-one" type="button" value=" - ">"', //<a class="remove-one" href="#"> Clear </a>', //Remove X
-	properties: [ 'description', 'thumb', 'color', 'size' ],
-	currencyFormat: '$00,000,000.00', // £
-	currencyCode: 'USD',
-	generateSKU: true,
 
-	storage: 'session',
-	storageURL: 'shopping-cart.php',
-	
-	emptyCartBefore: function () {
-		return confirm(
-			//'This message is controlled by a callback function.\n\n' + 
-			'Are you sure you want to empty your cart?'
-		);
-	}
-});
+

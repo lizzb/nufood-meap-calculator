@@ -184,7 +184,7 @@ display: inline-block;
 /*float: left; 
 margin-right: 10px;*/ 
 }
-.subtotal {text-align: left;}
+
 
 </style>
 
@@ -193,6 +193,8 @@ margin-right: 10px;*/
 
 
 <style>
+
+.subtotal {text-align: left;}
 
 body {
   padding-top: 50px;
@@ -213,6 +215,9 @@ body {
 .item {
 	width:100%;
 	text-align:left;
+	height: 45px;
+	/*padding: 10px;*/
+	vertical-align: middle;
 }
 .item-name {
 	float: left;
@@ -242,6 +247,7 @@ color: #cdbfe3;
 .btn {
   display: inline-block;
   padding: 6px 12px;
+  /*height: 50px;*/
   margin-bottom: 0;
 
   font-size: 14px;
@@ -347,11 +353,6 @@ fieldset[disabled] .btn {
           </button-->
 
           <a class="navbar-brand" href="#">
-				<!--
-				<label>Subtotal:  Total</label>
-				<label> Total: </label> 
-				<span class="cart-total">$0.00</span>
-				-->
 				<span class="equivalency-meals">0</span> <label> Meals </label>  + 
 				<span class="meal-remainder">0</span> <label> Points </label> 
 				
@@ -372,7 +373,6 @@ fieldset[disabled] .btn {
         </div><!--/.nav-collapse -->
       </div>
     </div>
-
     
 
     	
@@ -469,7 +469,8 @@ try {
 
 
 <script src="./js/jquery.js"></script>
-<script src="./js/plum.shop.js"></script>
+<script src="./js/meap.js"></script>
+<!--script src="./js/plum.shop.js"></script-->
 
 
 <script>
