@@ -57,6 +57,7 @@ var plum = plum || {};
 
 	plum.shop = function (options) {
 		var self = plum.shop.prototype;
+
 		// Register additional shopping cart containers.
 		if (this.selector && (typeof options === 'string' || options.cartitem)) {
 			$.each(this.selector.split(/\s*,\s*/), function (i, selector) {
@@ -71,8 +72,10 @@ var plum = plum || {};
 		// Continue jQuery chaining.
 		return this;
 	};
+
 	plum.shop.prototype = {
-		// The initial cart. This contains an empty expiration time, shipping
+		// The initial cart. This contains an empty expiration time,
+		// shipping
 		// method, discount code, country and region.
 		cart: {
 			items: [],
@@ -92,11 +95,6 @@ var plum = plum || {};
 		// build each item.
 		carts: { },
 
-		// A cached property to check if the shipping menu already has an item
-		// in it.
-		//shippingMenuPopulated: false,
-
-
 		// The cart's subtotal amount.
 		subtotal: 0,
 		// The cart's total quantity.
@@ -108,8 +106,7 @@ var plum = plum || {};
 		options: {
 			// The list of class or data-attribute listeners for HTML elements.
 			classes: {
-				// The HTML tag that contains the cart's discount amount.
-				//cartdiscount: 'cart-discount',
+				// The HTML tag that contains the cart's ...
 
 
 				// HTML tag for the cart's total number of items.
@@ -170,10 +167,10 @@ var plum = plum || {};
 			currencyCode: 'USD',
 			// Set this to true to use plum.Shop's experimental geolocation,
 			// which utilizes services of geoplugin.com, a third-party provider.
-			geolocation: false,
+			//geolocation: false,
 			// If set to true, Plum will generate an ID for products based on
 			// the options that are chosen.
-			generateSKU: false,
+			//generateSKU: false,
 			// The number of characters to set option names and values to when
 			// generating a product SKU.
 			generateLimit: 2,
@@ -205,6 +202,7 @@ var plum = plum || {};
 					return this.formatPrice(product[c.price] * product[c.quantity]);
 				}
 			},
+
 			// The list of storage methods in order of priority. If localStorage
 			// is unavailable, Plum attempts to use cookies. If cookies are
 			// unavailable, Plum attempts to user server-side sessions. If no
@@ -218,6 +216,7 @@ var plum = plum || {};
 			
 			// The number of seconds until the shopping cart contents expire.
 			timeout: 86400,
+
 			// Triggers after a new item has been added to the cart.
 			addItemAfter: function () { },
 			// Triggers before a new item has been added.
@@ -283,9 +282,15 @@ var plum = plum || {};
 			makeProductList();
 
 			
-			var self = this, o = this.options, c = o.classes, d = $(document), i;
+			var self = this,
+				o = this.options,
+				c = o.classes,
+				d = $(document),
+				i;
+			
 			// Set up the cart configuration.
 			$.extend(true, o, options);
+
 			// Set up the storage method.
 			this.saveCart = this.setStorageMethod(o.storage);
 			if (this.saveCart) {
@@ -308,7 +313,7 @@ var plum = plum || {};
 				// Build the shopping cart.
 				$.each(this.carts, function (cart) {
 					d.delegate(cart + ' .' + c.remove, 'click', 'remove', $.proxy(self.listen, self));
-					d.delegate(cart + ' :input', 'change', 'cart-options', $.proxy(self.listen, self));
+					//d.delegate(cart + ' :input', 'change', 'cart-options', $.proxy(self.listen, self));
 					self.buildCart(cart);
 				});
 				// Update total amounts.
@@ -715,7 +720,9 @@ var plum = plum || {};
 				id,
 				container,
 				SKU;
+				
 			switch (event.data) {
+
 			case 'build':
 				$(html).each(function () {
 					elem = $(this);
@@ -726,7 +733,7 @@ var plum = plum || {};
 					});
 				});
 				break;
-
+/*
 			case 'cart-options':
 				target = $(target);
 				value = target[0].value;
@@ -775,14 +782,15 @@ var plum = plum || {};
 				// Update the item
 				this.insertItem(product);
 				break;
-			
+			*/
+
 			case 'empty':
 				this.emptyCart();
 				break;
 
 			case 'purchase':
 				container = $(target).closest('.' + c.product)[0];
-				SKU = this.options.generateSKU ? [] : false;
+				//SKU = this.options.generateSKU ? [] : false;
 
 				// Make sure a product container exists.
 				if (!container) { return false; }
@@ -1011,6 +1019,7 @@ var plum = plum || {};
 						this.setupCart(cart);
 					}, this)
 				});
+
 			// Attempts to save the cart to a server session by querying the
 			// server with a POST request and a single variable containing the
 			// storageName with a value of the shopping cart.
@@ -1127,8 +1136,8 @@ var plum = plum || {};
 					//amountTilFullMealEQ); });
 
 			//equivalency-meals++
-	//amountOverMealEQ
-	//amountUnderMealEQ
+			//amountOverMealEQ
+			//amountUnderMealEQ
 
 				//cartmeals: 'equivalency-meals',
 				//cartremainder: 'meal-remainder',
@@ -1138,11 +1147,7 @@ var plum = plum || {};
 			//shop.shipping = parseFloat(shop.calcShipping().toFixed(2));
 			//shop.tax = parseFloat(shop.calcTax().toFixed(2));
 			//shop.discount = parseFloat(shop.calcDiscount(discountTarget).toFixed(2));
-			
-			//$('.' + c.cartshipping).each(function () { this.innerHTML = shop.formatPrice(shop.shipping); });
-			//$('.' + c.carttax).each(function () { this.innerHTML = shop.formatPrice(shop.tax); });
-			//$('.' + c.cartdiscount).each(function () { this.innerHTML = '-' + shop.formatPrice(shop.discount); });
-			
+
 		}
 
 	};
