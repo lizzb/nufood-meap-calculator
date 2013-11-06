@@ -95,12 +95,9 @@ var plum = plum || {};
 		// build each item.
 		carts: { },
 
-		// The cart's subtotal amount.
-		subtotal: 0,
-		// The cart's total quantity.
-		quantity: 0,
-		// The cart's total cost.
-		total: 0,
+		subtotal: 0,	// The cart's subtotal amount.
+		quantity: 0,	// The cart's total quantity.
+		total: 0,		// The cart's total cost.
 
 		// Default option list.
 		options: {
@@ -132,18 +129,24 @@ var plum = plum || {};
 				
 				// The button that triggers emptying the shopping cart.
 				empty: 'empty',
+
 				// The class name or data attribute to store a product's ID/SKU.
 				id: 'id',
+
 				// Class or data attribute that forces the quantity to never go
 				// above this amount. This is different from the "stock" in that
 				// item properties other than the quantity may still be updated.
-				limit: 'limit',
+				//limit: 'limit',
+
 				// Class or data attribute for a product's price.
 				price: 'price',
+
 				// The class name to identify a product container.
 				product: 'product',
+
 				// The class name to identify the button that adds an item.
 				purchase: 'purchase',
+
 				// Class or data attribute for a product's quantity.
 				quantity: 'quantity',
 				
@@ -158,6 +161,7 @@ var plum = plum || {};
 				// refers to the button that will remove the item.
 				remove: 'remove'
 			},
+
 			// Defines how prices should be formatted. For example, you can use
 			// '$00,000.00' or '€ 00 000,00' or '€000' or any variation of
 			// currency symbols and formats.
@@ -173,7 +177,9 @@ var plum = plum || {};
 			//generateSKU: false,
 			// The number of characters to set option names and values to when
 			// generating a product SKU.
-			generateLimit: 2,
+			//generateLimit: 2,
+
+
 			// An ISO-2 code used to determine the language available on the
 			// payment gateway's checkout page.
 			language: 'EN',
@@ -208,8 +214,10 @@ var plum = plum || {};
 			// unavailable, Plum attempts to user server-side sessions. If no
 			// storage method is available, an error will be thrown.
 			storage: 'local,cookie,session',
+
 			// The identifying key name for the cart to be stored.
 			storageName: 'plum_shop',
+
 			// When using server-side storage, this is the URL where Plum sends
 			// GET and POST requests.
 			storageURL: '',
@@ -297,7 +305,8 @@ var plum = plum || {};
 
 				// Get the shopping cart.
 				//o.properties = $.merge([ c.id, c.limit, c.price, c.quantity, c.stock, c.title ], o.properties);
-				o.properties = $.merge([ c.id, c.limit, c.price, c.quantity, c.title ], o.properties);
+				//o.properties = $.merge([ c.id, c.limit, c.price, c.quantity, c.title ], o.properties);
+				o.properties = $.merge([ c.id, c.price, c.quantity, c.title ], o.properties);
 
 
 				this.saveCart(true);
@@ -316,6 +325,7 @@ var plum = plum || {};
 					//d.delegate(cart + ' :input', 'change', 'cart-options', $.proxy(self.listen, self));
 					self.buildCart(cart);
 				});
+
 				// Update total amounts.
 				this.updateTotals();
 				o.ready.call(this);
@@ -366,6 +376,7 @@ var plum = plum || {};
 		buildCartItem: function (product, html) {
 			var self = this, o = this.options, c = o.classes;
 			if (html) {
+
 				// Replace each shortcode in the cart item HTML with the product
 				// property value, or the return value from an available
 				// shortcode function.
@@ -376,6 +387,7 @@ var plum = plum || {};
 						: product[value];
 					html = html.replace(new RegExp(prop, 'g'), value === undefined ? '' : value);
 				});
+
 				html = $('<li class="cart-item" data-id="' + product[c.id] + '">' + html + '</li>');
 				$(':input', html).each(function () {
 					var elem = $(this), prop = this.className, property;
@@ -384,6 +396,7 @@ var plum = plum || {};
 					// have properties applicable to those fields. If not, the
 					// field can be removed from the item to prevent unavailable
 					// options from being purchased.
+					
 					if (prop) {
 						$.each(prop.split(' '), function (i, prop) {
 							if ($.inArray(prop, o.properties) && product[prop] !== undefined) {
@@ -391,16 +404,10 @@ var plum = plum || {};
 								return false;
 							}
 						});
-						if (property === undefined) {
-							elem.remove();
-						} 
-						else {
-							elem.val(property);
-						}
+						if (property === undefined) { elem.remove(); } 
+						else { elem.val(property); }
 					} 
-					else {
-						elem.remove();
-					}
+					else { elem.remove(); }
 				});
 			}
 			return html;
@@ -437,7 +444,7 @@ var plum = plum || {};
 		 */
 		calcTotal: function () {
 			var o = this.options, total = 0, callback;
-			total = this.subtotal; // + this.shipping - this.discount + (o.taxIncluded ? 0 : this.tax);
+			total = this.subtotal;
 			callback = o.calcTotal.call(this, total);
 			total = callback === undefined ? total : callback;
 			return total < 0 ? 0 : total;
@@ -476,18 +483,23 @@ var plum = plum || {};
 		encodeJSON: function (object) {
 			var json = [], i;
 			switch (typeof object) {
+
 			case 'function':
 				return this.escapeJSONString(object.toString());
+
 			case 'number':
 				if (isNaN(object)) {
 					throw new Error();
 				}
 				return object;
+
 			case 'boolean':
 			case 'null':
 				return object;
+
 			case 'string':
 				return this.escapeJSONString(object);
+
 			case 'object':
 				if (!object) {
 					return null;
@@ -617,26 +629,20 @@ var plum = plum || {};
 				soldOut;
 
 			// The product MUST have an ID attached to it.
-			if (!product[c.id]) {
-				return false;
-			}
+			if (!product[c.id]) { return false; }
+
 			// Determine if the product is taxable or not.
-			product[c.taxable] = product[c.taxable] === 'false' ? false : true;
+			//product[c.taxable] = product[c.taxable] === 'false' ? false : true;
 			
 			// Check if the item already exists in the cart.
 			i = this.itemExists(product);
-			//soldOut = product[c.stock];
 			
 			// If it does not already exist, run the addItemBefore callback
 			// function. If the function does not return false, push the item to
 			// the cart, run the addItemAfter callback and save the cart.
-			if (i === false) {
-				//soldOut = soldOut && product[c.quantity] > soldOut;
-				//if (soldOut) {
-				//	o.itemSoldOut.call(this, product);
-				//} else if (o.addItemBefore.call(this, product) !== false) {
-				if (o.addItemBefore.call(this, product) !== false) {
 
+			if (i === false) {
+				if (o.addItemBefore.call(this, product) !== false) {
 					this.cart.items.push(product);
 					this.saveCart();
 					o.addItemAfter.call(this, product);
@@ -644,7 +650,8 @@ var plum = plum || {};
 
 			// If the item exists and the updated quantity is 0, run the
 			// removeItemBefore and removeItemAfter callback functions.
-			} else if (product[c.quantity] + this.cart.items[i][c.quantity] < 1) {
+			}
+			else if (product[c.quantity] + this.cart.items[i][c.quantity] < 1) {
 				product = this.cart.items[i];
 				if (o.removeItemBefore.call(this, product) !== false) {
 					this.cart.items.splice(i, 1);
@@ -655,15 +662,17 @@ var plum = plum || {};
 			// For items that exist and the quantity is being changed to a
 			// value other than 0, the updateItemBefore and updateItemAfter
 			// callback functions are run.
-			} else {
+			}
+			else {
 				product[c.quantity] += this.cart.items[i][c.quantity];
-				if (product[c.limit] && product[c.quantity] > product[c.limit]) {
+				/*if (product[c.limit] && product[c.quantity] > product[c.limit]) {
 					product[c.quantity] = parseInt(product[c.limit]);
-				}
-				soldOut = soldOut && product[c.quantity] > soldOut;
-				if (soldOut) {
+				}*/
+				//soldOut = soldOut && product[c.quantity] > soldOut;
+				/*if (soldOut) {
 					o.itemSoldOut.call(this, product);
-				} else if (o.updateItemBefore.call(this, product) !== false) {
+				} else*/
+				if (o.updateItemBefore.call(this, product) !== false) {
 					if (o.overrideProperties) {
 						$.extend(this.cart.items[i], product);
 					} 
@@ -674,6 +683,7 @@ var plum = plum || {};
 					o.updateItemAfter.call(this, product);
 				}
 			}
+
 			// Rebuild the cart(s).
 			$.each(this.carts, function (cart) { self.buildCart(cart); });
 		},
@@ -829,12 +839,12 @@ var plum = plum || {};
 								} else if (elem.data(c.price)) {
 									priceMod += parseFloat(elem.data(c.price));
 								}
-								if (SKU) {
+								/*if (SKU) {
 									SKU.push(
 										prop.replace(/(\:|\|)/g, '').substring(0, o.generateLimit)
 											+ product[prop].replace(/(\:|\|)/g, '').substring(0, o.generateLimit)
 									);
-								}
+								}*/
 							}
 						}
 					});
@@ -860,7 +870,7 @@ var plum = plum || {};
 				// Force the product's quantity, limit and stock properties to
 				// integers.
 				product[c.quantity] = this.forceInt(product[c.quantity], 1);
-				product[c.limit] = this.forceInt(product[c.limit], 0);
+				//product[c.limit] = this.forceInt(product[c.limit], 0);
 				//product[c.stock] = this.forceInt(product[c.stock], 0);
 
 				// Update or add a new item to the cart.
