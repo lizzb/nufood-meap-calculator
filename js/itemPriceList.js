@@ -19,26 +19,26 @@ var products = [
 		price: "4.99",
 		section: "Deli",
 	},
-	/*{
+	{
 		name: "Sushi - California",
-		price: ,
+		price: "",
 		section: "Deli",
 	},
 	{
 		name: "Sushi - California w/ Masago",
-		price: ,
+		price: "",
 		section: "Deli",
 	},
 	{
 		name: "Sushi - Shrimp",
-		price: ,
+		price: "",
 		section: "Deli",
 	},
 	{
 		name: "Sushi - Veggie",
-		price: ,
+		price: "",
 		section: "Deli",
-	},*/
+	},
 	{
 		name: "PB&J on Wheat",
 		price: "2.99",
@@ -99,7 +99,7 @@ var products = [
 	// ---------- Baked Goods ---------- //
 	{
 		name: "Cookie",
-		price: "Cookie",
+		price: "",
 		section: "Baked Goods",
 	},
 	{
@@ -120,11 +120,11 @@ var products = [
 		price: "4.99",
 		section: "Packaged Noodles/Soup",
 	},
-	/*{
+	{
 		name: "Cup O Ramen",
-		price: ,
+		price: "",
 		section: "Packaged Noodles/Soup",
-	},*/
+	},
 	{
 		name: "Top Ramen Package",
 		price: "0.49",
@@ -236,9 +236,6 @@ function makeProductList() {
 	var productlisthtml = "";
 
 	$.each( products, function( index ) {
-		// name = products[i][0]
-		// price = products[i][1]
-		// section = products[i][2]
 	  	productlisthtml +=
 	  	"<li class='product purchase btn btn-info item' id='"+ index+ "'>" +
 	  	"<span class='title'>" + products[index].name + "</span>" +

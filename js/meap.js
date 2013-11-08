@@ -133,11 +133,6 @@ var plum = plum || {};
 				// The class name or data attribute to store a product's ID/SKU.
 				id: 'id',
 
-				// Class or data attribute that forces the quantity to never go
-				// above this amount. This is different from the "stock" in that
-				// item properties other than the quantity may still be updated.
-				//limit: 'limit',
-
 				// Class or data attribute for a product's price.
 				price: 'price',
 
@@ -153,10 +148,6 @@ var plum = plum || {};
 				// Class name or data attribute for a product's title.
 				title: 'title',
 				
-				// Class or data attribute to list a product's in stock amount.
-				// The value of this field can trigger the itemSoldOut calback
-				// method.
-				//stock: 'stock',
 				// The class name inside a single list item in the cart that
 				// refers to the button that will remove the item.
 				remove: 'remove'
@@ -169,15 +160,6 @@ var plum = plum || {};
 			// The currency code used when checking out with a third-party
 			// payment gateway, like PayPal.
 			currencyCode: 'USD',
-			// Set this to true to use plum.Shop's experimental geolocation,
-			// which utilizes services of geoplugin.com, a third-party provider.
-			//geolocation: false,
-			// If set to true, Plum will generate an ID for products based on
-			// the options that are chosen.
-			//generateSKU: false,
-			// The number of characters to set option names and values to when
-			// generating a product SKU.
-			//generateLimit: 2,
 
 
 			// An ISO-2 code used to determine the language available on the
@@ -246,8 +228,7 @@ var plum = plum || {};
 			// Triggers before the cart is emptied.
 			emptyCartBefore: function () { },
 
-			// Triggers when the quantity of an item reaches the "stock" limit.
-			//itemSoldOut: function () { },
+
 			// Triggers when the cart has loaded after the page initially loads.
 			ready: function () { },
 
@@ -304,8 +285,6 @@ var plum = plum || {};
 			if (this.saveCart) {
 
 				// Get the shopping cart.
-				//o.properties = $.merge([ c.id, c.limit, c.price, c.quantity, c.stock, c.title ], o.properties);
-				//o.properties = $.merge([ c.id, c.limit, c.price, c.quantity, c.title ], o.properties);
 				o.properties = $.merge([ c.id, c.price, c.quantity, c.title ], o.properties);
 
 
@@ -630,9 +609,6 @@ var plum = plum || {};
 
 			// The product MUST have an ID attached to it.
 			if (!product[c.id]) { return false; }
-
-			// Determine if the product is taxable or not.
-			//product[c.taxable] = product[c.taxable] === 'false' ? false : true;
 			
 			// Check if the item already exists in the cart.
 			i = this.itemExists(product);
@@ -665,13 +641,7 @@ var plum = plum || {};
 			}
 			else {
 				product[c.quantity] += this.cart.items[i][c.quantity];
-				/*if (product[c.limit] && product[c.quantity] > product[c.limit]) {
-					product[c.quantity] = parseInt(product[c.limit]);
-				}*/
-				//soldOut = soldOut && product[c.quantity] > soldOut;
-				/*if (soldOut) {
-					o.itemSoldOut.call(this, product);
-				} else*/
+
 				if (o.updateItemBefore.call(this, product) !== false) {
 					if (o.overrideProperties) {
 						$.extend(this.cart.items[i], product);
@@ -743,56 +713,6 @@ var plum = plum || {};
 					});
 				});
 				break;
-/*
-			case 'cart-options':
-				target = $(target);
-				value = target[0].value;
-				i = this.itemExists(target.closest('li[data-id]').data('id'));
-				product = $.extend({}, this.cart.items[i]);
-				// Check if the item has a class that is part of the list
-				// of defined properties.
-				$.each(target[0].className.split(/\s+/), function (i, prop) {
-					if ($.inArray(prop, o.properties)) {
-						property = prop;
-					}
-				});
-
-				// If the property is a quantity, the product's quantity
-				// should be subtracted from the value to change the amount.
-				if (property === c.quantity) {
-					value = parseInt(value, 10);
-					value = isNaN(value) ? -product[c.quantity] : value;
-					product[c.quantity] = value - product[c.quantity];
-				// If the generateSKU option is enabled, changing an option
-				// will also change the SKU for the product. Therefore, the
-				// product should be removed from the cart and a new product
-				// should be added, or existing product updated.
-				} else if (property && o.generateSKU) {
-					this.cart.items.splice(i, 1);
-					trimProp = property.replace(/(?:\:|\|)/, '')
-						.substring(0, o.generateLimit)
-						.toUpperCase();
-					product[c.id] = product[c.id].replace(
-						new RegExp(
-							trimProp + product[property]
-								.replace(/(?:\:|\|)/, '')
-								.substring(0, o.generateLimit)
-								.toUpperCase() + '(\u007c|$)'
-						),
-						trimProp + value.replace(/(?:\:|\|)/, '')
-							.substring(0, o.generateLimit)
-							.toUpperCase() + '$1'
-					);
-					product[property] = value;
-				} else if (property) {
-					product[c.quantity] = 0;
-					product[c.id] = this.cart.items[i][c.id];
-					this.cart.items[i][property] = value;
-				}
-				// Update the item
-				this.insertItem(product);
-				break;
-			*/
 
 			case 'empty':
 				this.emptyCart();
@@ -800,7 +720,6 @@ var plum = plum || {};
 
 			case 'purchase':
 				container = $(target).closest('.' + c.product)[0];
-				//SKU = this.options.generateSKU ? [] : false;
 
 				// Make sure a product container exists.
 				if (!container) { return false; }
@@ -839,26 +758,12 @@ var plum = plum || {};
 								} else if (elem.data(c.price)) {
 									priceMod += parseFloat(elem.data(c.price));
 								}
-								/*if (SKU) {
-									SKU.push(
-										prop.replace(/(\:|\|)/g, '').substring(0, o.generateLimit)
-											+ product[prop].replace(/(\:|\|)/g, '').substring(0, o.generateLimit)
-									);
-								}*/
+
 							}
 						}
 					});
 				});
 
-				// A stock-keeping unit can be generated based on chosen
-				// options for the product. Options used are those based on
-				// designated select menus, radio buttons and checkboxes.
-				if (SKU) {
-					SKU = SKU.join('|').toUpperCase();
-					product[c.id] = !SKU ? product[c.id]
-						: product[c.id] ? product[c.id] + ':' + SKU
-							: SKU;
-				}
 
 				// Convert the product's price to a float number. This
 				// removes any invalid characters, like "$" or ",".
@@ -870,8 +775,6 @@ var plum = plum || {};
 				// Force the product's quantity, limit and stock properties to
 				// integers.
 				product[c.quantity] = this.forceInt(product[c.quantity], 1);
-				//product[c.limit] = this.forceInt(product[c.limit], 0);
-				//product[c.stock] = this.forceInt(product[c.stock], 0);
 
 				// Update or add a new item to the cart.
 				this.insertItem(product);
@@ -1078,7 +981,6 @@ var plum = plum || {};
 			this.cart.each(function () {
 				this.price = Number(this.price);
 				this.quantity = Number(this.quantity);
-				//this.stock = Number(this.stock);
 			});
 			this.timeout();
 		},
