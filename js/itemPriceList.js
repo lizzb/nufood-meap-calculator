@@ -159,6 +159,131 @@ var products = [
 	},
 
 
+	{
+		name: "Fruit Water",
+		price: "1.99", // 16 oz
+		section: "Cold Drinks",
+	},
+	{
+		name: "Bottled Soft Drinks",
+		price: "1.69", // 20 oz 
+		section: "Cold Drinks",
+	},
+
+
+	{
+		name: "Fridge Packs (12 cans)",
+		price: "6.99",
+		section: "Candy, Chips, & Soda",
+	},
+
+
+
+
+		{
+		name: "DiGorno Pizza",
+		price: "5.99",
+		section: "Frozen Meals",
+	},
+	{
+		name: "EVOL Bowls",
+		price: "5.99",
+		section: "Frozen Meals",
+	},
+	{
+		name: "Amy Entree Bowls",
+		price: "5.49",
+		section: "Frozen Meals",
+	},
+	{
+		name: "Spaghetti with Meat Sauce",
+		price: "5.29",
+		section: "Frozen Meals",
+	},
+	{
+		name: "Lean Cuisine Glazed Chicken",
+		price: "5.29",
+		section: "Frozen Meals",
+	},
+	{
+		name: "Lean Cuisine Lasagna ",
+		price: "4.99",
+		section: "Frozen Meals",
+	},
+	{
+		name: "Lean Cuisine Ravioli",
+		price: "4.99",
+		section: "Frozen Meals",
+	},
+	{
+		name: "Lean Cuisine Fettuccini Alfredo",
+		price: "4.99",
+		section: "Frozen Meals",
+	},
+	{
+		name: "TGIF Buffalo Wings",
+		price: "4.49",
+		section: "Frozen Meals",
+	},
+	{
+		name: "Hot Pockets",
+		price: "1.29",
+		section: "Frozen Meals",
+	},
+
+	{
+		name: "Ben & Jerry's Ice Cream Pints ",
+		price: "4.99",
+		section: "Frozen Treats",
+	},
+{
+		name: "Starbucks Ice Cream Pints ",
+		price: "4.99",
+		section: "Frozen Treats",
+	},
+{
+		name: "Haagen Daz Ice Cream Pints ",
+		price: "4.99",
+		section: "Frozen Treats",
+	},
+{
+		name: "Dove Ice Cream Bars",
+		price: "2.99",
+		section: "Frozen Treats",
+	},
+{
+		name: "Ben & Jerry's Ice Cream Bars",
+		price: "2.69",
+		section: "Frozen Treats",
+	},
+{
+		name: "Ice Cream Cookie Toll House",
+		price: "2.59",
+		section: "Frozen Treats",
+	},
+{
+		name: "Mrs. Fields Ice Cream Bar",
+		price: "2.50",
+		section: "Frozen Treats",
+	},
+{
+		name: "Twix Ice Cream Bar",
+		price: "2.29",
+		section: "Frozen Treats",
+	},
+ 
+{
+		name: "Snickers Ice Cream Bar",
+		price: "2.29",
+		section: "Frozen Treats",
+	},
+{
+		name: "Nestle Drumstick Vanilla",
+		price: "2.25",
+		section: "Frozen Treats",
+	},
+
+
 	// ---------- Cold Drinks ---------- //
 	{
 		name: "Odwalla Juice Smoothie",
@@ -215,11 +340,185 @@ var products = [
 
 	{
 		name: "Soup of the day",
-		price: "0.00",
+		price: "3.49",
 		section: "Register",
+	},
+	{
+		name: "",
+		price: "",
+		section: "",
+	},
+	
+
+	{
+		name: "Smoothies",
+		price: "3.50",
+		section: "Register",
+	},
+	{
+		name: "Coffee - Small",
+		price: "1.65",
+		section: "Register",
+	},
+	{
+		name: "Coffee - Medium",
+		price: "1.90",
+		section: "Register",
+	},
+	{
+		name: "Coffee - Large",
+		price: "2.00",
+		section: "Register",
+	},
+
+
+
+
+
+
+	{
+		name: "Campbell's Soup at Hand",
+		price: "2.39",
+		section: "Packaged Noodles/Soup",
+	},
+	{
+		name: "Hand Snacks Pudding",
+		price: "2.99 ", //3.5 oz 
+		section: "",
+	},
+
+
+	{
+		name: "Sue Bee Honey",
+		price: "6.59", // 12 oz 
+		section: "",
+	},
+	{
+		name: "Smucker's Jelly ",
+		price: "3.99", // 12 oz 
+		section: "",
+	},
+	{
+		name: "Peter Pan",
+		price: "4.99", // 16.3 oz 
+		section: "",
+	},
+	{
+		name: "Nutella Spread",
+		price: "5.99", // 13 oz 
+		section: "",
+	},
+	{
+		name: "Loaf of Bread",
+		price: "1.99", // 4 oz 
+		section: "",
+	},
+	{
+		name: "Quaker Medleys (Oatmeal)",
+		price: "2.79",
+		section: "",
+	},
+
+
+	{
+		name: "Pop Tarts 2pk ",
+		price: "1.29",
+		section: "",
+	},
+	{
+		name: "Balance Bars",
+		price: "1.99",
+		section: "",
+	},
+	{
+		name: "KIND Bars",
+		price: "2.29",
+		section: "",
+	},
+
+
+	{
+		name: "Sabra Hummus Cups ",
+		price: "3.79", // 4.56 oz
+		section: "",
+	},
+	{
+		name: "Sabra Salsa cups ",
+		price: "3.79", // 4.1 oz
+		section: "",
+	},
+	{
+		name: "Odwalla Drinks",
+		price: "3.29", // 12 oz 
+		section: "",
+	},
+	{
+		name: "Zaco Water ",
+		price: "3.19", // 14 oz 
+		section: "",
+	},
+	{
+		name: "Cheese Sticks",
+		price: "1.09", // 1 oz
+		section: "",
+	},
+	{
+		name: "Silk Soy Singles",
+		price: "1.79", // 8 oz
+		section: "",
+	},
+	{
+		name: "Silk Soy Quarts",
+		price: "2.99", // 32 oz
+		section: "",
+	},
+	{
+		name: "Oikos Greek Yogurt",
+		price: "1.99", // 5.3 oz
+		section: "",
+	},
+	{
+		name: "PB Jamwich",
+		price: "1.59", // 2.8 oz
+		section: "",
+	},
+	
+
+	{
+		name: "Snyder's Snacks ",
+		price: "1.29",
+		section: "Candy, Chips, & Soda",
+	},
+	{
+		name: "Gardetto's Snacks",
+		price: "2.99", // 5.5 oz 
+		section: "Candy, Chips, & Soda",
+	},
+	{
+		name: "Rye Street Chips",
+		price: "1.29", // 1.5 oz 
+		section: "Candy, Chips, & Soda",
+	},
+	{
+		name: "Kettle Chips",
+		price: "1.29", // 1.5oz 
+		section: "Candy, Chips, & Soda",
+	},
+
+
+	{
+		name: "Keebler Sugar Wafers ",
+		price: "1.19", // 2.75 oz
+		section: "",
 	},
 	
 ];
+
+/*
+NutriGrain Bar
+11.5 oz 3.79
+Diamon Cutlery 24ct 1.99
+*/
 
 	// section: "Frozen Meals",
 	// section: "Baked Goods",
@@ -262,7 +561,8 @@ function sortByPrice() {
   listItems.sort(function(a,b){
     var compA = $(a).find('.price').text();
     var compB = $(b).find('.price').text();
-    return (compA < compB) ? -1 : (compA > compB) ? 1 : 0;
+    //return (compA < compB) ? -1 : (compA > compB) ? 1 : 0; original, ascending
+    return (compA > compB) ? -1 : (compA < compB) ? 1 : 0;
   });
   $(productList).append(listItems);
 }
