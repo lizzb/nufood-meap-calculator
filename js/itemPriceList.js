@@ -1,14 +1,4 @@
-/*	// section: "Frozen Meals",
-	// section: "Baked Goods",
-	// section: "Candy, Chips, & Soda",
-	// section: "Register",
-	// section: "Deli",
-	// section: "Packaged Noodles/Soup",
-	// section: "Cold Drinks",
-	// section: "Frozen Treats",
-
-var products = {
-
+var products = [
 	{
 		name: "Celery + Carrots (Crudites)",
 		price: "2.69",
@@ -29,7 +19,7 @@ var products = {
 		price: "4.99",
 		section: "Deli",
 	},
-	{
+	/*{
 		name: "Sushi - California",
 		price: ,
 		section: "Deli",
@@ -48,7 +38,7 @@ var products = {
 		name: "Sushi - Veggie",
 		price: ,
 		section: "Deli",
-	},
+	},*/
 	{
 		name: "PB&J on Wheat",
 		price: "2.99",
@@ -130,11 +120,11 @@ var products = {
 		price: "4.99",
 		section: "Packaged Noodles/Soup",
 	},
-	{
+	/*{
 		name: "Cup O Ramen",
 		price: ,
 		section: "Packaged Noodles/Soup",
-	},
+	},*/
 	{
 		name: "Top Ramen Package",
 		price: "0.49",
@@ -159,12 +149,12 @@ var products = {
 	},
 	{
 		name: "Bagel Bites Mini Pizzas",
-		price: ,
+		price: "",
 		section: "Frozen Meals",
 	},
 	{
 		name: "Naanwich",
-		price: ,
+		price: "",
 		section: "Frozen Meals",
 	},
 
@@ -177,7 +167,7 @@ var products = {
 	},
 	{
 		name: "Soda - Individual bottle",
-		price: ,
+		price: "",
 		section: "Cold Drinks",
 	},
 	{
@@ -214,7 +204,7 @@ var products = {
 	},
 	{
 		name: "Gum",
-		price: ,
+		price: "",
 		section: "Register",
 	},
 	{
@@ -229,9 +219,9 @@ var products = {
 		section: "Register",
 	},
 	
-};*/
+];
 
-
+/*
 var items = {
 	"Soup of the day": "0.00",
 
@@ -287,19 +277,50 @@ var items = {
 	"Box of cereal": "0.00",
 	"Mini bowl of cereal": "0.00",
 	
-};
+};*/
+
+	// section: "Frozen Meals",
+	// section: "Baked Goods",
+	// section: "Candy, Chips, & Soda",
+	// section: "Register",
+	// section: "Deli",
+	// section: "Packaged Noodles/Soup",
+	// section: "Cold Drinks",
+	// section: "Frozen Treats",
+
+/* // uses items
+function makeProductList() {
+
+	var productlisthtml = "";
+	var i = 0;
+
+	//$.each( items, function( item, price ) {
+	$.each( products, function( name, price, section ) {
+	  	productlisthtml +=
+	  	"<li class='product purchase btn btn-info item' id='"+i+"'>" +
+	  	"<span class='title'>" + name + "</span>" +
+	  	"<span class='price'> $" + price + "</span> </li>";
+	  i++;
+	});
+
+	document.getElementById("products").innerHTML = "<ul>" + productlisthtml + "</ul>";
+}
+*/
 
 function makeProductList() {
 
 	var productlisthtml = "";
 	var i = 0;
 
-	$.each( items, function( item, price ) {
+	$.each( products, function( index ) { //, value
+		// name = products[i][0]
+		// price = products[i][1]
+		// section = products[i][2]
 	  	productlisthtml +=
-	  	"<li class='product purchase btn btn-info item' id='"+i+"'>" +
-	  	"<span class='title'>" + item + "</span>" +
-	  	"<span class='price'> $" + price + "</span> </li>";
-	  i++;
+	  	"<li class='product purchase btn btn-info item' id='"+ index+ "'>" + //+i+"'>" +
+	  	"<span class='title'>" + products[index].name + "</span>" +
+	  	"<span class='price'> $" + products[index].price  + "</span> </li>";
+	  //i++;
 	});
 
 	document.getElementById("products").innerHTML = "<ul>" + productlisthtml + "</ul>";
