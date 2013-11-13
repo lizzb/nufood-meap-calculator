@@ -341,7 +341,7 @@ fieldset[disabled] .btn {
 
 
 
-<body>
+<body onload="getCurrentDayTimeString();">
 
     <div class="navbar navbar-inverse navbar-fixed-top">
       <div class="container">
@@ -381,6 +381,10 @@ fieldset[disabled] .btn {
         <p class="lead">Meal Equivalency and Points Calculator</p>
         Calculate how many items to buy from Lisa's Cafe to perfectly use up meal equivalencies. <br>
       <br>
+
+<div id="txt"></div>
+Today: <span id="weekday"></span>
+Time: <span id="currentTime"></span>
 
 
 	<div id="totals">
@@ -475,43 +479,55 @@ try {
 
 <script>
 // this used to contain the sorting and making of list
-/*
-<!DOCTYPE html>
-<html>
-<head>
-<script>
+
 
 
 var dayNames = [
-"Sunday",
-"Monday",
-"Tuesday",
-"Wednesday",
-"Thursday",
-"Friday",
-"Saturday"
+	"Sunday",
+	"Monday",
+	"Tuesday",
+	"Wednesday",
+	"Thursday",
+	"Friday",
+	"Saturday"
 ];
 
-Date.prototype.timeNow = function()
-{ return ((this.getHours() < 10)?"0":"") + ((this.getHours()>12)?(this.getHours()-12):this.getHours()) +":"+ ((this.getMinutes() < 10)?"0":"") + this.getMinutes() +":"+ ((this.getSeconds() < 10)?"0":"") + this.getSeconds() + ((this.getHours()>12)?('PM'):'AM'); };
+function getCurrentWeekdayString()
+{
+	document.getElementById('weekday').innerHTML=dayNames[today.getDay()];
+	//Date.timeNow; //dayNames[today.getDay()];
+}
+
+
+
+
+function getCurrentDayTimeString()
+{
+	var today = new Date();
+	var h = today.getHours();
+	var m = today.getMinutes();
+	var s = today.getSeconds();
+
+	var hour = 	((h < 10)? "0" : "") + ( (h > 12)? (h-12) : h);
+	var min = 	((m < 10)? "0" : "") + m;
+	var sec = 	((s < 10) ? "0" : "") + s;
+	var ampm = 	((h > 12) ? "PM" : "AM")
+
+	document.getElementById('weekday').innerHTML=dayNames[today.getDay()];
+	//return hour + ":" + min + ":" + sec + ampm;
+	//document.getElementById('txt').innerHTML=h+":"+m+":"+s;
+	document.getElementById('txt').innerHTML = hour + ":" + min + ":" + sec + ampm;
+}
+
+//Date.prototype.timeNow = function()
+// + ((this.getHours()>12)?('PM'):'AM'); };
 
 function startTime()
 {
 
-
-
-
 var output = "";
 
-var today=new Date();
 
-
-var h=today.getHours();
-var m=today.getMinutes();
-var s=today.getSeconds();
-// add a zero in front of numbers<10
-m=checkTime(m);
-s=checkTime(s);
 
 document.getElementById('weekday').innerHTML=Date.timeNow; //dayNames[today.getDay()];
 
@@ -521,37 +537,31 @@ t=setTimeout(function(){startTime()},500);
 
 }
 
-
+// add a zero in front of numbers<10
+// m=checkTime(m);
+// s=checkTime(s);
 
 function checkTime(i)
 {
-if (i<10)
-  {
-  i="0" + i;
-  }
+if (i<10) { i="0" + i; }
 return i;
 }
 
+//<body onload="startTime();">
 
-/script
-</head>
-
-<body onload="startTime();">
+</script>
 
 
-Today: <span id="weekday"></span>
-
-<div id="txt"></div>
-*/
 
 
-// above = janky made with w3schools need to fix 
+
 
 
 
 
 
 </script>
+
 
 
 <script>
