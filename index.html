@@ -475,6 +475,82 @@ try {
 
 <script>
 // this used to contain the sorting and making of list
+/*
+<!DOCTYPE html>
+<html>
+<head>
+<script>
+
+
+var dayNames = [
+"Sunday",
+"Monday",
+"Tuesday",
+"Wednesday",
+"Thursday",
+"Friday",
+"Saturday"
+];
+
+Date.prototype.timeNow = function()
+{ return ((this.getHours() < 10)?"0":"") + ((this.getHours()>12)?(this.getHours()-12):this.getHours()) +":"+ ((this.getMinutes() < 10)?"0":"") + this.getMinutes() +":"+ ((this.getSeconds() < 10)?"0":"") + this.getSeconds() + ((this.getHours()>12)?('PM'):'AM'); };
+
+function startTime()
+{
+
+
+
+
+var output = "";
+
+var today=new Date();
+
+
+var h=today.getHours();
+var m=today.getMinutes();
+var s=today.getSeconds();
+// add a zero in front of numbers<10
+m=checkTime(m);
+s=checkTime(s);
+
+document.getElementById('weekday').innerHTML=Date.timeNow; //dayNames[today.getDay()];
+
+document.getElementById('txt').innerHTML=h+":"+m+":"+s;
+
+t=setTimeout(function(){startTime()},500);
+
+}
+
+
+
+function checkTime(i)
+{
+if (i<10)
+  {
+  i="0" + i;
+  }
+return i;
+}
+
+
+/script
+</head>
+
+<body onload="startTime();">
+
+
+Today: <span id="weekday"></span>
+
+<div id="txt"></div>
+*/
+
+
+// above = janky made with w3schools need to fix 
+
+
+
+
+
 </script>
 
 
