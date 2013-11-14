@@ -68,6 +68,9 @@ var dayNames = [ "Sunday", "Monday", "Tuesday", "Wednesday",
 
 //}, false);
 
+//
+//
+//
 function start()
 {
 	updateEQ();
@@ -78,7 +81,9 @@ function start()
 }
 
 
-
+//
+//
+//
 // Readable for the user
 function getCurrentDayTimeString()
 {
@@ -101,6 +106,9 @@ function getCurrentDayTimeString()
         //<body onload="startTime();">
 }
 
+//
+//
+//
 function updateEQ()
 {
 
@@ -197,6 +205,9 @@ Number.prototype.toCurrencyString = function() { return "$" + Math.floor(this).t
 }*/
 
 
+//
+//
+//
 function formatPrice(price)
 {
 	// Formatting variables.
@@ -233,19 +244,20 @@ function formatPrice(price)
 	return price;
 }
 
+//
+//
+//
 function updateTotal()
 {
-	document.getElementById('points-over').innerHTML = eq;
+	var pointOverflow = total % eq;
+	document.getElementById('points-over').innerHTML = pointOverflow;
 	document.getElementById('eq-meals-over').innerHTML = mealCount;
-	document.getElementById('points-under').innerHTML = eq;
+	document.getElementById('points-under').innerHTML = eq - pointOverflow;
 	document.getElementById('eq-meals-under').innerHTML = mealCount + 1;
 
 	document.getElementById('cart-subtotal').innerHTML = toUSD(total);
 
 }
-
-
-
 
 
 
