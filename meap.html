@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<head>
+
+	<title> Lisa's Assistant | meap </title>
+
+	
+
+<style>
+/*
+.total-field
+.cart-total
+.subtotal
+.empty
+.sort
+#cart-subtotal
+
+#eq-meals-over { }
+#eq-meals-under { }
+#points-over { }
+#points-under { }
+*/
+</style>
+
+
+<script>
+
+var total = 0.00;
+
+var dayNames = [ "Sunday", "Monday", "Tuesday", "Wednesday", 
+				"Thursday", "Friday", "Saturday"];
+
+// Readable for the user
+function getCurrentDayTimeString()
+{
+	var today = new Date();
+	var h = today.getHours();
+	var m = today.getMinutes();
+	var s = today.getSeconds();
+
+	var hour = 	((h < 10)? "0" : "") + ( (h > 12)? (h-12) : h);
+	var min = 	((m < 10)? "0" : "") + m;
+	var sec = 	((s < 10) ? "0" : "") + s;
+	var ampm = 	((h > 12) ? "PM" : "AM")
+
+	// getCurrentWeekdayString()
+	document.getElementById('currentWeekday').innerHTML=dayNames[today.getDay()];
+	//return hour + ":" + min + ":" + sec + ampm;
+	//document.getElementById('txt').innerHTML=h+":"+m+":"+s;
+	document.getElementById('currentTime').innerHTML = hour + ":" + min + ":" + sec + ampm;
+	// t=setTimeout(function(){startTime()},500);
+	//<body onload="startTime();">
+}
+
+// http://www.cssnewbie.com/javascript-currency-conversion-script/#.UoQZr5TwIw9
+// Converts a float number to a USD currency format
+// fx isn't perfect, testing "010" == $8.00??
+function toUSD(number) {
+    var number = number.toString(), 
+    dollars = number.split('.')[0], 
+    cents = (number.split('.')[1] || '') +'00';
+
+    // converts our string into an array of individual digits
+    dollars = dollars.split('')
+    	// reverses our array
+    	.reverse()
+    	// turns our array back into a single string again
+    	.join('')
+    	// “add a comma to the end of every group of 3 numbers, 
+    	// unless it is the last group of three numbers
+    	// (to avoid trailing commas)”:
+        .replace(/(\d{3}(?!$))/g, '$1,')
+        // converts our newly comma’d string to an array again:
+        .split('')
+        // puts the numbers back in the proper order
+        .reverse()
+        // makes them a string again
+        .join('');
+        // return our manipulated number
+        // with a dollar sign out front
+        // and a decimal point between dollars and cents
+        // (slice to only return the first two digits
+        // in the cents string).
+    return '$' + dollars + '.' + cents.slice(0, 2);
+}
+/*
+function formatPrice(price)
+{
+Number.prototype.toCurrencyString = function() { return "$" + Math.floor(this).toLocaleString() + (this % 1).toFixed(2).toLocaleString().replace(/^0/,''); }
+}*/
+
+
+function formatPrice(price)
+{
+	// Formatting variables.
+	var currency = '$00,000.00', //this.options.currencyFormat,
+		before = currency.replace(/^([^\d]+)?.+?$/, '$1'),
+		after = currency.replace(/^.+?([^\d]+)?$/, '$1'),
+		number = currency.substring(before.length, currency.length - after.length),
+		decimal = number.replace(/^.+?([^\d]+)\d{2}$/, '$1');
+
+	decimal = decimal === number ? '' : decimal;
+	number = decimal ? number.substring(0, number.lastIndexOf(decimal)) : number;
+	number = number.split('').reverse();
+	
+	// Split the price to whole & fraction amounts.
+	price = parseFloat(price || 0).toFixed(2).toString().match(/^(.+?)(?:[^\d](\d\d))?$/);
+	price[1] = price[1].replace(/[^\d]/g, '');
+	price[2] = price[2] || 0;
+			
+	// Reformat the price array to contain only whole & fraction
+	// numbers, and reverse the format.
+	price = parseFloat(price[1] + '.' + price[2]).toFixed(2).split('.');
+	price[0] = price[0].split('').reverse();
+	
+	// Build the currency string.
+	currency = [];
+	$.each(number, function (i, number) {
+		currency.push(/^\d+$/.test(number) ? price[0].shift() : number);
+	});
+
+	currency = currency.reverse().join('').replace(/^(?:[^\d]+)?(.+)(?:[^\d]+)?$/, '$1');
+	
+	// Add formatting.
+	price = before + currency + (decimal ? decimal + price[1] : '') + after;
+	return price;
+}
+
+function updateTotal()
+{
+
+
+
+}
+
+</script>
+
+
+</head>
+
+<body onload="getCurrentDayTimeString();">
+
+Today: <span id="currentWeekday"></span>
+Time: <span id="currentTime"></span>
+
+	<div id="totals">
+
+		<div class="total-field">
+			<span id="points-over">0</span>
+			points
+			<strong>over</strong>
+			<span id="eq-meals-over">0</span>
+			meals
+		</div>
+
+
+
+		<div class="total-field">
+			<span id="points-under">0</span>
+			points
+			<strong>under</strong>
+			<span id="eq-meals-under">0</span>
+		</div>
+
+
+		<div class="total-field subtotal">
+			<label> Total: </label>
+			<span id="cart-subtotal">$0.00</span>
+		</div>
+
+
+		<a class="empty" href="#">Clear all items</a>
+		<!-- empty cart -->
+
+	</div>
+
+	<hr>
+
+
+	<!-- This is filled with a ul by the functions -->
+
+	<div id="cart"> </div>
+
+
+	<button class="sort" onclick="sortAZ()">Sort A-Z</button>
+	<button class="sort" onclick="sortByPrice()">Sort By Price</button>
+
+
+
+	<!-- This is filled with html generated from an array -->
+
+	<div id="products">
+
+		<!-- 
+		<li class="product purchase btn btn-info item" id="1">
+			<span class="title">Tank</span>
+			<span class="price">$13.00</span>
+			<span class="badge pull-right"> + </span>
+			<input class="purchase" type="button" value=" + ">
+			<input class="remove-one" type="button" value=" - ">
+		</li> -->
+
+	</div>
+
+
+	<!-- Bootstrap core JavaScript
+    ================================================== -->
+	<!-- Placed at the end of the document so the pages load faster -->
+    <script src="./js/jquery.js"></script>
+    <script src="./js/bootstrap.min.js"></script>
+
+    <script src="./js/itemPriceList.js"></script>
+
+
+</body>
+
+
+
+
+
+			<!-- meal-remainder -> meals-underflow... meal-remaining -> meal-count-overflow / meals overflow? 
+			meal remainder = over points, meal remaining = under points ... equivalency-meals equivalency-meals++-->
+
+</html>
