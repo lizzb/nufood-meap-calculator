@@ -3,8 +3,6 @@
 
 	<title> Lisa's Assistant | meap </title>
 
-	
-
 <style>
 /*
 .total-field
@@ -24,23 +22,133 @@
 
 <script>
 
+	var breakfastEQ = 5.00;
+	var brunchEQ = 9.00;
+	var lunchEQ = 7.00;
+	var dinnerEQ = 9.00;
+	var latenightEQ = 7.00;
+	
+
+	var breakfastStartH = 7;	// 7:30 am
+	var breakfastStartM = 30;
+
+	var breakfastEndH = 10;		// 10:45 am
+	var breakfastEndM = 45;
+	
+	var lunchStartH = 10;		// 10:46 am
+	var lunchStartM = 46;
+
+	var lunchEndH = 16;			// 4:45 am
+	var lunchEndM = 45;
+
+	var dinnerStartH = 16;		// 4:46 pm
+	var dinnerStart = 46;
+	
+	var dinnerEndH = 19; 		// 7:30pm
+	var dinnerEndM = 30;
+
+
+
 var total = 0.00;
+var eq = 0.00;
+var mealCount = 0;
 
 var dayNames = [ "Sunday", "Monday", "Tuesday", "Wednesday", 
-				"Thursday", "Friday", "Saturday"];
+                                "Thursday", "Friday", "Saturday"];
+
+
+//window.addEventListener('load', function(e) {
+//  document.querySelector('#test').innerHTML = 'Hello, Jsany!';
+
+//updateEQ();
+
+//getCurrentDayTimeString();
+
+//updateTotal();
+
+//}, false);
+
+function start()
+{
+	updateEQ();
+	updateTotal();
+
+	getCurrentDayTimeString();
+
+}
+
+
 
 // Readable for the user
 function getCurrentDayTimeString()
 {
-	var today = new Date();
-	var h = today.getHours();
-	var m = today.getMinutes();
-	var s = today.getSeconds();
+        var today = new Date();
+        var h = today.getHours();
+        var m = today.getMinutes();
+        var s = today.getSeconds();
 
-	var hour = 	((h < 10)? "0" : "") + ( (h > 12)? (h-12) : h);
-	var min = 	((m < 10)? "0" : "") + m;
-	var sec = 	((s < 10) ? "0" : "") + s;
-	var ampm = 	((h > 12) ? "PM" : "AM")
+        var hour =         ((h < 10)? "0" : "") + ( (h > 12)? (h-12) : h);
+        var min =         ((m < 10)? "0" : "") + m;
+        var sec =         ((s < 10) ? "0" : "") + s;
+        var ampm =         ((h > 12) ? "PM" : "AM");
+        document.getElementById('currentWeekday').innerHTML=dayNames[today.getDay()];
+        
+        document.getElementById('currentTime').innerHTML = hour + ":" + min + ":" + sec + ampm;
+
+ 	document.getElementById('eq').innerHTML = toUSD(eq);
+
+        // t=setTimeout(function(){startTime()},500);
+        //<body onload="startTime();">
+}
+
+function updateEQ()
+{
+
+
+	var today = new Date();
+    var h = today.getHours();
+    var m = today.getMinutes();
+
+
+/*if 	( 	(h > lunchStartH && h < lunchEndH) &&
+		(m > lunchStartM && m < lunchEndM) )
+{
+	eq = lunchEQ;
+}*/
+
+//else if
+if 	(	(h > dinnerStartH && h < dinnerEndH) && 
+		(m > dinnerStartM && m < dinnerEndM) )
+{
+	eq = dinnerEQ;
+}
+else eq = latenightEQ;
+
+
+}
+/*
+Mon - Thu
+Friday
+Saturday
+Sunday
+11:00 a.m. - 2:00 a.m.
+11:00 a.m. - 2:00 a.m.
+11 fri - 2 sat
+11 sat - 2 sun
+12 sunday - 2 mon
+*/
+function fun(){
+
+
+}
+
+
+
+
+
+/*
+function getCurrentDayTimeString()
+{
 
 	// getCurrentWeekdayString()
 	document.getElementById('currentWeekday').innerHTML=dayNames[today.getDay()];
@@ -50,7 +158,7 @@ function getCurrentDayTimeString()
 	// t=setTimeout(function(){startTime()},500);
 	//<body onload="startTime();">
 }
-
+*/
 // http://www.cssnewbie.com/javascript-currency-conversion-script/#.UoQZr5TwIw9
 // Converts a float number to a USD currency format
 // fx isn't perfect, testing "010" == $8.00??
@@ -127,20 +235,31 @@ function formatPrice(price)
 
 function updateTotal()
 {
+	document.getElementById('points-over').innerHTML = eq;
+	document.getElementById('eq-meals-over').innerHTML = mealCount;
+	document.getElementById('points-under').innerHTML = eq;
+	document.getElementById('eq-meals-under').innerHTML = mealCount + 1;
 
-
+	document.getElementById('cart-subtotal').innerHTML = toUSD(total);
 
 }
+
+
+
+
+
+
 
 </script>
 
 
 </head>
 
-<body onload="getCurrentDayTimeString();">
+<body onload="start();"> <!-- onload="getCurrentDayTimeString();"-->
 
 Today: <span id="currentWeekday"></span>
 Time: <span id="currentTime"></span>
+EQ: <span id="eq"></span>
 
 	<div id="totals">
 
@@ -159,6 +278,7 @@ Time: <span id="currentTime"></span>
 			points
 			<strong>under</strong>
 			<span id="eq-meals-under">0</span>
+			meals
 		</div>
 
 
