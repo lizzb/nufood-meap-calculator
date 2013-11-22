@@ -53,18 +53,39 @@ var total = 0.00;
 var eq = 0.00;
 var mealCount = 0;
 
+var products = [
+	{
+		name: "Celery + Carrots (Crudites)",
+		price: "2.69",
+		section: "Deli",
+	},
+	{
+		name: "Edamame",
+		price: "2.95",
+		section: "Deli",
+	},
+	{
+		name: "Chicken Caesar Salad",
+		price: "5.59",
+		section: "Deli",
+	},
+];
+
+var cart = [
+	{
+		name: "Celery + Carrots (Crudites)",
+		price: "2.69",
+		quantity: 1,
+		item-id: 1,
+	},
+];
+
 var dayNames = [ "Sunday", "Monday", "Tuesday", "Wednesday", 
                                 "Thursday", "Friday", "Saturday"];
 
 
 //window.addEventListener('load', function(e) {
 //  document.querySelector('#test').innerHTML = 'Hello, Jsany!';
-
-//updateEQ();
-
-//getCurrentDayTimeString();
-
-//updateTotal();
 
 //}, false);
 
@@ -132,15 +153,19 @@ if 	(	(h > dinnerStartH && h < dinnerEndH) &&
 }
 else eq = latenightEQ;
 
+//check if dinnertime
+//check if breakfast
+// check if sunday "brunch"
+// if none, eq = lunch/latente value
 
+//alert('h: '+h+'m: '+m+'eq: '+eq);
 }
 /*
-Mon - Thu
-Friday
+Mon - Thur 	11:00 a.m. - 2:00 a.m.
+Friday 		11:00 a.m. - 2:00 a.m.
 Saturday
 Sunday
-11:00 a.m. - 2:00 a.m.
-11:00 a.m. - 2:00 a.m.
+
 11 fri - 2 sat
 11 sat - 2 sun
 12 sunday - 2 mon
@@ -151,8 +176,26 @@ function fun(){
 }
 
 
+function incrementItem(){
 
 
+}
+
+function decrementItem(){
+
+	// if quantity <=0 remove frmo cart
+}
+
+function emptyCart(){
+
+
+}
+
+
+function filter(){
+
+
+}
 
 /*
 function getCurrentDayTimeString()
@@ -259,6 +302,34 @@ function updateTotal()
 
 }
 
+function updateSubtotal()
+{
+	// sum up every item in the cart
+
+	// for each item in the cart
+	// multiply price x quantity
+
+}
+
+// remove item from the cart array
+// and also remove the cart item html /redo? the cart
+function removeCartItem()
+{
+
+}
+
+// add item to the array
+// and also generate and append the cart item html
+function addCartItem()
+{
+	
+}
+
+//update, genrate, create?
+function generateCartHTML()
+{
+	
+}
 
 
 
@@ -338,7 +409,7 @@ EQ: <span id="eq"></span>
     ================================================== -->
 	<!-- Placed at the end of the document so the pages load faster -->
     <script src="./js/jquery.js"></script>
-    <script src="./js/bootstrap.min.js"></script>
+    <!--script src="./js/bootstrap.min.js"></script-->
 
     <script src="./js/itemPriceList.js"></script>
 

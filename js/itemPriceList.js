@@ -1,7 +1,123 @@
-var products = [
+var lizzproducts = [
+{
+		name: "Odwalla Drinks",
+		price: "3.29", // 12 oz 
+		section: "",
+	},
+	{
+		name: "Soup of the day",
+		price: "3.49",
+		section: "Register",
+	},
+	{
+		name: "Campbell's Soup at Hand",
+		price: "2.39",
+		section: "Packaged Noodles/Soup",
+	},
+	{
+		name: "Bottled Soft Drinks",
+		price: "1.69", // 20 oz 
+		section: "Cold Drinks",
+	},
+	{
+		name: "Fridge Packs (12 cans)",
+		price: "6.99",
+		section: "Candy, Chips, & Soda",
+	},
 	{
 		name: "Celery + Carrots (Crudites)",
 		price: "2.69",
+		// image: "",
+		// id
+		// options/variations
+		section: "Deli",
+	},
+	{
+		name: "Edamame",
+		price: "2.95",
+		section: "Deli",
+	},
+	{
+		name: "Chicken Caesar Salad",
+		price: "5.59",
+		section: "Deli",
+	},
+	{
+		name: "Tomato + Mozzerella Baguette",
+		price: "4.99",
+		section: "Deli",
+	},
+		name: "Nerd Rope",
+		price: "1.19",
+		section: "Candy, Chips, & Soda",
+	},
+	{
+		name: "Tostido's Lime Tortilla Chips",
+		price: "4.29",
+		section: "Candy, Chips, & Soda",
+	},
+	{
+		name: "Spicy Cheeto Fries",
+		price: "1.49",
+		section: "Candy, Chips, & Soda",
+	},
+	{
+		name: "Sweettart Gummies",
+		price: "2.75",
+		section: "Candy, Chips, & Soda",
+	},
+		{
+		name: "Simply Asia Soup/Noodles",
+		price: "4.99",
+		section: "Packaged Noodles/Soup",
+	},
+	{
+		name: "Top Ramen Package",
+		price: "0.49",
+		section: "Packaged Noodles/Soup",
+	},
+	{
+		name: "Lean Cuisine",
+		price: "4.99",
+		section: "Frozen Meals",
+	},
+	{
+		name: "Lean Cuisine Glazed Chicken",
+		price: "5.29",
+		section: "Frozen Meals",
+	},
+	{
+		name: "Amy's Pesto Tortellini Bowl",
+		price: "5.49",
+		section: "Frozen Meals",
+	},
+	{
+		name: "Taipei Stir Fry Chinese Takeout Boxes",
+		price: "4.99",
+		section: "Frozen Meals",
+	},
+	{
+		name: "Bagel Bites Mini Pizzas",
+		price: "",
+		section: "Frozen Meals",
+	},
+	{
+		name: "Naanwich",
+		price: "",
+		section: "Frozen Meals",
+	},
+
+];
+
+var products = [
+	
+
+	{
+		name: "Celery + Carrots (Crudites)",
+		price: "2.69",
+		// image: "",
+		// id
+		// options/variations
 		section: "Deli",
 	},
 	{
@@ -180,7 +296,7 @@ var products = [
 
 
 
-		{
+	{
 		name: "DiGorno Pizza",
 		price: "5.99",
 		section: "Frozen Meals",
@@ -421,7 +537,7 @@ var products = [
 
 
 	{
-		name: "Pop Tarts 2pk ",
+		name: "Pop Tarts 2pk",
 		price: "1.29",
 		section: "",
 	},
@@ -438,7 +554,7 @@ var products = [
 
 
 	{
-		name: "Sabra Hummus Cups ",
+		name: "Sabra Hummus Cups",
 		price: "3.79", // 4.56 oz
 		section: "",
 	},
@@ -453,7 +569,7 @@ var products = [
 		section: "",
 	},
 	{
-		name: "Zaco Water ",
+		name: "Zaco Water",
 		price: "3.19", // 14 oz 
 		section: "",
 	},
