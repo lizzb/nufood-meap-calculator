@@ -1,27 +1,3 @@
-<!DOCTYPE html>
-<head>
-
-	<title> Lisa's Assistant | meap </title>
-
-<style>
-/*
-.total-field
-.cart-total
-.subtotal
-.empty
-.sort
-#cart-subtotal
-
-#eq-meals-over { }
-#eq-meals-under { }
-#points-over { }
-#points-under { }
-*/
-</style>
-
-
-<script>
-
 	var breakfastEQ = 5.00;
 	var brunchEQ = 9.00;
 	var lunchEQ = 7.00;
@@ -52,7 +28,7 @@
 var total = 0.00;
 var eq = 0.00;
 var mealCount = 0;
-
+/*
 var products = [
 	{
 		name: "Celery + Carrots (Crudites)",
@@ -79,7 +55,7 @@ var cart = [
 		item-id: 1,
 	},
 ];
-
+*/
 var dayNames = [ "Sunday", "Monday", "Tuesday", "Wednesday", 
                                 "Thursday", "Friday", "Saturday"];
 
@@ -331,94 +307,4 @@ function generateCartHTML()
 
 
 
-</script>
 
-
-</head>
-
-<body onload="start();"> <!-- onload="getCurrentDayTimeString();"-->
-
-Today: <span id="currentWeekday"></span>
-Time: <span id="currentTime"></span>
-EQ: <span id="eq"></span>
-
-	<div id="totals">
-
-		<div class="total-field">
-			<span id="points-over">0</span>
-			points
-			<strong>over</strong>
-			<span id="eq-meals-over">0</span>
-			meals
-		</div>
-
-
-
-		<div class="total-field">
-			<span id="points-under">0</span>
-			points
-			<strong>under</strong>
-			<span id="eq-meals-under">0</span>
-			meals
-		</div>
-
-
-		<div class="total-field subtotal">
-			<label> Total: </label>
-			<span id="cart-subtotal">$0.00</span>
-		</div>
-
-
-		<a class="empty" href="#">Clear all items</a>
-		<!-- empty cart -->
-
-	</div>
-
-	<hr>
-
-
-	<!-- This is filled with a ul by the functions -->
-
-	<div id="cart"> </div>
-
-
-	<button class="sort" onclick="sortAZ()">Sort A-Z</button>
-	<button class="sort" onclick="sortByPrice()">Sort By Price</button>
-
-
-
-	<!-- This is filled with html generated from an array -->
-
-	<div id="products">
-
-		<!-- 
-		<li class="product purchase btn btn-info item" id="1">
-			<span class="title">Tank</span>
-			<span class="price">$13.00</span>
-			<span class="badge pull-right"> + </span>
-			<input class="purchase" type="button" value=" + ">
-			<input class="remove-one" type="button" value=" - ">
-		</li> -->
-
-	</div>
-
-
-	<!-- Bootstrap core JavaScript
-    ================================================== -->
-	<!-- Placed at the end of the document so the pages load faster -->
-    <script src="./js/jquery.js"></script>
-    <!--script src="./js/bootstrap.min.js"></script-->
-
-    <script src="./js/itemPriceList.js"></script>
-
-
-</body>
-
-
-
-
-
-			<!-- meal-remainder -> meals-underflow... meal-remaining -> meal-count-overflow / meals overflow? 
-			meal remainder = over points, meal remaining = under points ... equivalency-meals equivalency-meals++-->
-
-</html>

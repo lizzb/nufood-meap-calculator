@@ -1,0 +1,489 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <!--link rel="shortcut icon" href="../../assets/ico/favicon.png"-->
+
+    <title>nuFood - Meal Equivalency & Points Calculator</title>
+
+	<!--
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+	<title>plum.shop, the JavaScript shopping cart</title>
+	-->
+	<!-- saved from url=(0038)http://demo.plumjs.com/shop/index.html -->
+
+<script src="./js/itemPriceList.js"></script>
+
+<style>
+
+html, body { 
+	background:#fff; 
+	height:100%; 
+	margin:0; 
+	padding:0; 
+	width:100%;
+}
+
+body, input, select { 
+	font:400 12px/1.5em Helvetica, Arial, sans-serif; 
+}
+
+h1, h2 { margin:20px 0; }
+h1:first-child { margin-top:0; }
+h1 { font-size:2em; font-weight:700; letter-spacing:-1px; line-height:1em; }
+h2 { font-size:1.3em; font-weight:400; }
+h3 { font-size:1.2em; font-weight:400; margin:1em 0; }
+
+strong { color:#982056; }
+ol, ul { padding-left:1.5em; }
+hr { 
+	border:0; 
+	border-top:1px solid #ccc; 
+	margin:20px 0; 
+}
+a { 
+	color:#982056; 
+	font-weight:700; 
+}
+a:hover { color:#000; text-decoration:none; }
+
+/*
+#header span
+#header { background:#661443; height:2em; /*padding:30px;* }
+#header h1 { color:#fff; float:left; }
+
+#header a, #header span {
+	color:#fff;
+	float:right;
+	font-size:1.5em;
+	letter-spacing:-1px;
+	line-height:1.4em;
+	text-decoration:none;
+}
+#header a:hover { color:#cc2b73; }
+*/
+/*
+#footer {
+	border-top:1px solid #ccc;
+	clear:both;
+	color:#aaa;
+	font-size:11px;
+	margin:auto;
+	/*padding:20px 0; */
+	/*width:90%; 960px;*
+}*/
+
+#main { /*margin:20px auto; width:90%;*/ /*960px;*/ }
+
+#main:after, 
+#products > ul:after {
+	clear:both;
+	content:'';
+	display:block;
+	height:0;
+	overflow:hidden;
+	visibility:hidden;
+	width:100%;
+}
+
+
+#products { 
+	height:100px; 
+}
+
+#products > ul { list-style:none; padding:0; }
+#products > ul > li { 
+	/*float:left; */
+	/*margin:5px 0 0 5px; */
+	padding-bottom: 5px;
+}
+#products > ul > li:first-child { margin-left:0; }
+
+#products img { 
+	background:#f0f0f0;
+	display:block;
+	height:0px;
+	width:0px; 
+}
+
+#products p { padding:0 5px; }
+#products .price, 
+#products .purchase { float:right; /*padding-left: 20px;*/ }
+
+
+#cart ul { 
+	list-style:none;
+	margin:0 0 20px;
+	padding:0;
+	width:100%;
+	/*font-size: 9pt;*/
+}
+
+#cart ul li { 
+	background:#f0f0f0; 
+	height:45px;
+	margin:1px 0 0; 
+	padding:10px; 
+}
+#cart ul li:first-child { margin:0; }
+#cart ul li > * { display:block; float:left; }
+#cart ul li span { 
+	/*text-align:right;
+	width:65px;*/
+	padding-left: 4px;
+}
+#cart ul li span:first-child { 
+	text-align:left;
+	width:200px;
+	padding: 0px;
+}
+
+.quantity {}
+
+.cart-item {display: block;}
+
+.carttitle {}
+.pricesingle {float: left; font-size: 8pt;}
+.pricetotal {float: right; font-size: 8pt;}
+.cart-prices {float: right; font-size: 9pt; padding-right: 2px;}
+/*
+#cart ul li > div { border:1px solid #f0f0f0; }
+
+#cart ul li select { width:70px; }*/
+
+#cart ul li input { 
+	margin:0px;
+	padding: 0px;
+	width:30px; 
+	height: 25px;
+	text-align: center;
+} /* margin:0 5px 0 0;  50 */
+
+#cart ul li a { float:right; }
+
+#totals { background:#f0f0f0; font-size: 12pt; }
+
+#totals input { 
+	float:right;
+	/*margin:0 0 5px; */
+}
+/*
+#checkout { 
+	clear:right; 
+	float:right; 
+}
+*/
+#totals span { text-align:right; }
+.total-field {
+display: inline-block; 
+/*width: 30%;*/ padding: 0px 7px; 
+/*width: 100px;*/ 
+/*float: left; 
+margin-right: 10px;*/ 
+}
+
+
+</style>
+
+    <!-- Bootstrap core CSS -->
+    <link href="css/bootstrap.css" rel="stylesheet">
+
+
+<style>
+
+.subtotal {text-align: left;}
+
+body {
+  padding-top: 50px;
+}
+.starter-template {
+  padding: 25px 5px; /*40px 15px;*/
+  text-align: center;
+} 
+
+
+
+.empty {
+	float: right;
+	margin-bottom: 15px;
+	display: block;
+}
+
+.item {
+	width:100%;
+	text-align:left;
+	height: 45px;
+	/*padding: 10px;*/
+	vertical-align: middle;
+}
+.item-name {
+	float: left;
+	text-align:left;
+	width: 100px;
+}
+.item-price {
+	float: right;
+
+}
+
+
+
+.container {padding: 5px; margin: auto;}
+
+
+/*
+.navbar-inverse {background-color: #563d7c;
+border-color: #463265;}
+
+.navbar-nav > li > a {
+color: #cdbfe3;
+}
+
+.navbar-inverse {height: 40px;}*/
+
+.btn {
+  display: inline-block;
+  padding: 6px 12px;
+  /*height: 50px;*/
+  margin-bottom: 0;
+
+  font-size: 14px;
+  font-weight: normal;
+  line-height: 1.428571429;
+
+  /*text-align: center;*/
+  white-space: nowrap;
+  vertical-align: middle;
+
+  cursor: pointer;
+  border: 1px solid transparent;
+  border-radius: 0px; /*4px;*/
+
+
+  -webkit-user-select: none;
+     -moz-user-select: none;
+      -ms-user-select: none;
+       -o-user-select: none;
+          user-select: none;
+}
+
+
+.btn:focus {
+  outline: thin dotted #333;
+  outline: 5px auto -webkit-focus-ring-color;
+  outline-offset: -2px;
+}
+
+.btn:hover,
+.btn:focus {
+  color: #333333;
+  text-decoration: none;
+}
+
+.btn:active,
+.btn.active {
+  background-image: none;
+  outline: 0;
+  -webkit-box-shadow: inset 0 3px 5px rgba(0, 0, 0, 0.125);
+          box-shadow: inset 0 3px 5px rgba(0, 0, 0, 0.125);
+}
+
+.btn.disabled, .btn[disabled],
+fieldset[disabled] .btn {
+  pointer-events: none;
+  cursor: not-allowed;
+  opacity: 0.65;
+  filter: alpha(opacity=65);
+  -webkit-box-shadow: none;
+          box-shadow: none;
+}
+
+.btn-info {
+  color: #ffffff;
+  background-color: #5bc0de;
+  border-color: #46b8da;
+}
+
+
+.btn-info:hover, .btn-info:focus,
+.btn-info:active, .btn-info.active,
+.open .dropdown-toggle.btn-info {
+  color: #ffffff;
+  background-color: #39b3d7;
+  border-color: #269abc;
+}
+
+.btn-info:active,
+.btn-info.active,
+.open .dropdown-toggle.btn-info {
+  background-image: none;
+}
+
+ 
+ /* disabled info colors 
+  background-color: #5bc0de;
+  border-color: #46b8da;
+  */
+
+</style>
+
+
+
+    <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+      <script src="../../assets/js/html5shiv.js"></script>
+      <script src="../../assets/js/respond.min.js"></script>
+    <![endif]-->
+  </head>
+
+
+
+<body onload="start();">
+
+    <div class="navbar navbar-inverse navbar-fixed-top">
+      <div class="container">
+        <div class="navbar-header">
+          <!--button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button-->
+
+          <a class="navbar-brand" href="#">
+				<span class="equivalency-meals">0</span> <label> Meals </label>  + 
+				<span class="meal-remainder">0</span> <label> Points </label> 
+				
+          </a>
+          		
+          		
+        </div>
+        <div class="collapse navbar-collapse">
+          <ul class="nav navbar-nav">
+            <li class="active">
+            	<a href="#">Home</a>
+            </li>
+            <li><a href="#about">About</a></li>
+            <li>
+            	<a class="empty" href="http://demo.plumjs.com/shop/index.html#">Clear all items</a>
+            	
+          </ul>
+        </div><!--/.nav-collapse -->
+      </div>
+    </div>
+    
+
+    	
+      <div class="starter-template">
+        <h1>meap</h1>
+        <p class="lead">Meal Equivalency and Points Calculator</p>
+        Calculate how many items to buy from Lisa's Cafe to perfectly use up meal equivalencies. <br>
+      <br>
+
+
+Today: <span id="currentWeekday"></span>
+Time: <span id="currentTime"></span>
+EQ: <span id="eq"></span>
+
+
+	<div id="totals">
+
+		<div class="total-field">
+			<span id="points-over">0</span>
+			points
+			<strong>over</strong>
+			<span id="eq-meals-over">0</span>
+			meals
+		</div>
+
+		<div class="total-field">
+			<span id="points-under">0</span>
+			points
+			<strong>under</strong>
+			<span id="eq-meals-under">0</span>
+			meals
+		</div>
+
+		<div class="total-field subtotal">
+			<label> Total: </label>
+			<span id="cart-subtotal">$0.00</span>
+		</div>
+	</div>
+
+
+
+			<!-- This is filled with a ul by the functions -->
+
+			<div id="cart"> </div>
+
+			<a class="empty" href="#">Clear all items</a>
+
+			<br>
+			<hr>
+
+			<button onclick="sortAZ()">Sort A-Z</button>
+			<button onclick="sortByPrice()">Sort By Price</button>
+
+			<!-- This is filled with html generated from an array -->
+
+			<div id="products"> </div>
+	
+		</div>
+
+</div><!-- /.container -->
+
+<script type="text/javascript">
+var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
+document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));
+</script>
+<script type="text/javascript">
+try {
+	var pageTracker = _gat._getTracker("UA-45359239-1");
+	pageTracker._trackPageview();
+	} catch(err) {}
+</script>
+
+
+<script src="./js/jquery.js"></script>
+<script src="./js/meap2.js"></script>
+<script src="./js/mealHoursEQ.js"></script>
+
+
+
+<script>
+$('#cart').plum('shop', {
+
+	cartitem: '<span class="carttitle">{title}</span> '
+		+ '<span class="cart-prices">{pricesingle} x '
+		+ '<input type="number" pattern="[0-9]*" class="quantity" value="{quantity}">'
+		+ '</span>'
+		+ '<a class="remove" href="#"> X </a>', //Remove X Clear
+		
+	properties: [ 'description', 'thumb', 'color', 'size' ],
+	currencyFormat: '$00,000,000.00', // £
+	currencyCode: 'USD',
+	generateSKU: true,
+	
+	storage: 'session',
+	storageURL: 'shopping-cart.php',
+
+	emptyCartBefore: function () {
+		return confirm(
+			'Are you sure you want to empty your cart?'
+		);
+	}
+});
+
+</script>
+
+
+
+    <!-- Bootstrap core JavaScript
+    ================================================== -->
+    <!-- Placed at the end of the document so the pages load faster -->
+    <script src="./js/jquery.js"></script>
+    <script src="./js/bootstrap.min.js"></script>
+  </body>
+</html>

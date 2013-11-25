@@ -1,7 +1,9 @@
 var products = [
 	{
-		name: "Celery + Carrots (Crudites)",
+		name: "Celery + Carrots + Ranch",
 		price: "2.69",
+		actualName: "Celery + Carrots (Crudites)",
+		altNames: "",
 		// image: "",
 		// id
 		// options/variations
@@ -10,77 +12,107 @@ var products = [
 	{
 		name: "Edamame",
 		price: "2.95",
+		actualName: "",
+		altNames: "",
 		section: "Deli",
 	},
 	{
 		name: "Chicken Caesar Salad",
 		price: "5.59",
+		actualName: "",
+		altNames: "",
 		section: "Deli",
 	},
 	{
 		name: "Tomato + Mozzerella Baguette",
 		price: "4.99",
+		actualName: "",
+		altNames: "",
 		section: "Deli",
 	},
 	{
 		name: "Sushi - California",
 		price: "0.00", //......
+		actualName: "",
+		altNames: "",
 		section: "Deli",
 	},
 	{
 		name: "Sushi - California w/ Masago",
 		price: "0.00", //......
+		actualName: "",
+		altNames: "",
 		section: "Deli",
 	},
 	{
 		name: "Sushi - Shrimp",
 		price: "0.00", //......
+		actualName: "",
+		altNames: "",
 		section: "Deli",
 	},
 	{
 		name: "Sushi - Veggie",
 		price: "0.00", //......
+		actualName: "",
+		altNames: "",
 		section: "Deli",
 	},
 	{
 		name: "PB&J on Wheat",
 		price: "2.99",
+		actualName: "",
+		altNames: "",
 		section: "Deli",
 	},
 	// ---------- Candy, Chips, & Soda ---------- //
 	{
 		name: "Nerd Rope",
 		price: "1.19",
+		actualName: "",
+		altNames: "",
 		section: "Candy, Chips, & Soda",
 	},
 	{
 		name: "Tostido's Lime Tortilla Chips",
 		price: "4.29",
+		actualName: "",
+		altNames: "",
 		section: "Candy, Chips, & Soda",
 	},
 	{
 		name: "Spicy Cheeto Fries",
 		price: "1.49",
+		actualName: "",
+		altNames: "",
 		section: "Candy, Chips, & Soda",
 	},
 	{
 		name: "Sweettart Gummies",
 		price: "2.75",
+		actualName: "",
+		altNames: "",
 		section: "Candy, Chips, & Soda",
 	},
 	{
 		name: "Chocolate Candy Bar",
 		price: "0.00", //......
+		actualName: "",
+		altNames: "",
 		section: "Candy, Chips, & Soda",
 	},
 	{
 		name: "Dorito's",
 		price: "0.00", //......
+		actualName: "",
+		altNames: "",
 		section: "Candy, Chips, & Soda",
 	},
 	{
 		name: "Candy Bar",
 		price: "1.19",
+		actualName: "",
+		altNames: "",
 		section: "Candy, Chips, & Soda",
 	},
 	{
@@ -649,7 +681,8 @@ function makeProductList() {
 
 	var productlisthtml = "";
 
-	$.each( products, function( index ) {
+	$.each( products, function( index )
+	{
 	  	productlisthtml +=
 	  	"<li class='product purchase btn btn-info item' id='"+ index+ "'>" +
 	  	"<span class='title'>" + products[index].name + "</span>" +
@@ -659,7 +692,8 @@ function makeProductList() {
 	document.getElementById("products").innerHTML = "<ul>" + productlisthtml + "</ul>";
 }
 
-function sortAZ() {
+function sortAZ() // bool ascendig
+{
 	var productList = $('#products ul');
 	var listItems = productList.children('li').get();
 	listItems.sort(function(a, b) {
@@ -667,10 +701,13 @@ function sortAZ() {
 		var compB = $(b).text().toUpperCase();
    return (compA < compB) ? -1 : (compA > compB) ? 1 : 0;
 })
+	// if not ascendig reverse
+
 $.each(listItems, function(idx, itm) { productList.append(itm); });
 }
 
-function sortByPrice() {
+function sortByPrice() // bool ascendig
+{
   var productList = $('#products ul');
   var listItems = productList.children('li').get();
   listItems.sort(function(a,b){
@@ -679,6 +716,9 @@ function sortByPrice() {
     //return (compA < compB) ? -1 : (compA > compB) ? 1 : 0; original, ascending
     return (compA > compB) ? -1 : (compA < compB) ? 1 : 0;
   });
+
+// if not ascendig reverse
+
   $(productList).append(listItems);
 }
 
