@@ -240,9 +240,9 @@ border-color: #463265;}
 
 .navbar-nav > li > a {
 color: #cdbfe3;
-}*/
+}
 
-.navbar-inverse {height: 40px;}
+.navbar-inverse {height: 40px;}*/
 
 .btn {
   display: inline-block;
@@ -341,7 +341,7 @@ fieldset[disabled] .btn {
 
 
 
-<body onload="getCurrentDayTimeString();">
+<body onload="start();">
 
     <div class="navbar navbar-inverse navbar-fixed-top">
       <div class="container">
@@ -382,48 +382,35 @@ fieldset[disabled] .btn {
         Calculate how many items to buy from Lisa's Cafe to perfectly use up meal equivalencies. <br>
       <br>
 
-<div id="txt"></div>
-Today: <span id="weekday"></span>
+
+Today: <span id="currentWeekday"></span>
 Time: <span id="currentTime"></span>
+EQ: <span id="eq"></span>
 
 
 	<div id="totals">
-			
-			<!--
-			<label>Total items</label><span class="cart-quantity">0</span>
-			<label> Total: </label> <span class="cart-total"> $0.00 </span>
-			<label> Subtotal: </label> <span class="cart-subtotal">$0.00</span>
-			Points Til next Meal EQ:
-			-->
-			<!--
-			<div class="total-field">
-			<label> Meals: </label> <span id="numMeals" class="equivalency-meals">0</span>
-			</div>
 
-			<div class="total-field">
-			<label> Points Over: </label> <span class="meal-remainder">0</span>
-			</div>
-			
-			<div class="total-field">
-			<label> Points Under: </label> <span class="meal-remaining">0</span>
-			</div>
-			-->
-			<div class="total-field">
-			<span class="meal-remainder">0</span> points <strong>over</strong> <span class="equivalency-meals">0</span> meals
-			</div>
+		<div class="total-field">
+			<span id="points-over">0</span>
+			points
+			<strong>over</strong>
+			<span id="eq-meals-over">0</span>
+			meals
+		</div>
 
-			<div class="total-field">
-			<span class="meal-remaining">0</span> <!--points <strong>over</strong>
-			points under </label> <span class="equivalency-meals++">0</span>-->
-			</div>
+		<div class="total-field">
+			<span id="points-under">0</span>
+			points
+			<strong>under</strong>
+			<span id="eq-meals-under">0</span>
+			meals
+		</div>
 
-			
+		<div class="total-field subtotal">
+			<label> Total: </label>
+			<span id="cart-subtotal">$0.00</span>
+		</div>
 	</div>
-
-			<br>
-			<div class="total-field subtotal">
-			<label> Total: </label> <span class="cart-total">$0.00</span>
-			</div>
 
 
 
@@ -439,22 +426,9 @@ Time: <span id="currentTime"></span>
 			<button onclick="sortAZ()">Sort A-Z</button>
 			<button onclick="sortByPrice()">Sort By Price</button>
 
-<!--div class="container"-->
-
 			<!-- This is filled with html generated from an array -->
 
-			<div id="products">
-
-			<!-- 
-			<li class="product purchase btn btn-info item" id="1">
-						<span class="title">Tank</span>
-						<span class="price">$13.00</span>
-						<span class="badge pull-right"> + </span>
-						<input class="purchase" type="button" value=" + ">
-						<input class="remove-one" type="button" value=" - ">
-			</li> -->
-
-			</div>
+			<div id="products"> </div>
 	
 		</div>
 
@@ -474,137 +448,19 @@ try {
 
 <script src="./js/jquery.js"></script>
 <script src="./js/meap2.js"></script>
-
-<!--<script src="./js/meap.js"></script>
-<!--script src="./js/plum.shop.js"></script-->
-
-
-<script>
-// this used to contain the sorting and making of list
-
-
-
-var dayNames = [
-	"Sunday",
-	"Monday",
-	"Tuesday",
-	"Wednesday",
-	"Thursday",
-	"Friday",
-	"Saturday"
-];
-
-function getCurrentWeekdayString()
-{
-	document.getElementById('weekday').innerHTML=dayNames[today.getDay()];
-	//Date.timeNow; //dayNames[today.getDay()];
-}
-
-
-
-
-function getCurrentDayTimeString()
-{
-	var today = new Date();
-	var h = today.getHours();
-	var m = today.getMinutes();
-	var s = today.getSeconds();
-
-	var hour = 	((h < 10)? "0" : "") + ( (h > 12)? (h-12) : h);
-	var min = 	((m < 10)? "0" : "") + m;
-	var sec = 	((s < 10) ? "0" : "") + s;
-	var ampm = 	((h > 12) ? "PM" : "AM")
-
-	document.getElementById('weekday').innerHTML=dayNames[today.getDay()];
-	//return hour + ":" + min + ":" + sec + ampm;
-	//document.getElementById('txt').innerHTML=h+":"+m+":"+s;
-	document.getElementById('txt').innerHTML = hour + ":" + min + ":" + sec + ampm;
-}
-
-//Date.prototype.timeNow = function()
-// + ((this.getHours()>12)?('PM'):'AM'); };
-
-function startTime()
-{
-
-var output = "";
-
-
-
-document.getElementById('weekday').innerHTML=Date.timeNow; //dayNames[today.getDay()];
-
-document.getElementById('txt').innerHTML=h+":"+m+":"+s;
-
-t=setTimeout(function(){startTime()},500);
-
-}
-
-// add a zero in front of numbers<10
-// m=checkTime(m);
-// s=checkTime(s);
-
-function checkTime(i)
-{
-if (i<10) { i="0" + i; }
-return i;
-}
-
-//<body onload="startTime();">
-
-</script>
-
-
-
-
-
-
-
-
-
-
-</script>
+<script src="./js/mealHoursEQ.js"></script>
 
 
 
 <script>
-
-// this used to have the cart config
-/**
- * Example plum.Shop configuration
- */
 $('#cart').plum('shop', {
 
 	cartitem: '<span class="carttitle">{title}</span> '
-
-		// why wont this add...
-		// + '<input class="purchase" type="button" value="+">'
-
-
-		// + '<span class="pricesingle">{pricesingle} x '
 		+ '<span class="cart-prices">{pricesingle} x '
 		+ '<input type="number" pattern="[0-9]*" class="quantity" value="{quantity}">'
 		+ '</span>'
-		//+ '<span class="pricesingle">{pricesingle} &nbsp;x&nbsp; </span>'
-
-		//{pricesingle}</span> '
-		//+ '<input type="number" pattern="[0-9]*" class="quantity" value="{quantity}">'
-		//+ '<input type="number" class="quantity" value="{quantity}">'
-		//+ '<input type="tel" class="quantity" value="{quantity}">'
-		// attempted hack for easier number access on mobile devices
-		/*+ '<input type="button" value="-" class="qtyminus" field="quantity" />'
-    	+ '<input type="text" name="quantity" value="{quantity}" class="qty" />'
-    	+ '<input type="button" value="+" class="qtyplus" field="quantity" />'
-		*/
-
-		//+ '<span class="pricetotal"> {pricetotal} </span> '
-		//= {pricetotal}
-
-		// + '<a class="remove-one" type="button" value=" - "> minus </a>'
-		//+ '<input class="remove-one" type="button" value=" -- ">'
 		+ '<a class="remove" href="#"> X </a>', //Remove X Clear
 		
-		
-
 	properties: [ 'description', 'thumb', 'color', 'size' ],
 	currencyFormat: '$00,000,000.00', // £
 	currencyCode: 'USD',
@@ -615,7 +471,6 @@ $('#cart').plum('shop', {
 
 	emptyCartBefore: function () {
 		return confirm(
-			//'This message is controlled by a callback function.\n\n' +
 			'Are you sure you want to empty your cart?'
 		);
 	}
